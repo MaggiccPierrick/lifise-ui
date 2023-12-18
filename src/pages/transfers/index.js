@@ -1,9 +1,13 @@
-import Menu from '../../components/menu';
-import BoardHeader from '../../components/boardheader';
-import LOGO_BLACK from '../../assets/images/logo_black.png';
-import BANKINGWEB3 from '../../assets/images/banking_web3.png';
-import Button from '../../components/button';
+//UTILS
 import { isMobile } from 'react-device-detect';
+
+//COMPONENTS
+
+//VISUALS
+import LOGO_BLACK from '../../assets/images/logo_black.png';
+import BANKINGWEB3 from '../../assets/images/banking_web3.png';import Menu from '../../components/menu';
+import BoardHeader from '../../components/boardheader';
+import Button from '../../components/button';
 
 const Transfers = () => {
     return (

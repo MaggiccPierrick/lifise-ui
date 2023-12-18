@@ -1,3 +1,4 @@
+//COMPONENTS
 import Footer from '../footer';
 
 const Layout = (props) => (

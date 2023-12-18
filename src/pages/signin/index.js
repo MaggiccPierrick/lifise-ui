@@ -1,9 +1,15 @@
 import Button from "../../components/button";
-import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
-import LOGO_BLACK from "../../assets/images/logo_black.png"
-import FollowUp from "../../components/followup";
+
+//UTILS
 import { isMobile } from "react-device-detect";
+
+//COMPONENTS
 import Header from "../../components/header";
+import FollowUp from "../../components/followup";
+
+//VISUALS
+import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
+import LOGO_BLACK from "../../assets/images/logo_black.png";
 
 const SignIn = () => {
     const homeRedirect = () => window.location.href = "/"

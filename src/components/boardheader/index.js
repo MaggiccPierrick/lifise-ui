@@ -1,4 +1,6 @@
 import "./boardheader.css";
+
+//VISUALS
 import USER1 from '../../assets/images/user1.jpg';
 import LOGO from '../../assets/images/logo.png';
 

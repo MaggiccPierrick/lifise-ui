@@ -1,4 +1,6 @@
 import "./menu.css";
+
+//VISUALS
 import LOGO from '../../assets/images/logo.png';
 
 const Menu = () => {
