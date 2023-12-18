@@ -1,9 +1,14 @@
-import Menu from '../../components/menu';
-import BoardHeader from '../../components/boardheader';
+//UTILS
+import { isMobile } from 'react-device-detect';
+
+//VISUALS
 import LOGO_BLACK from '../../assets/images/logo_black.png';
 import BANKINGWEB3 from '../../assets/images/banking_web3.png';
+
+//COMPONENTS
+import Menu from '../../components/menu';
+import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button';
-import { isMobile } from 'react-device-detect';
 
 const Dashboard = () => {
     return (

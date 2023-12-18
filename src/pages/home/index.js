@@ -46,6 +46,8 @@ const Home = () => {
 
     const toggleIOSdisplay = () => setDisplayIOS(!displayIOS);
 
+    const navigateSignUp = () => window.location.href = "/signup";
+
     return (
         <>
             <Header />
@@ -68,7 +70,7 @@ const Home = () => {
                                 We are bringing banking to a whole new level leveraging CaâEuro stablecoin and top notch technology.
                             </p>
                             <div className="center">
-                                <Button title={"Get started now"} />
+                                <Button title={"Get started now"} click={navigateSignUp}/>
                                 <Button title={"Install App"} framed={true} click={isIOS? toggleIOSdisplay : handleInstallClick} />
                             </div>
                         </div>
@@ -87,7 +89,7 @@ const Home = () => {
                                 <br />
                                 CaâEuro stablecoin and top notch technology.
                             </p>
-                            <Button title={"Get started now"} />
+                            <Button title={"Get started now"} click={navigateSignUp}/>
                         </div>
                         <div className="right_b">
                             <img src={BANNER_VISUAL} className="banner_visual" alt="Girl standing in front of a graffiti wall" />

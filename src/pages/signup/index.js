@@ -1,9 +1,14 @@
-import Button from "../../components/button";
-import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
-import LOGO_BLACK from "../../assets/images/logo_black.png"
-import FollowUp from "../../components/followup";
+//UTILS
 import { isMobile } from "react-device-detect";
+import Button from "../../components/button";
+
+//COMPONENTS
+import FollowUp from "../../components/followup";
 import Header from "../../components/header";
+
+//VISUALS
+import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
+import LOGO_BLACK from "../../assets/images/logo_black.png";
 
 const SignUp = () => {
     const homeRedirect = () => window.location.href = "/"

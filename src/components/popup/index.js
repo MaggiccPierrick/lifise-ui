@@ -1,6 +1,10 @@
 import './popup.css';
-import LOGO from "../../assets/images/logo.png";
+
+//COMPONENTS
 import Button from '../button';
+
+//VISUALS
+import LOGO from "../../assets/images/logo.png";
 
 const PopUp = ({ setDisplayAMF }) => {
 

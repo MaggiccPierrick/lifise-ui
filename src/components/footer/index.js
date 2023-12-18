@@ -1,10 +1,14 @@
 import './footer.css';
+
+//UTILS
+import { isMobile } from 'react-device-detect';
+
+//VISUALS
 import LOGO from '../../assets/images/logo.png';
 import LINKEDIN from '../../assets/images/LinkedIn_logo_initials.png';
 import XTWITTER from '../../assets/images/twitter-x-logo.png';
 import YOUTUBE from '../../assets/images/youtube.png';
 import POLYGON from '../../assets/images/polygon-matic-logo.png';
-import { isMobile } from 'react-device-detect';
 
 const Footer = () => {
     const currentPath = window.location.pathname;
