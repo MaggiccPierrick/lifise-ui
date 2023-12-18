@@ -18,8 +18,13 @@ import EUROPE from "../../assets/images/europe_flag.jpg";
 let deferredPrompt;
 
 const Home = () => {
-    const [displayAMF, setDisplayAMF] = useState(true);
+    const [displayAMF, setDisplayAMF] = useState(!window.sessionStorage.getItem('amf_warning'));
     const [displayIOS, setDisplayIOS] = useState(false);
+
+    const acceptAMFwarning = () => {
+        setDisplayAMF(false);
+        window.sessionStorage.setItem('amf_warning', 'accepted')
+    }
 
     useEffect(() => {
         window.addEventListener("beforeinstallprompt", (e) => {
@@ -52,7 +57,7 @@ const Home = () => {
         <>
             <Header />
             <div className="container">
-                {displayAMF && <PopUp setDisplayAMF={setDisplayAMF} />}
+                {displayAMF && <PopUp acceptAMFwarning={acceptAMFwarning} />}
                 {displayIOS && <PWAPrompt promptOnVisit={50} timesToShow={50} copyClosePrompt="Close" debug={true}/>}
                 {isMobile ?
                     <>
