@@ -44,7 +44,7 @@ const Home = () => {
         });
     };
 
-    const toggleIOSdisplay = () => setDisplayIOS(!displayIOS);
+    const toggleIOSdisplay = () => setDisplayIOS(true);
 
     const navigateSignUp = () => window.location.href = "/signup";
 
@@ -53,7 +53,7 @@ const Home = () => {
             <Header />
             <div className="container">
                 {displayAMF && <PopUp setDisplayAMF={setDisplayAMF} />}
-                {displayIOS && <PWAPrompt promptOnVisit={10} timesToShow={10} copyClosePrompt="Close" permanentlyHideOnDismiss={false}/>}
+                {displayIOS && <PWAPrompt promptOnVisit={50} timesToShow={50} copyClosePrompt="Close" debug={true}/>}
                 {isMobile ?
                     <>
                         <div className="right_b mt--20">
