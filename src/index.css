@@ -1,13 +1,612 @@
+:root {
+  --primary: #1F90FA;
+  --primary-hover: #117fe6;
+  --end-gradient: rgba(164, 207, 245, 1);
+}
+
+@font-face {
+  font-family: "Raleway-regular";
+  src: local("Raleway-regular"),
+    url("./assets/fonts/Raleway-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Raleway-black";
+  src: local("Raleway-black"),
+    url("./assets/fonts/Raleway-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Raleway-extrabold";
+  src: local("Raleway-extrabold"),
+    url("./assets/fonts/Raleway-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Raleway-semibold";
+  src: local("Raleway-semibold"),
+    url("./assets/fonts/Raleway-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Raleway-bold";
+  src: local("Raleway-bold"),
+    url("./assets/fonts/Raleway-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Raleway-medium";
+  src: local("Raleway-medium"),
+    url("./assets/fonts/Raleway-Medium.ttf") format("truetype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Raleway-regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F6F6F6;
+  overflow-y: none !important;
+  color: #FFF;
+  background-color: #1B1B1B;
+  min-height: 80vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.display-block {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.display-inline-block {
+  display: inline-block !important;
+  vertical-align: top;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.float-right {
+  float: right;
+  margin-right: 0;
+}
+
+.w-22 {
+  width: calc(22% - 50px) !important;
+}
+
+.w-28 {
+  width: calc(28% - 60px) !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+.mt-50 {
+  margin-top: 50px !important;
+}
+
+.mt-100 {
+  margin-top: 100px !important;
+}
+
+.mt--20 {
+  margin-top: -20px !important;
+}
+
+.mt-reducer {
+  margin-top: -50vw !important;
+}
+
+.mr-0 {
+  margin-right: 0px !important;
+}
+
+.mr-20 {
+  margin-right: 20px !important;
+}
+
+.mr-50 {
+  margin-right: 50px !important;
+}
+
+.mb-reducer {
+  margin-bottom: 20vw !important;
+}
+
+.ml-0 {
+  margin-left: 0px !important;
+}
+
+.ml-20 {
+  margin-left: 20px !important;
+}
+
+.grey-shade-one {
+  background-color: #252525;
+}
+
+.grey-shade-two {
+  background-color: #272727;
+}
+
+.grey-shade-three {
+  background-color: #292929;
+}
+
+.grey-shade-four {
+  background-color: #2A2A2A;
+}
+
+.grey-shade-five {
+  background-color: #2C2C2C;
+}
+
+.grey-shade-six {
+  background-color: #333333;
+}
+
+.shadowed {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
+  color: #FFF !important;
+}
+
+.container {
+  width: 1200px;
+  display: block;
+  margin: 100px auto 50px auto;
+  position: relative;
+}
+
+.container h2 {
+  font-size: 44px;
+  color: #DBDBDB;
+  font-family: 'Raleway-semibold';
+  margin-top: 15px;
+  position: relative;
+  line-height: 55px;
+}
+
+.container .tagline {
+  font-size: 15px;
+  font-family: 'Raleway-semibold';
+  display: inline-block;
+  margin-right: 8px;
+  color: #F9C23C;
+}
+
+.container .left_b {
+  width: 650px;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  padding-right: 50px;
+}
+
+.container .right_b {
+  width: 500px;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+
+.container .right_b .banner_visual {
+  width: 500px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 24px;
+}
+
+.container .box {
+  margin: 50px 85px 50px 0;
+  width: fit-content;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.container .box .tag {
+  display: block;
+  margin-bottom: 15px;
+  font-family: 'Raleway-bold';
+  font-size: 20px;
+}
+
+.container .box .maxi {
+  font-size: 70px;
+}
+
+.container .box .discord_group {
+  display: block;
+  margin: 0 auto 15px auto;
+  cursor: pointer;
+  width: 170px;
+}
+
+.container .box .subtitle {
+  display: block;
+  margin-bottom: 15px;
+  font-family: 'Raleway-medium';
+  font-size: 15px;
+  color: #919191;
+}
+
+.container .box .big_number {
+  display: block;
+  margin-bottom: 15px;
+  font-family: 'Raleway-bold';
+  font-size: 42px;
+  color: #FFF;
+}
+
+.container .shader {
+  width: 130px;
+  padding: 15px 20px;
+  font-size: 15px;
+  text-align: left;
+  font-family: 'Raleway-bold';
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 10px;
+  margin: 20px 30px 20px 0;
+}
+
+.container .value {
+  padding: 15px 20px;
+  font-size: 13px;
+  text-align: left;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 10px;
+  margin: 10px;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, var(--end-gradient) 100%);
+  color: #000;
+  height: 210px;
+}
+
+.container .dark {
+  background: #232323;
+  color: #FFF;
+}
+
+.container .value .title {
+  font-size: 15px;
+  margin: 5px 0 10px 0 !important;
+  font-family: 'Raleway-bold';
+}
+
+.container .europe {
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 10px;
+  margin: 10px;
+  height: 240px;
+  width: calc(48% - 50px);
+  background-position: center center;
+  background-size: cover;
+}
+
+.container .left_sign {
+  width: 55%;
+  height: 650px;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 24px;
+  position: relative;
+  margin-bottom: 100px;
+  z-index: 2;
+}
+
+.container .left_sign .logo {
+  position: absolute;
+  left: 30px;
+  top: 31px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.container .left_sign .metabank_typo {
+  font-family: 'Raleway-extrabold';
+  font-size: 30px;
+  text-align: left;
+  margin-left: 72px;
+  line-height: 100px;
+  color: #000;
+  cursor: pointer;
+}
+
+.container .right_sign {
+  width: 40%;
+  height: 600px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, var(--end-gradient) 100%);
+  color: #000;
+  padding: 25px 3% 25px 17%;
+}
+
+.container .right_sign h1 {
+  font-size: 36px;
+  color: #000;
+  font-family: 'Raleway-bold';
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.container .instructions {
+  font-size: 16px;
+  color: #232323;
+  font-family: 'Raleway-semibold';
+}
+
+.container label {
+  font-family: 'Raleway-medium';
+  display: block;
+  margin: 30px 0 5px 20px;
+  font-size: 14px;
+}
+
+.container label a {
+  font-family: 'Raleway-bold';
+  color: var(--primary);
+  text-decoration: none;
+}
+
+input[type=text] {
+  display: inline-block;
+  width: 420px;
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background-color: rgba(0, 0, 0, 0);
+  font-family: 'Raleway-semibold';
+  font-size: 15px;
+  color: #000;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+.container .semi {
+  width: 180px;
+}
+
+.dashboard {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, var(--end-gradient) 100%);
+  border-radius: 24px;
+  width: 1200px;
+  display: block;
+  margin: 10vh auto;
+  height: 80vh;
+  color: #000;
+  position: relative;
+}
+
+.dashboard .right_board {
+  width: 899px;
+  height: calc(80vh - 40px);
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+
+.dashboard .content {
+  padding: 10px 50px;
+  position: relative;
+}
+
+.dashboard .content p small{
+  font-size: 12px;
+}
+
+.dashboard .content h2{
+  font-family: 'Raleway-semibold';
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.dashboard .content .balance{
+  display: inline-block;
+  vertical-align: top;
+  font-size: 38px;
+  font-family: 'Raleway-bold';
+  font-weight: 600;
+  width: fit-content;
+}
+
+.dashboard .content .currency{
+  display: inline-block;
+  vertical-align: bottom;
+  height: 38px;
+  margin-left: 10px;
+}
+
+.dashboard .content button{
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 20px;
+  vertical-align: bottom;
+}
+
+.dashboard .right_board .visual{
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  height: 300px;
+}
+
+@media screen and (max-width: 940px) {
+  .container {
+    width: 96%;
+    margin: 50px auto 50px auto;
+  }
+
+  .container h2 {
+    font-size: 34px;
+    line-height: 38px;
+  }
+
+  .container .left_b {
+    width: 100%;
+    display: block;
+    padding-right: 0;
+  }
+
+  .container .right_b {
+    width: 100%;
+    display: block;
+    margin-top: 25px;
+  }
+
+  .container .right_b .banner_visual {
+    width: 100%;
+  }
+
+  .container .box {
+    margin: 60px auto;
+    display: block;
+    width: 100%;
+  }
+
+  .container .box .big_number {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+
+  .container .shader {
+    width: calc(50% -20px);
+    padding: 12px 15px;
+    margin-right: 20px;
+  }
+
+  .container .value {
+    height: auto;
+  }
+
+  .container .europe {
+    display: block;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .w-22 {
+    width: calc(100% - 40px) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .w-28 {
+    width: calc(100% - 40px) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .container .left_sign {
+    width: 100%;
+    height: 100vw;
+    margin-bottom: 0;
+    margin-top: -40px;
+    z-index: 1;
+  }
+
+  .container .left_sign .logo {
+    display: none;
+  }
+
+  .container .left_sign .metabank_typo {
+    display: none;
+  }
+
+  .container .right_sign {
+    width: calc(100% - 40px);
+    height: auto;
+    border-radius: 24px;
+    position: relative;
+    top: -40vw;
+    z-index: 2;
+    padding: 25px 20px;
+    margin-bottom: -150px;
+  }
+
+  input[type=text] {
+    width: calc(100% - 36px);
+  }
+
+  .container .semi {
+    width: calc(100% - 36px) !important;
+  }
+
+  .container .right_sign h1 {
+    font-size: 32px;
+  }
+
+  .container .instructions {
+    font-size: 13px;
+  }
+
+  .dashboard {
+    height: 100vh;
+    border-radius: 0;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .dashboard .right_board {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .dashboard .content {
+    padding: 10px 20px;
+    height: calc(100vh - 91px);
+    text-align: center;
+  }
+
+  .dashboard .content h2{
+    text-align: center;
+  }
+  
+  .dashboard .content .balance{
+    text-align: center;
+  }
+  
+  .dashboard .content button{
+    margin: 20px 8px;
+  }
+  
+  .dashboard .right_board .visual{
+    width: 80vw;
+    height: auto;
+    bottom: 180px;
+  }
 }

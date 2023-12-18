@@ -1,0 +1,13 @@
+image: nikolaik/python-nodejs:python3.8-nodejs16
+
+before_script:
+  - apt-get update
+  - npm i
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - CI=false npm run build

@@ -1,0 +1,75 @@
+header {
+    width: 1200px;
+    display: block;
+    margin: 0 auto;
+    height: 100px;
+    line-height: 100px;
+    position: relative;
+}
+
+header .logo {
+    position: absolute;
+    left: 0;
+    top: 33px;
+    height: 34px;
+}
+
+header .metabank_typo {
+    font-family: 'Raleway-extrabold';
+    font-size: 30px;
+    text-align: left;
+    margin-left: 45px;
+}
+
+header .selecter {
+    font-family: 'Raleway-bold';
+    font-size: 16px;
+    text-align: left;
+    margin-left: 100px;
+    cursor: pointer;
+    color: #FFF;
+    text-decoration: none;
+}
+
+header .selecter:hover {
+    color: var(--primary);
+}
+
+header .active {
+    color: var(--primary) !important;
+}
+
+@media screen and (max-width: 940px) {
+  header {
+    width: 96%;
+    height: 80px;
+    line-height: 80px;
+  }
+
+  header .logo {
+      position: absolute;
+      left: 0;
+      top: 25px;
+      height: 28px;
+  }
+  
+  header .metabank_typo {
+      font-family: 'Raleway-extrabold';
+      font-size: 24px;
+      text-align: left;
+      margin-left: 35px;
+  }
+
+  header button{
+    display: none !important;
+  }
+
+  .selecter{
+    display: none;
+  }
+
+  .mobile-keeper{
+    display: inline-block;
+    margin-right: 3%;
+  }
+}

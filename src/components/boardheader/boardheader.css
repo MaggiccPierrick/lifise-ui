@@ -1,0 +1,95 @@
+.dashboard .right_board .board_header{
+    width: calc(100% - 50px);
+    border-bottom: 1px solid #ABBCCC;
+    position: relative;
+    padding-left: 50px;
+}
+
+.dashboard .right_board .board_header h1{
+    font-family: 'Raleway-bold';
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.dashboard .right_board .board_header .logo{
+    display: none;
+}
+
+.dashboard .right_board .board_header .metabank_typo{
+    display: none;
+}
+
+.dashboard .right_board .board_header .profile {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: -4px;
+}
+
+.dashboard .right_board .board_header .profile .avatar{
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
+    height: 50px;
+    border-radius: 35px;
+    background-position: center center;
+    background-size: cover;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+}
+
+.dashboard .right_board .board_header .profile .profile_info{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.dashboard .right_board .board_header .profile .profile_info .profile_name{
+    font-size: 16px;
+    font-family: 'Raleway-bold';
+    line-height: 20px;
+    display: block;
+    margin-top: 5px;
+}
+
+.dashboard .right_board .board_header .profile .profile_info .profile_email{
+    font-family: 'Raleway-medium';
+    font-size: 12px;
+    color: #232323;
+}
+
+@media screen and (max-width: 940px) {
+    .dashboard .right_board .board_header h1{
+        display: none;
+    }
+
+    .dashboard .right_board .board_header{
+        width: calc(100% - 50px);
+        padding-left: 50px;
+    }
+
+    .dashboard .right_board .board_header .logo{
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        height: 30px;
+        display: inline-block;
+    }
+    
+    .dashboard .right_board .board_header .metabank_typo{
+        font-family: 'Raleway-extrabold';
+        font-size: 28px;
+        text-align: left;
+        display: inline-block;
+        line-height: 70px;
+    }
+
+    .dashboard .right_board .board_header .profile {
+        top: 10px;
+        right: 0;
+    }
+
+    .dashboard .right_board .board_header .profile .profile_info{
+        display: none;
+    }
+
+}

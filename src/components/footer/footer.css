@@ -1,0 +1,83 @@
+footer {
+    width: 1100px;
+    display: block;
+    margin: 50px auto 10px auto;
+    min-height: 200px;
+    position: relative;
+    padding: 30px 50px;
+    background: rgb(14, 43, 70);
+    background: linear-gradient(145deg, rgba(14, 43, 70, 1) 0%, rgba(33, 78, 120, 1) 100%);
+    border-radius: 24px;
+}
+
+footer .split {
+    width: calc(25% - 25px);
+    margin-right: 25px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    position: relative;
+}
+
+footer h4 {
+    font-size: 16px;
+    font-family: 'Raleway-bold';
+    margin-top: 10px;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+footer .split .logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 34px;
+}
+
+footer .split .metabank_typo {
+    font-family: 'Raleway-extrabold';
+    font-size: 30px;
+    text-align: left;
+    margin-left: 45px;
+}
+
+footer .selecter {
+    font-family: 'Raleway-bold';
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: #FFF;
+    text-decoration: none;
+    display: block;
+    margin: 15px 0 0 46px;
+    text-align: left;
+}
+
+footer .selecter:hover {
+    color: var(--primary);
+}
+
+footer .social {
+    cursor: pointer;
+    height: 25px;
+    margin-right: 15px;
+}
+
+@media screen and (max-width: 940px) {
+    footer {
+        width: calc(96% - 40px);
+        padding: 20px;
+    }
+
+    footer .split {
+        width: 100%;
+        margin: 0 auto 20px auto;
+        display: block;
+    }
+
+    footer .selecter {
+        margin-left: 0;
+    }
+}

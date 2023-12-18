@@ -1,0 +1,21 @@
+.followup {
+    font-family: 'Raleway-medium';
+    line-height: 40px;
+    font-size: 14px;
+    margin-left: -40px;
+}
+
+.followup a {
+    font-family: 'Raleway-bold';
+    color: var(--primary);
+    text-decoration: none;
+}
+
+@media screen and (max-width: 940px) {
+    .followup {
+        display: block;
+        line-height: 30px;
+        font-size: 14px;
+        margin-left: 10px;
+    }
+}

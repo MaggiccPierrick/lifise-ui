@@ -1,0 +1,150 @@
+.dashboard .left_menu {
+  padding: 20px;
+  width: 260px;
+  height: calc(80vh - 40px);
+  border-right: 1px solid #ABBCCC;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.dashboard .left_menu .logo {
+  position: absolute;
+  left: 55px;
+  top: 21px;
+  height: 28px;
+}
+
+.dashboard .left_menu .metabank_typo {
+  font-family: 'Raleway-extrabold';
+  font-size: 26px;
+  text-align: left;
+  margin-left: 75px;
+}
+
+.dashboard .left_menu .entry {
+  position: relative;
+  display: block;
+  margin: 10px auto 0 auto;
+  height: 38px;
+  line-height: 38px;
+  padding-left: 50px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-family: 'Raleway-semibold';
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #000 !important
+}
+
+.dashboard .left_menu .entry .icon {
+  position: absolute;
+  left: 18px;
+  top: -2px;
+  font-size: 20px;
+}
+
+.dashboard .left_menu .entry:hover {
+  background: #D4E5F3;
+  background: linear-gradient(145deg, #E7F3FE 0%, #D4E5F3 100%);
+}
+
+.dashboard .left_menu .active {
+  background: #D4E5F3;
+  background: linear-gradient(145deg, #E7F3FE 0%, #D4E5F3 100%);
+}
+
+.dashboard .left_menu .share {
+  position: absolute;
+  bottom: 10px;
+  width: 260px;
+  padding: 0 20px;
+  left: 0;
+}
+
+.dashboard .left_menu .share .rocket {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  font-size: 55px;
+}
+
+.dashboard .left_menu .share p {
+  text-align: center;
+  font-size: 13px;
+  font-family: 'Raleway-semibold';
+}
+
+.dashboard .left_menu .share .action {
+  font-family: 'Raleway-bold';
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+  color: #FFF;
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
+  text-decoration: none;
+  height: 40px;
+  line-height: 36px;
+  border-radius: 20px;
+  padding: 0 18px;
+  display: block;
+  margin: 0 auto;
+}
+
+.dashboard .left_menu .share a {
+  color: var(--primary);
+  text-decoration: none;
+  font-family: 'Raleway-bold';
+}
+
+.dashboard .left_menu .share .action:hover {
+  background-color: var(--primary-hover);
+  border: 2px solid var(--primary-hover);
+}
+
+.dashboard .mobile_menu{
+  display: none;
+}
+
+@media screen and (max-width: 940px) {
+  .dashboard .left_menu {
+    display: none;
+  }
+
+  .dashboard .mobile_menu{
+    display: block;
+    position: fixed;
+    width: 90%;
+    left: 5%;
+    bottom: 40px;
+    height: 48px;
+    border-radius: 25px;
+    background: #0E2B46;
+    background: linear-gradient(145deg, #0E2B46 0%, #214E78 100%);
+    z-index: 5;
+  }
+
+  .dashboard .mobile_menu .entry{
+    display: inline-block;
+    vertical-align: top;
+    height: 32px;
+    margin: 8px 0 5px 3%;
+    width: 16.5%;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 26px;
+    line-height: 22px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .dashboard .mobile_menu .active{
+    background-color: #DBDBDB;
+  }
+
+  .dashboard .mobile_menu .realigned{
+    line-height: 32px;
+  }
+  
+}
