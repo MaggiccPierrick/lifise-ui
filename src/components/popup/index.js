@@ -6,12 +6,11 @@ import Button from '../button';
 //VISUALS
 import LOGO from "../../assets/images/logo.png";
 
-const PopUp = ({ setDisplayAMF }) => {
+const PopUp = ({ acceptAMFwarning }) => {
 
     const onClose = () => {
         window.location.href = "https://www.amf-france.org"
     };
-    const accept = () => setDisplayAMF(false);
 
     return (
         <div className="cover">
@@ -34,7 +33,7 @@ const PopUp = ({ setDisplayAMF }) => {
                     <br />
                     <a href={"https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/crypto-actifs-bitcoin-etc/investir-en-crypto-actifs-les-precautions-pratiques"} target="_blank" rel="noreferrer">En savoir plus</a>
                 </p>
-                <Button title={"J'ai compris et je suis majeur"} click={accept} />
+                <Button title={"J'ai compris et je suis majeur"} click={acceptAMFwarning} />
                 <Button title={"Quitter l'application"} framed={true} click={onClose} />
             </div>
         </div>
