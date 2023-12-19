@@ -14,9 +14,9 @@ const Menu = () => {
                 <a href={"/dashboard"} className={currentPath === "/dashboard" ? "entry active mt-50" : "entry mt-50"}>
                     <span className="icon">💳</span> My account
                 </a>
-                <div className="entry">
+                <a href={"/transfers"} className={currentPath === "/transfers" ? "entry active" : "entry"}>
                     <span className="icon">💸</span> Transfer funds
-                </div>
+                </a>
                 <div className="entry">
                     <span className="icon">🗃️</span> Operations
                 </div>

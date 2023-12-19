@@ -65,6 +65,11 @@ body {
   vertical-align: top;
 }
 
+.relative {
+  position: relative;
+  width: fit-content;
+}
+
 .right {
   text-align: right;
 }
@@ -134,12 +139,24 @@ body {
   margin-bottom: 20vw !important;
 }
 
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
 .ml-0 {
   margin-left: 0px !important;
 }
 
+.ml-10 {
+  margin-left: 10px !important;
+}
+
 .ml-20 {
   margin-left: 20px !important;
+}
+
+.lh-45{
+  line-height: 45px !important;
 }
 
 .grey-shade-one {
@@ -377,7 +394,8 @@ body {
   text-decoration: none;
 }
 
-input[type=text] {
+input[type=text], 
+input[type=number] {
   display: inline-block;
   width: 420px;
   height: 34px;
@@ -388,14 +406,32 @@ input[type=text] {
   font-family: 'Raleway-semibold';
   font-size: 15px;
   color: #000;
+  position: relative;
 }
 
-input[type=text]:focus {
+input:focus {
   outline: none;
 }
 
-.container .semi {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.semi {
   width: 180px;
+}
+
+.caaeuro{
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  height: 24px;
 }
 
 .dashboard {
@@ -462,6 +498,68 @@ input[type=text]:focus {
   bottom: 30px;
   right: 20px;
   height: 300px;
+}
+
+.dashboard .right_board label {
+  font-family: 'Raleway-medium';
+  display: block;
+  margin: 10px 0 5px 20px;
+  font-size: 14px;
+}
+
+.dashboard .right_board .select {
+  display: inline-block;
+  vertical-align: top;
+  width: 350px;
+  text-align: left;
+}
+
+.dashboard .right_board .select_profile {
+  display: block;
+  margin: 5px 0;
+}
+
+.dashboard .right_board .select_profile .select_avatar{
+  display: inline-block;
+  vertical-align: top;
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  background-position: center center;
+  background-size: cover;
+  cursor: pointer;
+  margin: 0 10px 0 0;
+}
+
+.dashboard .right_board .select_profile .select_info{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.dashboard .right_board .select_profile .select_info .select_name{
+  font-size: 16px;
+  font-family: 'Raleway-bold';
+  line-height: 20px;
+  display: block;
+  margin-top: 5px;
+}
+
+.dashboard .right_board .select_profile .select_info .select_email{
+  font-family: 'Raleway-medium';
+  font-size: 12px;
+  color: #232323;
+}
+
+.dashboard .followup {
+  margin-left: 10px;
+}
+
+.css-13cymwt-control{
+  border-radius: 40px !important;
+  border: 2px solid #000 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  font-family: 'Raleway-semibold' !important;
+  font-size: 15px !important;
 }
 
 @media screen and (max-width: 940px) {
@@ -562,7 +660,7 @@ input[type=text]:focus {
     width: calc(100% - 36px);
   }
 
-  .container .semi {
+  .semi {
     width: calc(100% - 36px) !important;
   }
 
@@ -608,5 +706,34 @@ input[type=text]:focus {
     width: 80vw;
     height: auto;
     bottom: 180px;
+    z-index: 0;
+  }
+  
+  .dashboard .right_board .v_mobile{
+    bottom: 80px !important;
+  }
+
+  .dashboard label {
+    margin-left: 0 !important;
+  }
+
+  .dashboard .followup {
+    margin-left: 0 !important;
+  }
+
+  .mobile_block {
+    display: block !important;
+    margin: -40px auto 0 auto !important;
+  }
+
+  .dashboard .right_board .select {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .lh-45{
+    line-height: 75px !important;
+    vertical-align: top;
   }
 }
