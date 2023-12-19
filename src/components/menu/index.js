@@ -42,7 +42,7 @@ const Menu = () => {
                 </div>
             </div>
             <div className="mobile_menu">
-                <div className={currentPath === "/dashboard" ? "entry active" : "entry"} onClick={() => window.location.href="/dashboard"}>
+                <div className={currentPath === "/dashboard" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href="/dashboard"}>
                     💳
                 </div>
                 <div className={currentPath === "/transfers" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href="/transfers"}>
@@ -51,7 +51,7 @@ const Menu = () => {
                 <div className="entry realigned">
                     🗃️
                 </div>
-                <div className="entry">
+                <div className="entry realigned">
                     🪪
                 </div>
                 <div className="entry realigned">
