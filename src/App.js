@@ -8,6 +8,10 @@ import SignIn from './pages/signin';
 import SignUp from './pages/signup';
 import Dashboard from './pages/dashboard';
 import Transfers from './pages/transfers';
+import Operations from './pages/operations';
+import Beneficiaries from './pages/beneficiaries';
+import Assistance from './pages/assistance';
+import Profile from './pages/Profile';
 
 function App() {
   const [user, setUser] = useState();
@@ -33,6 +37,10 @@ function App() {
             <Route path='/signup' exact element={<SignUp />} />
             <Route path='/dashboard' exact element={<Dashboard />} />
             <Route path='/transfers' exact element={<Transfers />} />
+            <Route path='/operations' exact element={<Operations />} />
+            <Route path='/beneficiaries' exact element={<Beneficiaries />} />
+            <Route path='/assistance' exact element={<Assistance />} />
+            <Route path='/profile' exact element={<Profile />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </Layout>

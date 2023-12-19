@@ -14,18 +14,18 @@ const Menu = () => {
                 <a href={"/dashboard"} className={currentPath === "/dashboard" ? "entry active mt-50" : "entry mt-50"}>
                     <span className="icon">💳</span> My account
                 </a>
-                <div className="entry">
+                <a href={"/transfers"} className={currentPath === "/transfers" ? "entry active" : "entry"}>
                     <span className="icon">💸</span> Transfer funds
-                </div>
-                <div className="entry">
+                </a>
+                <a href={"/operations"} className={currentPath === "/operations" ? "entry active" : "entry"}>
                     <span className="icon">🗃️</span> Operations
-                </div>
-                <div className="entry">
+                </a>
+                <a href={"/beneficiaries"} className={currentPath === "/beneficiaries" ? "entry active" : "entry"}>
                     <span className="icon">🪪</span> Beneficiaries
-                </div>
-                <div className="entry">
+                </a>
+                <a href={"/assistance"} className={currentPath === "/assistance" ? "entry active" : "entry"}>
                     <span className="icon">🛟</span> Assistance
-                </div>
+                </a>
 
                 <div className="share">
                     <div className="rocket">
@@ -36,25 +36,29 @@ const Menu = () => {
                         <br />
                         to join you
                     </p>
-                    <button className="action">Share with friends</button>
+                    <button className="action" onClick={() => navigator.share({
+                        text: "Join me and open your account now on MetaBank",
+                        url: `https://metabank.codinsight.com`,
+                        title: `Join me and open your account now on MetaBank`,
+                    })}>Share with friends</button>
                     <p className="center"><a href="#terms">General terms of use</a></p>
                     <p className="center"><a href="#privacy">Privacy policy</a></p>
                 </div>
             </div>
             <div className="mobile_menu">
-                <div className={currentPath === "/dashboard" ? "entry active" : "entry"} onClick={() => window.location.href="/dashboard"}>
+                <div className={currentPath === "/dashboard" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/dashboard"}>
                     💳
                 </div>
-                <div className={currentPath === "/transfers" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href="/transfers"}>
+                <div className={currentPath === "/transfers" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/transfers"}>
                     💸
                 </div>
-                <div className="entry realigned">
+                <div className={currentPath === "/operations" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/operations"}>
                     🗃️
                 </div>
-                <div className="entry">
+                <div className={currentPath === "/beneficiaries" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/beneficiaries"}>
                     🪪
                 </div>
-                <div className="entry realigned">
+                <div className={currentPath === "/assistance" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/assistance"}>
                     🛟
                 </div>
             </div>
