@@ -54,7 +54,7 @@
   background: linear-gradient(145deg, #E7F3FE 0%, #D4E5F3 100%);
 }
 
-.dashboard .left_menu .share {
+.dashboard .share {
   position: absolute;
   bottom: 10px;
   width: 260px;
@@ -62,20 +62,20 @@
   left: 0;
 }
 
-.dashboard .left_menu .share .rocket {
+.dashboard .share .rocket {
   text-align: center;
   display: block;
   margin: 0 auto;
   font-size: 55px;
 }
 
-.dashboard .left_menu .share p {
+.dashboard .share p {
   text-align: center;
   font-size: 13px;
   font-family: 'Raleway-semibold';
 }
 
-.dashboard .left_menu .share .action {
+.dashboard .share .action {
   font-family: 'Raleway-bold';
   font-size: 16px;
   text-align: left;
@@ -92,13 +92,13 @@
   margin: 0 auto;
 }
 
-.dashboard .left_menu .share a {
+.dashboard .share a {
   color: var(--primary);
   text-decoration: none;
   font-family: 'Raleway-bold';
 }
 
-.dashboard .left_menu .share .action:hover {
+.dashboard .share .action:hover {
   background-color: var(--primary-hover);
   border: 2px solid var(--primary-hover);
 }
@@ -146,5 +146,9 @@
   .dashboard .mobile_menu .realigned{
     line-height: 32px;
   }
-  
+
+  .dashboard .share {
+    bottom: 100px;
+    width: calc(100% - 40px);
+  }
 }

@@ -4,15 +4,15 @@ import "./boardheader.css";
 import USER1 from '../../assets/images/user1.jpg';
 import LOGO from '../../assets/images/logo.png';
 
-const BoardHeader = () => {
+const BoardHeader = ({title}) => {
     return (
         <div className="board_header">
             <h1>
-                My account
+                {title}
             </h1>
             <img src={LOGO} alt="MetaBank logo" className="logo" />
             <span className="metabank_typo">MetaBank</span>
-            <div className="profile">
+            <div className="profile" onClick={() => window.location.href = "/profile"}>
                 <div className="avatar" style={{ backgroundImage: `url('${USER1}')` }}></div>
                 <div className="profile_info">
                     <span className="profile_name">Alicia G.</span>

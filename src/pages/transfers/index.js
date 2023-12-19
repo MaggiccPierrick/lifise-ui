@@ -1,5 +1,4 @@
 //UTILS
-import { isMobile } from 'react-device-detect';
 import Select from 'react-select'
 
 //COMPONENTS 
@@ -24,7 +23,7 @@ const Transfers = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader />
+                <BoardHeader title={"Transfer funds"}/>
                 <div className="content">
                     <label>Select beneficiary</label>
                     <div className="select">
@@ -42,8 +41,7 @@ const Transfers = () => {
                             )}
                         />
                     </div>
-                    <span className="lh-45 ml-10">or</span>
-                    <Button framed={true} title={"Add a new beneficiary"} />
+                    <FollowUp intro={"Can't find your beneficiary ?"} description={"Add a new beneficiary"} link={"/beneficiaries"}/>
                     <label className="mt-50">Set amount to send</label>
                     <div className="relative display-inline-block">
                         <input type="number" className="semi" placeholder={"CâaEuro amount"} />
