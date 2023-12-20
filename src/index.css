@@ -139,6 +139,10 @@ body {
   margin-bottom: 20vw !important;
 }
 
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+
 .mb-40 {
   margin-bottom: 40px !important;
 }
@@ -153,6 +157,10 @@ body {
 
 .ml-20 {
   margin-left: 20px !important;
+}
+
+.mobile-ml-40 {
+  margin-left: 40px !important;
 }
 
 .lh-45{
@@ -181,6 +189,10 @@ body {
 
 .grey-shade-six {
   background-color: #333333;
+}
+
+.black {
+  color: #000 !important;
 }
 
 .shadowed {
@@ -423,6 +435,26 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+textarea {
+  display: block;
+  width: 420px;
+  height: 240px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  background-color: rgba(255, 255, 255, .2);
+  font-family: 'Raleway-semibold';
+  font-size: 15px;
+  color: #000;
+  position: relative;
+  resize: none;
+  z-index: 1;
+}
+
+textarea:focus {
+  outline: none;
+}
+
 .semi {
   width: 180px;
 }
@@ -437,7 +469,7 @@ input[type=number] {
 .dashboard {
   background: rgb(255, 255, 255);
   background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, var(--end-gradient) 100%);
-  border-radius: 24px;
+  border-radius: 20px;
   width: 1200px;
   display: block;
   margin: 10vh auto;
@@ -448,7 +480,8 @@ input[type=number] {
 
 .dashboard .right_board {
   width: 899px;
-  height: calc(80vh - 40px);
+  height: 80vh;
+  overflow-y: auto;
   display: inline-block;
   vertical-align: top;
   position: relative;
@@ -498,6 +531,7 @@ input[type=number] {
   bottom: 30px;
   right: 20px;
   height: 300px;
+  z-index: 0;
 }
 
 .dashboard .right_board label {
@@ -560,12 +594,193 @@ input[type=number] {
   right: 0;
 }
 
+.dashboard .operation {
+  position: relative;
+  margin: 20px 0;
+  display: block;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 20px;
+  width: fit-content;
+  color: #000;
+  border-radius: 20px;
+  z-index: 1;
+  text-align: left;
+}
+
+.dashboard .operation .op_type {
+  display: block;
+  margin-bottom: 5px;
+  font-family: 'Raleway-bold';
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.dashboard .operation .op_date {
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  font-family: 'Raleway-regular';
+  font-size: 12px;
+}
+
+.dashboard .operation .op_link {
+  color: var(--primary);
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.dashboard .operation .tx_value {
+  display: block;
+  position: absolute;
+  bottom: 32px;
+  right: 55px;
+  font-size: 30px;
+  font-family: 'Raleway-extrabold';
+  text-align: right;
+  color: var(--primary);
+}
+
+.dashboard .operation .tx_symbol {
+  display: block;
+  position: absolute;
+  bottom: 32px;
+  right: 20px;
+  width: 28px;
+}
+
+.dashboard .operation .op_link:hover {
+  color: var(--primary-hover);
+}
+
+.dashboard .search{
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+.dashboard .search button {
+  margin: 0 0 0 20px;
+}
+
+.dashboard .beneficiaries {
+  display: block;
+  text-align: left;
+}
+
+.dashboard .beneficiaries .profile {
+  display: block;
+  width: 400px;
+  border-radius: 100px;
+  background-color: #FFF;
+  padding: 10px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.dashboard .beneficiaries .profile .avatar{
+  display: inline-block;
+  vertical-align: top;
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  background-position: center center;
+  background-size: cover;
+  cursor: pointer;
+  margin: 0 10px 0 0;
+}
+
+.dashboard .beneficiaries .profile .profile_info{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.dashboard .beneficiaries .profile .profile_info .profile_name{
+  font-size: 16px;
+  font-family: 'Raleway-bold';
+  line-height: 20px;
+  display: block;
+  margin-top: 5px;
+}
+
+.dashboard .beneficiaries .profile .profile_info .profile_email{
+  font-family: 'Raleway-medium';
+  font-size: 12px;
+  color: #232323;
+}
+
+.dashboard .beneficiaries .profile .add_beneficiary{
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  background-color: var(--primary);
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  line-height: 50px;
+  text-align: center;
+  color: #FFF;
+  font-size: 38px;
+}
+
+.dashboard .beneficiaries .profile .add_beneficiary:hover{
+  background-color: var(--primary-hover);
+}
+
+.dashboard .beneficiaries .profile .rm_beneficiary{
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  background-color: #FAFAFA;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  line-height: 50px;
+  text-align: center;
+  color: #000;
+  font-size: 18px;
+}
+
+.dashboard .beneficiaries .profile .rm_beneficiary:hover{
+  background-color: #EEE;
+}
+
+.dashboard .conditions{
+  font-size: 10px;
+  margin: 10px 0;
+  max-width: 440px;
+  text-align: left;
+}
+
+.dashboard .conditions a{
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.dashboard .conditions a:hover{
+  color: var(--primary-hover);
+}
+
 .css-13cymwt-control{
   border-radius: 40px !important;
   border: 2px solid #000 !important;
   background-color: rgba(0, 0, 0, 0) !important;
   font-family: 'Raleway-semibold' !important;
   font-size: 15px !important;
+}
+
+.dashboard .big_avatar{
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 120px;
+  background-position: center center;
+  background-size: cover;
+  cursor: pointer;
+  margin: 10px 0 0 0;
 }
 
 @media screen and (max-width: 940px) {
@@ -607,7 +822,7 @@ input[type=number] {
   }
 
   .container .shader {
-    width: calc(50% -20px);
+    width: calc(50% - 50px);
     padding: 12px 15px;
     margin-right: 20px;
   }
@@ -746,5 +961,46 @@ input[type=number] {
   .dashboard .disconnect {
     top: auto;
     bottom: 100px;
+  }
+
+  .dashboard .operation {
+    width: calc(100% - 40px);
+    height: 150px;
+  }
+  
+  .dashboard .operation .op_link{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .mobile-ml-40 {
+    margin-left: 0 !important;
+  }
+  
+  .dashboard .search{
+    margin: 0 auto;
+    width: 96%;
+  }
+
+  .dashboard .search input{
+    margin: 0 0 20px 0;
+  }
+  
+  .dashboard .search .semi{
+    width: calc(100% - 160px) !important;
+  }
+
+  .dashboard .beneficiaries .profile {
+    width: calc(100% - 20px);
+  }
+
+  textarea {
+    width: calc(100% - 40px);
+    height: 240px;
+  }
+
+  .dashboard .big_avatar{
+    margin: 10px auto 0 auto;
   }
 }
