@@ -19,19 +19,20 @@ const Footer = () => {
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
                 <span className="metabank_typo">MetaBank</span>
                 <span className="selecter">General terms of use</span>
-                <span className="selecter">Privacy policy</span>
+                <span className="selecter"onClick={() => window.open("https://www.metabank-france.eu/politique-de-confidentialité")}>Privacy policy</span>
             </div>
             <div className="split">
                 <h4>
                     Editor
                 </h4>
                 <p>
-                    The publisher of the Site is MetaBank France, a simplified joint stock company
-                    Capital of €47,000, registered 907 943 088 with the Montpellier RCS
+                    The publisher of the Site is SAS En Liens ! Rovaltain-web.com - Capital 47 600€ - 914 291 372 R.C.S. Romans - France
+                    <br/>
                     VAT number: FR18907943088
                 </p>
                 <p>
-                    Email : contact@metabank.fr
+                    Email : <strong><a href={"mailTo:contact@metabank-france.eu"}>contact@metabank-france.eu</a></strong>
+                    <br/>
                     Publishing director: Mr. Pierrick TORASSO
                 </p>
             </div>
@@ -53,9 +54,9 @@ const Footer = () => {
                 <h4>
                     Follow us
                 </h4>
-                <img src={LINKEDIN} alt="LinkedIn" className="social" />
-                <img src={XTWITTER} alt="X Twitter" className="social" />
-                <img src={YOUTUBE} alt="Youtube" className="social" />
+                <img src={LINKEDIN} alt="LinkedIn" className="social" onClick={() => window.open("https://www.linkedin.com/company/80497650")}/>
+                <img src={XTWITTER} alt="X Twitter" className="social" onClick={() => window.open("https://www.youtube.com/channel/UCscHwitaskD9i8IT_r3YVCA")}/>
+                <img src={YOUTUBE} alt="Youtube" className="social" onClick={() => window.open("https://twitter.com/MetabankFrance")}/>
                 <h4 className="mt-30">
                     Smart contract
                 </h4>
