@@ -31,7 +31,7 @@ const Assistance = () => {
                         You can exercise these rights by emailing us at <a href={"mailTo:contact@metabank.fr"}>contact@metabank.fr</a>
                     </div>
                     <div className="conditions">
-                        To find out more about protecting your data, you can consult our <a href={"/"}>Privacy policy</a>.
+                        To find out more about protecting your data, you can consult our <a href={"https://www.metabank-france.eu/politique-de-confidentialité"} target="_blank" rel="noreferrer">Privacy policy</a>.
                     </div>
                     <Button title={"Send message"}/>
                 </div>

@@ -43,6 +43,11 @@ footer .split .metabank_typo {
     margin-left: 45px;
 }
 
+footer .split a{
+    color: var(--primary);
+    text-decoration: none;
+}
+
 footer .selecter {
     font-family: 'Raleway-bold';
     font-size: 16px;
