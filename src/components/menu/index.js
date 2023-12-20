@@ -42,7 +42,7 @@ const Menu = () => {
                         title: `Join me and open your account now on MetaBank`,
                     })}>Share with friends</button>
                     <p className="center"><a href="#terms">General terms of use</a></p>
-                    <p className="center"><a href="#privacy">Privacy policy</a></p>
+                    <p className="center"><a href="https://www.metabank-france.eu/politique-de-confidentialité" target="_blank" rel="noreferrer">Privacy policy</a></p>
                 </div>
             </div>
             <div className="mobile_menu">
