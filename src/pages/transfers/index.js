@@ -5,13 +5,13 @@ import Select from 'react-select'
 import Menu from '../../components/menu';
 import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button';
+import FollowUp from '../../components/followup';
 
 //VISUALS
 import LOGO_BLACK from '../../assets/images/logo_black.png';
 import BANKINGWEB3 from '../../assets/images/digital_banking.png';
 import USER3 from '../../assets/images/user3.jpg';
 import USER4 from '../../assets/images/user4.jpg';
-import FollowUp from '../../components/followup';
 
 const Transfers = () => {
     const beneficiaries = [
