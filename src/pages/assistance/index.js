@@ -1,6 +1,3 @@
-//VISUALS
-import BANKINGWEB3 from '../../assets/images/banking_web3.png';
-
 //COMPONENTS
 import Menu from '../../components/menu';
 import BoardHeader from '../../components/boardheader';
