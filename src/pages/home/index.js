@@ -134,7 +134,7 @@ const Home = () => {
                         Accès par la blockchains publique Polygon et le système bancaire traditionnel à une monnaie stable numérique de type euro à 445 millions de consommateurs et 23 millions d'entreprises.
                     </p>
                     <div className="shader grey-shade-one">
-                        Collatéral sécurisé par  la Banque Delubac
+                        Collatéral sécurisé par  une Banque française
                     </div>
                     <div className="shader grey-shade-two">
                         Tranparence et sécurisation des échanges
