@@ -54,6 +54,31 @@
   background: linear-gradient(145deg, #E7F3FE 0%, #D4E5F3 100%);
 }
 
+.dashboard .left_menu table{
+  margin: 0 auto;
+}
+
+.dashboard .left_menu table td{
+  vertical-align: bottom;
+}
+
+.dashboard .left_menu h1{
+  margin: 0;
+  font-family: 'Raleway-bold';
+  text-align: right;
+}
+
+.dashboard .left_menu h3{
+  margin: 0;
+  font-family: 'Raleway-bold';
+  text-align: right;
+}
+
+.dashboard .left_menu button{
+  margin: 10px auto;
+  display: block;
+}
+
 .dashboard .share {
   position: absolute;
   bottom: 10px;

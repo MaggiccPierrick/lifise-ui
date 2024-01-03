@@ -29,3 +29,10 @@ button:hover {
     color: var(--primary-hover) !important;
     background-color: transparent !important;
 }
+
+
+
+/* OVERIDES */
+.Toastify button{
+    margin: auto !important;
+}

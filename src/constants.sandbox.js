@@ -6,6 +6,7 @@ export const TOAST_OPTIONS = {
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
+    draggable: true,
     progress: undefined,
     theme: "colored",
 }

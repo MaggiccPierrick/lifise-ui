@@ -1,11 +1,10 @@
-import Button from "../../components/button";
-
 //UTILS
 import { isMobile } from "react-device-detect";
 
 //COMPONENTS
 import Header from "../../components/header";
 import FollowUp from "../../components/followup";
+import Button from "../../components/button";
 
 //VISUALS
 import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
