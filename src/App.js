@@ -30,7 +30,7 @@ function App() {
         <Routes>
           <Route path='/' exact element={<Home />} />
           <Route path='/signin' exact element={<SignIn magic={magic} />} />
-          <Route path='/signup' exact element={<SignUp />} />
+          <Route path='/signup' exact element={<SignUp magic={magic} />} />
           <Route path='/dashboard' exact element={<Dashboard magic={magic} />} />
           <Route path='/transfers' exact element={<Transfers magic={magic} />} />
           <Route path='/operations' exact element={<Operations />} />

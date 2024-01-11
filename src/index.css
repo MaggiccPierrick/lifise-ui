@@ -75,15 +75,15 @@ body {
 }
 
 .right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .left {
-  text-align: left;
+  text-align: left !important;
 }
 
 .center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .float-right {
@@ -428,6 +428,7 @@ body {
 input[type=text],
 input[type=email],
 input[type=password],
+input[type=date],
 input[type=number] {
   display: inline-block;
   width: 420px;
@@ -728,9 +729,9 @@ textarea:focus {
 .dashboard .beneficiaries .profile .profile_info .profile_name {
   font-size: 16px;
   font-family: 'Raleway-bold';
-  line-height: 20px;
+  line-height: 16px;
   display: block;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 
 .dashboard .beneficiaries .profile .profile_info .profile_email {
@@ -745,7 +746,7 @@ textarea:focus {
   text-decoration: none;
 }
 
-.dashboard .beneficiaries .profile .small_desc {
+.dashboard .small_desc {
   display: block;
   line-height: 14px;
   text-align: center;
@@ -960,6 +961,7 @@ textarea:focus {
   input[type=text],
   input[type=email],
   input[type=password],
+  input[type=date],
   input[type=number] {
     width: calc(100% - 36px);
   }

@@ -16,6 +16,7 @@ const Profile = () => {
     const [profile, setProfile] = useState({});
     const [firstname, onChangeFirstname] = useState("");
     const [lastname, onChangeLastname] = useState("");
+    const [birthdate, onChangeBirthdate] = useState("");
     const [loading, onChangeLoading] = useState(null);
 
     useEffect(() => {
@@ -23,6 +24,7 @@ const Profile = () => {
         setProfile(data.account);
         onChangeFirstname(data.account.firstname || "");
         onChangeLastname(data.account.lastname || "");
+        onChangeBirthdate(data.account.birthdate || "");
     }, []);
 
     const logout = () => {
@@ -30,6 +32,7 @@ const Profile = () => {
     }
 
     const updateProfile = async () => {
+        console.log(birthdate)
         if (!firstname)
             toast.error('Firstname syntax invalid!', TOAST_OPTIONS);
         else if (!lastname)
@@ -37,7 +40,7 @@ const Profile = () => {
         else {
             onChangeLoading("profile");
             try {
-                const resp = await UserService.updateProfile(firstname, lastname);
+                const resp = await UserService.updateProfile(firstname, lastname, birthdate);
                 if (resp.status) {
                     toast.success(`Profile successfully updated`, TOAST_OPTIONS);
                 } else
@@ -66,6 +69,10 @@ const Profile = () => {
                     <div className="mt-10 mb-20">
                         <label>Lastname</label>
                         <input type="text" value={lastname} onChange={(e) => onChangeLastname(e.target.value)} />
+                    </div>
+                    <div className="mt-10 mb-20">
+                        <label>Birthdate</label>
+                        <input type="date" value={birthdate} onChange={(e) => onChangeBirthdate(e.target.value)} />
                     </div>
                     <Button title={"Update profile"} loading={loading === "profile"} click={updateProfile} />
                     <ThreeDots visible={loading === "profile"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />

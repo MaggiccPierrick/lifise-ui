@@ -28,14 +28,15 @@ class UserService {
 
     //AUTHENTICATED ENDPOINTS
 
-    async updateProfile(firstname, lastname) {
+    async updateProfile(firstname, lastname, birthdate) {
         return await api
-            .post('/user/account', { firstname, lastname })
+            .post('/user/account', { firstname, lastname, birthdate })
             .then(async (response) => {
                 if (response.data.status) {
                     let profile = JSON.parse(localStorage.getItem('user'));
                     profile.account.firstname = firstname;
                     profile.account.lastname = lastname;
+                    profile.account.birthdate = birthdate;
                     localStorage.setItem('user', JSON.stringify(profile));
                 }
                 return response.data;

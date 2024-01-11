@@ -26,7 +26,7 @@ const AdminUsers = ({ magic }) => {
         const users = await AdminService.getUsers(deactivationState);
         users.forEach(async(user) => {
             user.balance = await getAdminBalance(user.public_address)
-            setAccounts([...accounts, user]);
+            setAccounts( accounts => [...accounts, user]);
         })
     }
 
@@ -77,6 +77,7 @@ const AdminUsers = ({ magic }) => {
                                 <div className="profile_info locked">
                                     <span className="profile_name">{account.firstname || "-"} {account.lastname || "-"}</span>
                                     <span className="profile_email">{account.email_address}</span>
+                                    <span className="small_desc left">Birth: {account.birthdate || "-"}</span>
                                 </div>
                                 <div className="profile_info pointer">
                                     <span className="small_desc">Press to browse all operations</span>

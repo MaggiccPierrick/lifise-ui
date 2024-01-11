@@ -37,7 +37,6 @@ export const transferERC20 = async (magic, amount, toAddr) => {
     const fromAddress = (await web3.eth.getAccounts())[0];
     console.log(`TRANSFER ${amount} from ${fromAddress} to ${toAddr}`)
     const contract = new web3.eth.Contract(txABI, ERC20_ADDRESS);
-    console.log("SENDING")
     const receipt = await contract.methods.transfer(toAddr, amount).send({ from: fromAddress });
     console.log(receipt)
     return receipt
