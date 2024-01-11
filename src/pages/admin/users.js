@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { TOAST_OPTIONS } from '../../constants';
 
 //UTILS
 import { useSearchParams } from 'react-router-dom';
@@ -12,8 +13,9 @@ import LOGO_BLACK from '../../assets/images/logo_black.png';
 import Menu from '../../components/menu/admin';
 import BoardHeader from '../../components/boardheader/admin';
 import Button from '../../components/button';
+import { ToastContainer, toast } from 'react-toastify';
 
-const AdminUsers = ({ magic }) => {
+const AdminUsers = () => {
     // eslint-disable-next-line
     const [searchParams, setSearchParams] = useSearchParams();
     const [accounts, setAccounts] = useState([]);
@@ -23,11 +25,40 @@ const AdminUsers = ({ magic }) => {
     const loadUsers = async () => {
         const deactivationState = searchParams.get("deactivated") === "true";
         setDeactivated(deactivationState);
+        setAccounts([]);
         const users = await AdminService.getUsers(deactivationState);
         users.forEach(async(user) => {
             user.balance = await getAdminBalance(user.public_address)
             setAccounts( accounts => [...accounts, user]);
         })
+    }
+
+    const deactivate = async (user_uuid) => {
+        if (window.confirm("Do you confirm deactivation?")) {
+            try {
+                const resp = await AdminService.deactivateUser(user_uuid);
+                if (resp.status) {
+                    toast.success(`Administration account successfully deactivated`, TOAST_OPTIONS);
+                    loadUsers();
+                } else
+                    toast.error(resp.message, TOAST_OPTIONS);
+            } catch (e) {
+                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+            }
+        }
+    }
+
+    const reactivate = async (user_uuid) => {
+        try {
+            const resp = await AdminService.reactivateUser(user_uuid);
+            if (resp.status) {
+                toast.success(`Administration account successfully reactivated`, TOAST_OPTIONS);
+                loadUsers();
+            } else
+                toast.error(resp.message, TOAST_OPTIONS);
+        } catch (e) {
+            toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+        }
     }
 
     useEffect(() => {
@@ -67,7 +98,7 @@ const AdminUsers = ({ magic }) => {
                     </div>
                     <div className="relative display-inline-block">
                         <label>
-                            Filter : <span className="filter heavy">All</span> | <span className="filter">Active</span> | <span className="filter">Pending</span>
+                            Filter : <span className={deactivated? "filter": "filter heavy"} onClick={() => window.location.href = "/admin/users"}>Active</span> | <span className={deactivated? "filter heavy": "filter"}  onClick={() => window.location.href = "/admin/users?deactivated=true"}>Deactivated</span> | <span className="filter">Pending</span>
                         </label>
                     </div>
                     <div className="beneficiaries">
@@ -84,24 +115,22 @@ const AdminUsers = ({ magic }) => {
                                     <div className="redeemer">0 redeems | 0 pending</div>
                                     <span className="small_desc">Since {new Date(account.created_date).toLocaleDateString()}</span>
                                 </div>
-                                <div className="profile_info float-right">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <span className="balance">{account.balance}</span>
-                                                </td>
-                                                <td>
-                                                    <img src={LOGO_BLACK} width={"26px"} alt="Logo black" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div className="profile_info float-right mr-70">
+                                    <span className="balance">{account.balance}<small>€</small></span>
                                 </div>
+                                {deactivated ?
+                                    <div className="rm_beneficiary float-right" onClick={() => reactivate(account.user_uuid)}>
+                                        ✅
+                                    </div>
+                                    :
+                                    <div className="rm_beneficiary float-right" onClick={() => deactivate(account.user_uuid)}>
+                                        🗑️
+                                    </div>}
                             </div>)}
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 };

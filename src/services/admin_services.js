@@ -95,6 +95,22 @@ class AdminService {
       });
   }
 
+  async deactivateUser(user_uuid) {
+    return await api
+      .post('/admin/user/deactivate', { user_uuid })
+      .then(async (response) => {
+        return response.data;
+      });
+  }
+
+  async reactivateUser(user_uuid) {
+    return await api
+      .post('/admin/user/reactivate', { user_uuid })
+      .then(async (response) => {
+        return response.data;
+      });
+  }
+
   async updateProfile(firstname, lastname) {
     return await api
       .post('/admin/account', { firstname, lastname })
