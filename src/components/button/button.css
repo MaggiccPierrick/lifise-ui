@@ -36,3 +36,6 @@ button:hover {
 .Toastify button{
     margin: auto !important;
 }
+.Toastify button:hover{
+    background-color: rgba(0, 0, 0, 0) !important;
+}

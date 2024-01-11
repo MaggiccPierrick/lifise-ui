@@ -37,7 +37,7 @@ const AdminProfile = () => {
             try {
                 const resp = await AdminService.updateProfile(firstname, lastname);
                 if (resp.status) {
-                    toast.success(`Password successfully updated`, TOAST_OPTIONS);
+                    toast.success(`Profile successfully updated`, TOAST_OPTIONS);
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {

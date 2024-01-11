@@ -87,6 +87,14 @@ class AdminService {
       });
   }
 
+  async getUsers(deactivated = false) {
+    return await api
+      .get(`/admin/users?deactivated=${deactivated}`)
+      .then(async (response) => {
+        return response.data.user_accounts;
+      });
+  }
+
   async updateProfile(firstname, lastname) {
     return await api
       .post('/admin/account', { firstname, lastname })

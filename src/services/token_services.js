@@ -32,8 +32,9 @@ class TokenService {
   }
 
   removeUser() {
-    localStorage.removeItem('user');
-    window.location.href = '/'
+    const user = JSON.parse(localStorage.getItem('user'))
+    localStorage.removeItem('user')
+    window.location.href = user.account.admin_uuid ? '/admin/signin' : '/signin'
   }
 }
 

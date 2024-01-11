@@ -15,18 +15,24 @@ import AdminResetPswd from './pages/admin/resetpswd';
 import AdminDashboard from './pages/admin/dashboard';
 import AdminProfile from './pages/admin/profile';
 import AdminUsers from './pages/admin/users';
+import { Magic } from 'magic-sdk';
+import { ALCHEMY_NODE, CHAIN_ID, REACT_APP_MAGIC_PUBLISHABLE_KEY } from './constants';
 
 function App() {
+
+  const magic = new Magic(REACT_APP_MAGIC_PUBLISHABLE_KEY, { 
+    network: {rpcUrl: ALCHEMY_NODE, chainId: CHAIN_ID},
+  });
 
   return (
     <Router>
       <Layout>
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/signin' exact element={<SignIn />} />
+          <Route path='/signin' exact element={<SignIn magic={magic} />} />
           <Route path='/signup' exact element={<SignUp />} />
-          <Route path='/dashboard' exact element={<Dashboard />} />
-          <Route path='/transfers' exact element={<Transfers />} />
+          <Route path='/dashboard' exact element={<Dashboard magic={magic} />} />
+          <Route path='/transfers' exact element={<Transfers magic={magic} />} />
           <Route path='/operations' exact element={<Operations />} />
           <Route path='/beneficiaries' exact element={<Beneficiaries />} />
           <Route path='/assistance' exact element={<Assistance />} />
@@ -37,7 +43,7 @@ function App() {
           <Route path='/admin/reset' exact element={<AdminResetPswd />} />
           <Route path='/admin/dashboard' exact element={<AdminDashboard />} />
           <Route path='/admin/profile' exact element={<AdminProfile />} />
-          <Route path='/admin/users' exact element={<AdminUsers />} />
+          <Route path='/admin/users' exact element={<AdminUsers/>} />
         </Routes>
       </Layout>
     </Router>

@@ -1,15 +1,40 @@
+import React, { useState, useEffect } from 'react';
+
+//UTILS
+import { useSearchParams } from 'react-router-dom';
+import AdminService from '../../services/admin_services';
+import { getAdminBalance } from '../../services/magic';
+
 //VISUALS
-import USER2 from '../../assets/images/user2.jpg';
-import USER3 from '../../assets/images/user3.jpg';
-import USER4 from '../../assets/images/user4.jpg';
 import LOGO_BLACK from '../../assets/images/logo_black.png';
 
 //COMPONENTS
 import Menu from '../../components/menu/admin';
 import BoardHeader from '../../components/boardheader/admin';
-import Button from '../../components/button'
+import Button from '../../components/button';
 
-const AdminUsers = () => {
+const AdminUsers = ({ magic }) => {
+    // eslint-disable-next-line
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [accounts, setAccounts] = useState([]);
+    // eslint-disable-next-line
+    const [deactivated, setDeactivated] = useState(false);
+
+    const loadUsers = async () => {
+        const deactivationState = searchParams.get("deactivated") === "true";
+        setDeactivated(deactivationState);
+        const users = await AdminService.getUsers(deactivationState);
+        users.forEach(async(user) => {
+            user.balance = await getAdminBalance(user.public_address)
+            setAccounts([...accounts, user]);
+        })
+    }
+
+    useEffect(() => {
+        loadUsers();
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <div className="dashboard">
             <Menu />
@@ -46,84 +71,33 @@ const AdminUsers = () => {
                         </label>
                     </div>
                     <div className="beneficiaries">
-                        <div className="profile max">
-                            <div className="avatar" style={{ backgroundImage: `url('${USER2}')` }}></div>
-                            <div className="profile_info locked">
-                                <span className="profile_name">Alicia G.</span>
-                                <span className="profile_email">alicia.gordon@gotham.com</span>
-                            </div>
-                            <div className="profile_info pointer">
-                                <span className="small_desc">Press to browse all operations</span>
-                                <div className="redeemer">2 redeems | 1 pending</div>
-                                <span className="small_desc">Since December 7th, 2023</span>
-                            </div>
-                            <div className="profile_info float-right">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <span className="balance">651</span>
-                                            </td>
-                                            <td>
-                                                <img src={LOGO_BLACK} width={"26px"} alt="Logo black" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div className="profile max">
-                            <div className="avatar" style={{ backgroundImage: `url('${USER4}')` }}></div>
-                            <div className="profile_info locked">
-                                <span className="profile_name">Kamala Khan</span>
-                                <span className="profile_email">kamala.khan@avengers.com</span>
-                            </div>
-                            <div className="profile_info pointer">
-                                <span className="small_desc">Press to browse all operations</span>
-                                <div className="redeemer">2 redeems | 1 pending</div>
-                                <span className="small_desc">Since December 7th, 2023</span>
-                            </div>
-                            <div className="profile_info float-right">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <span className="balance">180</span>
-                                            </td>
-                                            <td>
-                                                <img src={LOGO_BLACK} width={"26px"} alt="Logo black" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div className="profile max">
-                            <div className="avatar" style={{ backgroundImage: `url('${USER3}')` }}></div>
-                            <div className="profile_info locked">
-                                <span className="profile_name">Nick Fury</span>
-                                <span className="profile_email">nick.fury@shield.com</span>
-                            </div>
-                            <div className="profile_info pointer">
-                                <span className="small_desc">Press to browse all operations</span>
-                                <div className="redeemer">2 redeems | 1 pending</div>
-                                <span className="small_desc">Since December 7th, 2023</span>
-                            </div>
-                            <div className="profile_info float-right">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <span className="balance">402.41</span>
-                                            </td>
-                                            <td>
-                                                <img src={LOGO_BLACK} width={"26px"} alt="Logo black" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        {accounts.map(account =>
+                            <div className="profile max" key={account.user_uuid}>
+                                <div className="avatar" style={{ backgroundImage: `url('https://api.multiavatar.com/${account.user_uuid}.png')` }}></div>
+                                <div className="profile_info locked">
+                                    <span className="profile_name">{account.firstname || "-"} {account.lastname || "-"}</span>
+                                    <span className="profile_email">{account.email_address}</span>
+                                </div>
+                                <div className="profile_info pointer">
+                                    <span className="small_desc">Press to browse all operations</span>
+                                    <div className="redeemer">0 redeems | 0 pending</div>
+                                    <span className="small_desc">Since {new Date(account.created_date).toLocaleDateString()}</span>
+                                </div>
+                                <div className="profile_info float-right">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span className="balance">{account.balance}</span>
+                                                </td>
+                                                <td>
+                                                    <img src={LOGO_BLACK} width={"26px"} alt="Logo black" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>)}
                     </div>
                 </div>
             </div>

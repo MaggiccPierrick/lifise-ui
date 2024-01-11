@@ -104,6 +104,9 @@ const AdminDashboard = () => {
                 <BoardHeader title={"Administrators"} />
                 <div className="content">
                     <p><strong>Manage administration accounts</strong></p>
+                        <label className="ml-0">
+                            Filter : <span className={deactivated? "filter": "filter heavy"} onClick={() => window.location.href = "/admin/dashboard"}>Active</span> | <span className={deactivated? "filter heavy": "filter"}  onClick={() => window.location.href = "/admin/dashboard?deactivated=true"}>Deactivated</span>
+                        </label>
                     <div className="beneficiaries">
                         {accounts.map(account =>
                             <div className="profile" key={account.admin_uuid}>

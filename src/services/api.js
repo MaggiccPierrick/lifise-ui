@@ -11,7 +11,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
-    const token = await TokenService.getLocalAccessToken();
+    const token = config.url === "/logout"? await TokenService.getLocalRefreshToken() : await TokenService.getLocalAccessToken();
     if (token) {
       config.headers['X-AUTH-USER'] = token;
     }
@@ -28,8 +28,7 @@ instance.interceptors.response.use(
   },
   async (err) => {
     const originalConfig = err.config;
-    if (originalConfig && originalConfig.url !== '/admin/login') {
-      console.log(originalConfig.url)
+    if (originalConfig && originalConfig.url !== '/admin/login' && originalConfig.url !== '/user/login') {
       // JWT Token was expired
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
@@ -41,7 +40,7 @@ instance.interceptors.response.use(
           await TokenService.updateLocalAccessToken(jwt_token);
           return instance(originalConfig);
         } catch (_error) {
-          //TokenService.removeUser();
+          TokenService.removeUser();
           return Promise.reject(_error);
         }
       }else if(err.response.status === 500 && !originalConfig._retry) {
