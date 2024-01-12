@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TOAST_OPTIONS } from '../../constants';
 
 //UTILS
 import TokenService from "../../services/token_services";
 import UserService from "../../services/user_services";
 import { ToastContainer, toast } from 'react-toastify';
+import { Buffer } from 'buffer';
 
 //COMPONENTS
 import Menu from '../../components/menu';
@@ -13,11 +14,36 @@ import Button from '../../components/button';
 import { ThreeDots } from 'react-loader-spinner';
 
 const Profile = () => {
+    const inputRef = useRef();
     const [profile, setProfile] = useState({});
     const [firstname, onChangeFirstname] = useState("");
     const [lastname, onChangeLastname] = useState("");
     const [birthdate, onChangeBirthdate] = useState("");
+    const [avExt, onChangeExtension] = useState(null);
+    const [avB64, onChangeB64] = useState(null);
     const [loading, onChangeLoading] = useState(null);
+
+    const handleAvatarUpload = () => { inputRef.current.click() }
+
+    const onAvatarHandler = async (event) => {
+        const reader = new FileReader()
+        const extension = event.target.files[0] && event.target.files[0].name.split('.').pop().toLowerCase()
+        if (!extension || !['jpg', 'png', 'jpeg'].includes(extension)) {
+            toast.error('Invalid image extension', TOAST_OPTIONS);
+        } else if (event.target.files[0].size > 12000000) {
+            toast.error('Image file exceeeded', TOAST_OPTIONS);
+        } else {
+            onChangeExtension(extension)
+            reader.onloadend = () => processFile(reader)
+            reader.readAsArrayBuffer(event.target.files[0])
+        }
+    }
+
+    const processFile = (reader) => {
+        const buffer = Buffer.from(reader.result)
+        const base64data = buffer.toString('base64')
+        onChangeB64(base64data)
+    }
 
     useEffect(() => {
         const data = TokenService.getUser();
@@ -25,6 +51,8 @@ const Profile = () => {
         onChangeFirstname(data.account.firstname || "");
         onChangeLastname(data.account.lastname || "");
         onChangeBirthdate(data.account.birthdate || "");
+        onChangeB64(data.account.selfie);
+        onChangeExtension(data.account.selfie_ext);
     }, []);
 
     const logout = () => {
@@ -40,7 +68,7 @@ const Profile = () => {
         else {
             onChangeLoading("profile");
             try {
-                const resp = await UserService.updateProfile(firstname, lastname, birthdate);
+                const resp = await UserService.updateProfile(firstname, lastname, birthdate, avB64, avExt);
                 if (resp.status) {
                     toast.success(`Profile successfully updated`, TOAST_OPTIONS);
                 } else
@@ -60,11 +88,20 @@ const Profile = () => {
                 <BoardHeader title={"Profile"} />
                 <div className="content">
                     <p><strong>Edit your profile</strong></p>
-                    <div className="big_avatar" style={{ backgroundImage: `url('https://api.multiavatar.com/${profile.user_uuid}.png')` }}></div>
+                    <div className="big_avatar"
+                        onClick={handleAvatarUpload}
+                        style={{
+                            backgroundImage: avB64 ? `url('data:image/${avExt};base64,${avB64}')` :
+                                `url('https://api.multiavatar.com/${profile.user_uuid}.png')`
+                        }}>
+                    </div>
+                    <input className="display-none" type="file" ref={inputRef}
+                        accept="image/x-png,image/jpeg"
+                        onChange={(e) => onAvatarHandler(e)} />
                     <small>Press to change profile picture</small>
                     <div className="mt-30">
                         <label>Firstname</label>
-                        <input type="text" value={firstname} onChange={(e) => onChangeFirstname(e.target.value)}/>
+                        <input type="text" value={firstname} onChange={(e) => onChangeFirstname(e.target.value)} />
                     </div>
                     <div className="mt-10 mb-20">
                         <label>Lastname</label>

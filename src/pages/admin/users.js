@@ -27,6 +27,7 @@ const AdminUsers = () => {
         setDeactivated(deactivationState);
         setAccounts([]);
         const users = await AdminService.getUsers(deactivationState);
+        console.log(users)
         users.forEach(async(user) => {
             user.balance = await getAdminBalance(user.public_address)
             setAccounts( accounts => [...accounts, user]);
@@ -104,7 +105,7 @@ const AdminUsers = () => {
                     <div className="beneficiaries">
                         {accounts.map(account =>
                             <div className="profile max" key={account.user_uuid}>
-                                <div className="avatar" style={{ backgroundImage: `url('https://api.multiavatar.com/${account.user_uuid}.png')` }}></div>
+                                <div className="avatar" style={{ backgroundImage: account.selfie ? `url('data:image/${account.selfie_ext};base64,${account.selfie}')` : `url('https://api.multiavatar.com/${account.user_uuid}.png')` }}></div>
                                 <div className="profile_info locked">
                                     <span className="profile_name">{account.firstname || "-"} {account.lastname || "-"}</span>
                                     <span className="profile_email">{account.email_address}</span>
