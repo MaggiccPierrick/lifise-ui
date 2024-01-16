@@ -112,7 +112,7 @@ const AdminDashboard = () => {
                             <div className="profile" key={account.admin_uuid}>
                                 <div className="avatar" style={{ backgroundImage: `url('https://api.dicebear.com/7.x/fun-emoji/svg?seed=${account.admin_uuid}')` }}></div>
                                 <div className="profile_info">
-                                    <span className="profile_name">{account.firstname} {account.lastname}</span>
+                                    <span className="profile_name mt-10">{account.firstname} {account.lastname}</span>
                                     {profile.admin_uuid === account.admin_uuid ?
                                         <span className="profile_email">{account.email_address} | <a href={"/admin/profile"}>Update</a></span>
                                         :

@@ -26,6 +26,15 @@ class UserService {
         }
     }
 
+    
+    async checkEmail(email_address) {
+        return await api
+            .post('/user/is_registered', { email_address })
+            .then(async (response) => {
+                return response.data.status;
+            });
+    }
+
     //AUTHENTICATED ENDPOINTS
 
     async updateProfile(firstname, lastname, birthdate, selfie, selfie_ext) {
@@ -44,6 +53,70 @@ class UserService {
                 return response.data;
             });
     }
+
+    //BENEFICIARIES
+
+    async getUser(user_uuid){
+        return await api
+            .get(`/user/account/${user_uuid}`)
+            .then(async (response) => {
+                return response.data.account;
+            });
+    }
+
+    async searchUser(email_address) {
+        return await api
+            .post('/user/search', { email_address })
+            .then(async (response) => {
+                return response.data;
+            });
+    }
+
+    async addUnreferencedBeneficiary(public_address, email_address, twoFAtoken) {
+        return await api
+            .post('/user/beneficiary', { public_address, email_address, "2fa_token": twoFAtoken })
+            .then(async (response) => {
+                return response.data;
+            });
+    }
+
+    async addReferencedBeneficiary(user_uuid, twoFAtoken) {
+        return await api
+            .post('/user/beneficiary', { user_uuid, "2fa_token": twoFAtoken })
+            .then(async (response) => {
+                return response.data;
+            });
+    }
+
+    async rmBeneficiary(beneficiary_uuid) {
+        return await api
+            .post('/user/beneficiary/remove', { beneficiary_uuid })
+            .then(async (response) => {
+                return response.data;
+            });
+    }
+
+    async getBeneficiaries() {
+        return await api
+            .get('/user/beneficiary')
+            .then(async (response) => {
+                let beneficiaries = []
+                for(let beneficiary of response.data.beneficiaries){
+                    if(beneficiary.user_uuid){
+                        const user = await this.getUser(beneficiary.user_uuid)
+                        beneficiary.firstname = user.firstname
+                        beneficiary.lastname = user.lastname
+                        beneficiary.email_address = user.email_address
+                        beneficiary.public_address = user.public_address
+                        beneficiary.selfie = user.selfie
+                        beneficiary.selfie_ext = user.selfie_ext
+                    }
+                    beneficiaries.push(beneficiary)
+                }
+                return beneficiaries;
+            });
+    }
+
 }
 
 // eslint-disable-next-line

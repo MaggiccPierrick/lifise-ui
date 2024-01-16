@@ -30,7 +30,7 @@ const Profile = () => {
         const extension = event.target.files[0] && event.target.files[0].name.split('.').pop().toLowerCase()
         if (!extension || !['jpg', 'png', 'jpeg'].includes(extension)) {
             toast.error('Invalid image extension', TOAST_OPTIONS);
-        } else if (event.target.files[0].size > 12000000) {
+        } else if (event.target.files[0].size > 32000000) {
             toast.error('Image file exceeeded', TOAST_OPTIONS);
         } else {
             onChangeExtension(extension)
@@ -96,7 +96,7 @@ const Profile = () => {
                         }}>
                     </div>
                     <input className="display-none" type="file" ref={inputRef}
-                        accept="image/x-png,image/jpeg"
+                        accept="image/png,image/jpeg"
                         onChange={(e) => onAvatarHandler(e)} />
                     <small>Press to change profile picture</small>
                     <div className="mt-30">

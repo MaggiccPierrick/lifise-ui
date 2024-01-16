@@ -30,14 +30,19 @@ const SignIn = ({ magic }) => {
         } else {
             try {
                 onChangeLoading(true);
-                const didToken = await magic.auth.loginWithEmailOTP({ email });
-                console.log(didToken);
-                const resp = await UserService.login(didToken);
-                if (resp.status)
-                    window.location.href = "/dashboard"
-                else {
-                    toast.error(resp.message, TOAST_OPTIONS);
-                    onChangeLoading(true);
+                const status = await UserService.checkEmail(email)
+                if (status) {
+                    const didToken = await magic.auth.loginWithEmailOTP({ email });
+                    const resp = await UserService.login(didToken);
+                    if (resp.status)
+                        window.location.href = "/dashboard"
+                    else {
+                        toast.error(resp.message, TOAST_OPTIONS);
+                        onChangeLoading(false);
+                    }
+                }else{
+                    toast.error("No MetaBank account found", TOAST_OPTIONS);
+                    onChangeLoading(false);
                 }
             } catch (e) {
                 console.log(e);

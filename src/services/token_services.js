@@ -16,7 +16,14 @@ class TokenService {
   }
 
   getUser() {
-    if (localStorage.getItem('user')) return JSON.parse(localStorage.getItem('user'));
+    if (localStorage.getItem('user')) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (new Date() > new Date(user.refresh_expiration)) {
+        localStorage.removeItem('user')
+        window.location.href = user.account.admin_uuid ? '/admin/signin' : '/signin'
+      } else
+        return user;
+    }
     else window.location.href = '/signin';
   }
 

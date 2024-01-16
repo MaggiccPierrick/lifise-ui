@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import { isAddress } from 'web3-validator';
 import { ALCHEMY_NODE, ERC20_ADDRESS } from "../constants";
 
 const balanceABI = [{
@@ -40,4 +41,8 @@ export const transferERC20 = async (magic, amount, toAddr) => {
     const receipt = await contract.methods.transfer(toAddr, amount).send({ from: fromAddress });
     console.log(receipt)
     return receipt
+}
+
+export const validateAddr = (addr) => {
+    return isAddress(addr);
 }
