@@ -38,25 +38,11 @@ const Footer = () => {
             </div>
             <div className="split">
                 <h4>
-                    Host
-                </h4>
-                <p>
-                    The metabank.fr site is hosted in France by the company:
-                    <br />
-                    Amazon Web Services LLC
-                    <br />
-                    P.O. Box 81226
-                    <br />
-                    Seattle, WA 98108-1226
-                </p>
-            </div>
-            <div className="split">
-                <h4>
                     Follow us
                 </h4>
                 <img src={LINKEDIN} alt="LinkedIn" className="social" onClick={() => window.open("https://www.linkedin.com/company/80497650")}/>
-                <img src={XTWITTER} alt="X Twitter" className="social" onClick={() => window.open("https://www.youtube.com/channel/UCscHwitaskD9i8IT_r3YVCA")}/>
-                <img src={YOUTUBE} alt="Youtube" className="social" onClick={() => window.open("https://twitter.com/MetabankFrance")}/>
+                <img src={XTWITTER} alt="X Twitter" className="social" onClick={() => window.open("https://twitter.com/MetabankFrance")}/>
+                <img src={YOUTUBE} alt="Youtube" className="social" onClick={() => window.open("https://www.youtube.com/channel/UCscHwitaskD9i8IT_r3YVCA")}/>
                 <h4 className="mt-30">
                     Smart contract
                 </h4>
