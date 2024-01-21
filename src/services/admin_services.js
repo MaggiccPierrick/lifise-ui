@@ -87,9 +87,9 @@ class AdminService {
       });
   }
 
-  async getUsers(deactivated = false) {
+  async getUsers(deactivated = false, pending = false) {
     return await api
-      .get(`/admin/users?deactivated=${deactivated}`)
+      .get(`/admin/users?deactivated=${deactivated}&pending=${pending}`)
       .then(async (response) => {
         return response.data.user_accounts;
       });
@@ -141,6 +141,14 @@ class AdminService {
   async updatePassword(old_password, new_password) {
     return await api
       .post('/admin/account', { old_password, new_password })
+      .then(async (response) => {
+        return response.data;
+      });
+  }
+
+  async inviteUsers(emails_list, claimable_tokens = 0) {
+    return await api
+      .post('/admin/user/invite', { emails_list, claimable_tokens })
       .then(async (response) => {
         return response.data;
       });

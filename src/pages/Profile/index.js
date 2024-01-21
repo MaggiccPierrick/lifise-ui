@@ -60,7 +60,6 @@ const Profile = () => {
     }
 
     const updateProfile = async () => {
-        console.log(birthdate)
         if (!firstname)
             toast.error('Firstname syntax invalid!', TOAST_OPTIONS);
         else if (!lastname)

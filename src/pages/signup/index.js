@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TOAST_OPTIONS } from "../../constants";
 
 //UTILS
+import { useSearchParams } from 'react-router-dom';
 import { isMobile } from "react-device-detect";
 import { ToastContainer, toast } from 'react-toastify';
 import UserService from '../../services/user_services';
@@ -17,10 +18,15 @@ import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
 import LOGO_BLACK from "../../assets/images/logo_black.png";
 
 const SignUp = ({ magic }) => {
+    // eslint-disable-next-line
+    const [searchParams, setSearchParams] = useSearchParams();
     const [email, onChangeEmail] = useState();
+    const [firstname, onChangeFirstname] = useState(null);
+    const [lastname, onChangeLastname] = useState(null);
     const [loading, onChangeLoading] = useState(false);
     const [checkEurope, toggleEuropeCheck] = useState(false);
     const [checkTerms, toggleTermsCheck] = useState(false);
+    const [uuuid, setUuuid] = useState(null);
 
     const homeRedirect = () => window.location.href = "/";
 
@@ -29,6 +35,10 @@ const SignUp = ({ magic }) => {
         let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
         if (!email || !re.test(email)) {
             toast.error('Email syntax invalid!', TOAST_OPTIONS);
+        } else if (!firstname) {
+            toast.error('Please set your firstname to open account', TOAST_OPTIONS);
+        }  else if (!lastname) {
+            toast.error('Please set your lastname to open account', TOAST_OPTIONS);
         } else if (!checkEurope) {
             toast.error('Please validate that you are a European citizen', TOAST_OPTIONS);
         }  else if (!checkTerms) {
@@ -37,8 +47,7 @@ const SignUp = ({ magic }) => {
             try {
                 onChangeLoading(true);
                 const didToken = await magic.auth.loginWithEmailOTP({ email });
-                console.log(didToken);
-                const resp = await UserService.login(didToken);
+                const resp = await UserService.register(firstname, lastname, email, didToken, uuuid);
                 if (resp.status)
                     window.location.href = "/dashboard"
                 else {
@@ -47,11 +56,20 @@ const SignUp = ({ magic }) => {
                 }
             } catch (e) {
                 console.log(e);
-                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+                toast.error(uuuid? `Could not open account for email ${email}` : e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
                 onChangeLoading(false);
             }
         }
     }
+
+    const checkInvit = () => {
+        setUuuid(searchParams.get("user_uuid"))
+    }
+
+    useEffect(() => {
+        checkInvit();
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>
@@ -66,14 +84,14 @@ const SignUp = ({ magic }) => {
                     <h1>Open your account</h1>
                     <div className="display-inline-block mr-20 mt-0">
                         <label>Firstname</label>
-                        <input type="text" className="semi" placeholder="John" />
+                        <input type="text" className="semi" placeholder="Firstname" onChange={e => onChangeFirstname(e.target.value)}/>
                     </div>
                     <div className="display-inline-block mt-0">
                         <label>Lastname</label>
-                        <input type="text" className="semi" placeholder="Doe" />
+                        <input type="text" className="semi" placeholder="Lastname" onChange={e => onChangeLastname(e.target.value)}/>
                     </div>
                     <label>Email</label>
-                    <input type="text" placeholder="john.doe@mail.com" onChange={e => onChangeEmail(e.target.value)}/>
+                    <input type="text" placeholder="Email address" onChange={e => onChangeEmail(e.target.value)}/>
                     <label className="ml-0">
                         <input type="checkbox" onClick={() => toggleEuropeCheck(!checkEurope)}/> I hereby declare to be a citizen of the European Union
                     </label>

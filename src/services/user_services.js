@@ -13,6 +13,19 @@ class UserService {
             });
     }
 
+    async register(firstname, lastname, email_address, did_token, user_uuid) {
+        return await api
+            .post('/user/register', { firstname, lastname, email_address, did_token, user_uuid })
+            .then(async (response) => {
+                if (response.data.jwt_token) {
+                    await TokenService.setUser(response.data);
+                }else{
+                    return this.login(did_token)
+                }
+                return response.data;
+            });
+    }
+
     async logout() {
         try {
             return await api

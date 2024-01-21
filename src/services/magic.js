@@ -33,10 +33,8 @@ export const getAdminBalance = async (addr) => {
 
 export const transferERC20 = async (magic, amount, toAddr) => {
     const web3 = new Web3(magic.rpcProvider);
-    const accounts = await magic.wallet.connectWithUI();
-    console.log(accounts)
+    await magic.wallet.connectWithUI();
     const fromAddress = (await web3.eth.getAccounts())[0];
-    console.log(`TRANSFER ${amount} from ${fromAddress} to ${toAddr}`)
     const contract = new web3.eth.Contract(txABI, ERC20_ADDRESS);
     const receipt = await contract.methods.transfer(toAddr, amount).send({ from: fromAddress });
     console.log(receipt)

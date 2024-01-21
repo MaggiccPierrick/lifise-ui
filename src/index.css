@@ -151,6 +151,10 @@ body {
   margin-bottom: 20vw !important;
 }
 
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+
 .mb-20 {
   margin-bottom: 20px !important;
 }
@@ -778,6 +782,10 @@ textarea:focus {
 .dashboard .beneficiaries .profile .balance {
   font-size: 24px;
   line-height: 44px;
+}
+
+.dashboard .beneficiaries .profile .balance_logo {
+  width: 18px;
 }
 
 .dashboard .beneficiaries .profile .add_beneficiary {

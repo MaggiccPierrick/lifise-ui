@@ -13,15 +13,15 @@ import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button';
 import FollowUp from '../../components/followup';
 import { getBalance, transferERC20 } from '../../services/magic';
+import { ThreeDots } from 'react-loader-spinner';
 
 //VISUALS
 import LOGO_BLACK from '../../assets/images/logo_black.png';
 import BANKINGWEB3 from '../../assets/images/digital_banking.png';
-import { ThreeDots } from 'react-loader-spinner';
 
 const Transfers = ({ magic }) => {
     const [amount, setAmount] = useState("");
-    const [receiver, setReceiver] = useState("");
+    const [beneficiary, setBeneficiary] = useState(null);
     const [balance, setBalance] = useState("-");
     const [loading, onChangeLoading] = useState(null);
     const [beneficiaries, setBeneficiaries] = useState([]);
@@ -37,15 +37,17 @@ const Transfers = ({ magic }) => {
     }
 
     const transfer = async () => {
-        if (!receiver || receiver.length !== 42)
+        if (!beneficiary)
             toast.error('Receiving address invalid!', TOAST_OPTIONS);
         else if (!amount || amount < 1 || amount === "-")
             toast.error('Amount invalid!', TOAST_OPTIONS);
         else {
             onChangeLoading(true);
             try {
-                const receipt = await transferERC20(magic, amount * (10 ** 6), receiver);
+                const receipt = await transferERC20(magic, amount * (10 ** 6), beneficiary.public_address);
                 toast.success(`Funds successfuly sent with operation ID ${receipt.transactionHash.substring(0, 10)}...${receipt.transactionHash.substring(receipt.transactionHash.length - 10, receipt.transactionHash.length - 1)}`, TOAST_OPTIONS);
+                setAmount("")
+                setBeneficiary(null)
                 onChangeLoading(false);
             } catch (e) {
                 console.log(e);
@@ -71,7 +73,8 @@ const Transfers = ({ magic }) => {
                     {beneficiaries && <div className="select">
                         <Select
                             options={beneficiaries}
-                            onChange={(value) => setReceiver(value.public_address)}
+                            value={beneficiary}
+                            onChange={(value) => setBeneficiary(value)}
                             formatOptionLabel={beneficiary => ( beneficiary.user_uuid ?
                                 <div className="select_profile">
                                     <div className="select_avatar" style={{ backgroundImage: beneficiary.selfie ? `url('data:image/${beneficiary.selfie_ext};base64,${beneficiary.selfie}')` : `url('https://api.multiavatar.com/${beneficiary.user_uuid}.png')` }}></div>
