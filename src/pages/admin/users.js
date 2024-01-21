@@ -43,21 +43,6 @@ const AdminUsers = () => {
             })
     }
 
-    const deactivate = async (user_uuid) => {
-        if (window.confirm("Do you confirm deactivation?")) {
-            try {
-                const resp = await AdminService.deactivateUser(user_uuid);
-                if (resp.status) {
-                    toast.success(`Administration account successfully deactivated`, TOAST_OPTIONS);
-                    loadUsers();
-                } else
-                    toast.error(resp.message, TOAST_OPTIONS);
-            } catch (e) {
-                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
-            }
-        }
-    }
-
     const sendInvits = async () => {
         try {
             setLoading(true)
@@ -83,6 +68,21 @@ const AdminUsers = () => {
         } catch (e) {
             setLoading(false)
             toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+        }
+    }
+
+    const deactivate = async (user_uuid) => {
+        if (window.confirm("Do you confirm deactivation?")) {
+            try {
+                const resp = await AdminService.deactivateUser(user_uuid);
+                if (resp.status) {
+                    toast.success(`Administration account successfully deactivated`, TOAST_OPTIONS);
+                    loadUsers();
+                } else
+                    toast.error(resp.message, TOAST_OPTIONS);
+            } catch (e) {
+                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+            }
         }
     }
 
