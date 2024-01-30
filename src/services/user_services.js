@@ -19,9 +19,17 @@ class UserService {
             .then(async (response) => {
                 if (response.data.jwt_token) {
                     await TokenService.setUser(response.data);
-                }else{
+                } else {
                     return this.login(did_token)
                 }
+                return response.data;
+            });
+    }
+
+    async decline(user_uuid) {
+        return await api
+            .post('/user/decline', { user_uuid })
+            .then(async (response) => {
                 return response.data;
             });
     }
@@ -39,7 +47,7 @@ class UserService {
         }
     }
 
-    
+
     async checkEmail(email_address) {
         return await api
             .post('/user/is_registered', { email_address })
@@ -49,6 +57,22 @@ class UserService {
     }
 
     //AUTHENTICATED ENDPOINTS
+
+    async getAccountDetails() {
+        return await api
+            .get(`/user/account`)
+            .then(async (response) => {
+                return response.data;
+            });
+    }
+
+    async getOperations() {
+        return await api
+            .get(`/user/operations`)
+            .then(async (response) => {
+                return response.data.operations;
+            });
+    }
 
     async updateProfile(firstname, lastname, birthdate, selfie, selfie_ext) {
         return await api
@@ -69,7 +93,7 @@ class UserService {
 
     //BENEFICIARIES
 
-    async getUser(user_uuid){
+    async getUser(user_uuid) {
         return await api
             .get(`/user/account/${user_uuid}`)
             .then(async (response) => {
@@ -114,8 +138,8 @@ class UserService {
             .get('/user/beneficiary')
             .then(async (response) => {
                 let beneficiaries = []
-                for(let beneficiary of response.data.beneficiaries){
-                    if(beneficiary.user_uuid){
+                for (let beneficiary of response.data.beneficiaries) {
+                    if (beneficiary.user_uuid) {
                         const user = await this.getUser(beneficiary.user_uuid)
                         beneficiary.firstname = user.firstname
                         beneficiary.lastname = user.lastname
@@ -127,6 +151,14 @@ class UserService {
                     beneficiaries.push(beneficiary)
                 }
                 return beneficiaries;
+            });
+    }
+
+    async claim(claim_uuid) {
+        return await api
+            .post('/user/claim', { claim_uuid })
+            .then(async (response) => {
+                return response.data;
             });
     }
 

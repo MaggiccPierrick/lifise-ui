@@ -17,6 +17,7 @@ import AdminProfile from './pages/admin/profile';
 import AdminUsers from './pages/admin/users';
 import { Magic } from 'magic-sdk';
 import { ALCHEMY_NODE, CHAIN_ID, REACT_APP_MAGIC_PUBLISHABLE_KEY } from './constants';
+import Decline from './pages/decline';
 
 function App() {
 
@@ -31,12 +32,13 @@ function App() {
           <Route path='/' exact element={<Home />} />
           <Route path='/signin' exact element={<SignIn magic={magic} />} />
           <Route path='/signup' exact element={<SignUp magic={magic} />} />
-          <Route path='/dashboard' exact element={<Dashboard magic={magic} />} />
+          <Route path='/dashboard' exact element={<Dashboard />} />
           <Route path='/transfers' exact element={<Transfers magic={magic} />} />
           <Route path='/operations' exact element={<Operations />} />
           <Route path='/beneficiaries' exact element={<Beneficiaries />} />
           <Route path='/assistance' exact element={<Assistance />} />
           <Route path='/profile' exact element={<Profile />} />
+          <Route path='/decline' exact element={<Decline />} />
           <Route path="*" element={<Home />} />
           {/*ADMIN ROUTES*/}
           <Route path='/admin/signin' exact element={<AdminSignIn />} />

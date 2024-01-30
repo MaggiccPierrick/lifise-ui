@@ -4,7 +4,6 @@ import { TOAST_OPTIONS } from '../../constants';
 //UTILS
 import Select from 'react-select';
 import UserService from "../../services/user_services";
-import TokenService from "../../services/token_services";
 import { ToastContainer, toast } from 'react-toastify';
 
 //COMPONENTS 
@@ -12,7 +11,7 @@ import Menu from '../../components/menu';
 import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button';
 import FollowUp from '../../components/followup';
-import { getBalance, transferERC20 } from '../../services/magic';
+import { transferERC20 } from '../../services/magic';
 import { ThreeDots } from 'react-loader-spinner';
 
 //VISUALS
@@ -32,14 +31,14 @@ const Transfers = ({ magic }) => {
     }
 
     const loadInfo = async () => {
-        const data = TokenService.getUser()
-        setBalance(await getBalance(magic, data.account.public_address))
+        const acc = await UserService.getAccountDetails()
+        setBalance(acc.wallet.token_balance)
     }
 
     const transfer = async () => {
         if (!beneficiary)
             toast.error('Receiving address invalid!', TOAST_OPTIONS);
-        else if (!amount || amount < 1 || amount === "-")
+        else if (!amount || amount < 1 || amount === "-" || amount > balance)
             toast.error('Amount invalid!', TOAST_OPTIONS);
         else {
             onChangeLoading(true);
@@ -49,6 +48,9 @@ const Transfers = ({ magic }) => {
                 setAmount("")
                 setBeneficiary(null)
                 onChangeLoading(false);
+                setTimeout(() => {
+                    loadInfo()
+                }, 2500);
             } catch (e) {
                 console.log(e);
                 toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
@@ -75,7 +77,7 @@ const Transfers = ({ magic }) => {
                             options={beneficiaries}
                             value={beneficiary}
                             onChange={(value) => setBeneficiary(value)}
-                            formatOptionLabel={beneficiary => ( beneficiary.user_uuid ?
+                            formatOptionLabel={beneficiary => (beneficiary.user_uuid ?
                                 <div className="select_profile">
                                     <div className="select_avatar" style={{ backgroundImage: beneficiary.selfie ? `url('data:image/${beneficiary.selfie_ext};base64,${beneficiary.selfie}')` : `url('https://api.multiavatar.com/${beneficiary.user_uuid}.png')` }}></div>
                                     <div className="select_info">

@@ -1,4 +1,5 @@
 import "./menu.css";
+import React, { useState, useEffect } from 'react';
 
 //UTILS
 import AdminService from "../../services/admin_services";
@@ -10,11 +11,24 @@ import POLYGON from '../../assets/images/polygon-matic-logo.png';
 import Button from "../button";
 
 const Menu = () => {
+    const [balances, setBalances] = useState("-");
+    const [address, setAddress] = useState(null);
     const currentPath = window.location.pathname;
 
     const logout = () => {
         AdminService.logout()
     }
+
+    const loadBalances = async() => {
+        const data = await AdminService.getAdminBalance()
+        setBalances(data.balances)
+        setAddress(data.address)
+    } 
+
+    useEffect(() => {
+        loadBalances();
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>
@@ -33,15 +47,15 @@ const Menu = () => {
                         🏦
                     </div>
                     <p className="center">
-                        <small>0x95cF236dE0295F9e09f4bF3617D417346fEB6be4</small>
+                        <small>{address}</small>
                         <br />
                         <big><strong>Reserve account balance</strong></big>
                     </p>
-                    <table>
+                    {balances && <table>
                         <tbody>
                             <tr>
                                 <td>
-                                    <h1>10397.34</h1>
+                                    <h1>{parseFloat(balances.token_balance).toFixed(2)}</h1>
                                 </td>
                                 <td>
                                     <img src={LOGO_BLACK} width={"25px"} alt="Logo black"/>
@@ -49,14 +63,14 @@ const Menu = () => {
                             </tr>
                             <tr>
                                 <td>
-                                    <h3>108</h3>
+                                    <h3>{parseFloat(balances.matic).toFixed(2)}</h3>
                                 </td>
                                 <td>
                                     <img src={POLYGON} width={"15px"} alt="Logo Matic Polygon"/>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>}
                     <Button title={"Disconnect"} click={logout}/>
                 </div>
             </div>

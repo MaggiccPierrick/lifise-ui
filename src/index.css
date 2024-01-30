@@ -714,11 +714,11 @@ textarea:focus {
 }
 
 .dashboard .beneficiaries .max {
-  width: 680px !important;
+  width: 780px !important;
 }
 
 .dashboard .beneficiaries .locked {
-  width: 220px !important;
+  width: 250px !important;
 }
 
 .dashboard .beneficiaries .profile .avatar {
@@ -768,8 +768,9 @@ textarea:focus {
 
 .dashboard .beneficiaries .profile .redeemer {
   display: block;
-  line-height: 24px;
-  height: 24px;
+  line-height: 18px;
+  height: 36px;
+  margin-top: 5px;
   background-color: var(--primary);
   border-radius: 12px;
   color: #FFF;
@@ -784,8 +785,20 @@ textarea:focus {
   line-height: 44px;
 }
 
+.dashboard .beneficiaries .profile .balance_plus {
+  font-size: 20px;
+  line-height: 20px;
+  font-family: 'Raleway-bold';
+  font-weight: 600;
+  text-align: right;
+}
+
 .dashboard .beneficiaries .profile .balance_logo {
-  width: 18px;
+  width: 14px;
+}
+
+.dashboard .beneficiaries .profile .matic_logo {
+  width: 10px;
 }
 
 .dashboard .beneficiaries .profile .add_beneficiary {

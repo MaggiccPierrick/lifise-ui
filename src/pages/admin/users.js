@@ -4,10 +4,10 @@ import { TOAST_OPTIONS } from '../../constants';
 //UTILS
 import { useSearchParams } from 'react-router-dom';
 import AdminService from '../../services/admin_services';
-import { getAdminBalance } from '../../services/magic';
 
 //VISUALS
 import LOGO_BLACK from '../../assets/images/logo_black.png';
+import POLYGON from '../../assets/images/polygon-matic-logo.png';
 
 //COMPONENTS
 import Menu from '../../components/menu/admin';
@@ -34,13 +34,7 @@ const AdminUsers = () => {
         setPending(pendingState);
         setAccounts([]);
         const users = await AdminService.getUsers(deactivationState, pendingState);
-        if (pendingState)
-            setAccounts(users)
-        else
-            users.forEach(async (user) => {
-                user.balance = await getAdminBalance(user.public_address)
-                setAccounts(accounts => [...accounts, user]);
-            })
+        setAccounts(users)
     }
 
     const sendInvits = async () => {
@@ -154,7 +148,7 @@ const AdminUsers = () => {
                                     <div className="profile_info locked">
                                         <span className="profile_name">{account.email_address}</span>
                                         <span className="small_desc left">Invit sent {new Date(account.created_date).toLocaleDateString()}</span>
-                                        <span className="profile_name">0 redeems → 0 <small>CaaEUR</small></span>
+                                        <span className="profile_name">{account.token_claims.to_claim.length} <small>pending</small> → {account.token_claims.total_to_claim} <small>CaaEUR</small></span>
                                     </div>
                                     <div className="rm_beneficiary float-right">
                                         🕒
@@ -166,17 +160,25 @@ const AdminUsers = () => {
                                     <div className="profile_info locked">
                                         <span className="profile_name">{account.firstname || "-"} {account.lastname || "-"}</span>
                                         <span className="profile_email">{account.email_address}</span>
-                                        <span className="small_desc left">{new Date(account.created_date).toLocaleDateString()} | Birth: {account.birthdate || "-"}</span>
+                                        <span className="small_desc left">{account.public_address}</span>
                                     </div>
                                     <div className="profile_info pointer">
-                                        <span className="small_desc">Press to browse all operations</span>
-                                        <div className="redeemer">0 redeems | 0 pending</div>
-                                        <strong className="small_desc">0 <small>CaaEUR</small></strong>
+                                        <span className="small_desc">{new Date(account.created_date).toLocaleDateString()} | Birth: {account.birthdate || "-"}</span>
+                                        <div className="redeemer">
+                                            {account.token_claims.already_claimed.length} claimed → {account.token_claims.total_claimed} <small>CaaEUR</small>
+                                            <br/>
+                                            {account.token_claims.to_claim.length} pending → {account.token_claims.total_to_claim} <small>CaaEUR</small>
+                                        </div>
                                     </div>
-                                    <div className="profile_info float-right mr-70">
-                                        <span className="balance">{account.balance} <img src={LOGO_BLACK} className="balance_logo" alt="Logo CâaEuro" /></span>
-                                    </div>
+                                    {account.public_address && <div className="profile_info float-right mr-70">
+                                        <span className="balance_plus">
+                                            {parseFloat(account.wallet.token_balance).toFixed(2)} <img src={LOGO_BLACK} className="balance_logo" alt="Logo CâaEuro" />
+                                            <br/>
+                                            <small>{parseFloat(account.wallet.matic).toFixed(2)}</small> <img src={POLYGON} className="matic_logo" alt="Logo Matic Polygon"/>
+                                        </span>
+                                    </div>}
                                     {deactivated ?
+                                        account.public_address && 
                                         <div className="rm_beneficiary float-right" onClick={() => reactivate(account.user_uuid)}>
                                             ✅
                                         </div>

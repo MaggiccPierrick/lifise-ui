@@ -12,3 +12,4 @@ export const TOAST_OPTIONS = {
     progress: undefined,
     theme: "colored",
 }
+export const EXPLORER = "https://mumbai.polygonscan.com"

@@ -153,6 +153,14 @@ class AdminService {
         return response.data;
       });
   }
+  async getAdminBalance() {
+    return await api
+      .get(`/admin/wallet/balance`)
+      .then(async (response) => {
+        return response.data;
+      });
+  }
+
 }
 
 // eslint-disable-next-line
