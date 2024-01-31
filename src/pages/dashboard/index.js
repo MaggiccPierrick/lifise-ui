@@ -48,7 +48,7 @@ const Dashboard = () => {
             onChangeClaiming(true);
             try {
                 const resp = await UserService.claim([claim_uuid]);
-                if (resp.status && resp.tx_hash[claim_uuid]) {
+                if (resp.status && resp.transactions[claim_uuid]) {
                     toast.success(`Funds successfuly claimed with operation ID ${resp.transactions[claim_uuid].tx_hash.substring(0, 10)}...${resp.transactions[claim_uuid].tx_hash.substring(resp.transactions[claim_uuid].tx_hash.length - 10, resp.transactions[claim_uuid].tx_hash.length - 1)}`, TOAST_OPTIONS);
                     setTimeout(async() => {
                         await loadInfo()
