@@ -26,10 +26,11 @@ const Footer = () => {
             <div className="split">
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
                 <span className="metabank_typo">MetaBank</span>
-                {i18n.language === "en" && <span className="selecter" onClick={() => handleLangChange('fr')}>
+                {i18n.language === "en"? <span className="selecter" onClick={() => handleLangChange('fr')}>
                     FR
-                </span>}
-                {i18n.language === "fr" && <span className="selecter" onClick={() => handleLangChange('en')}>
+                </span>
+                :
+                <span className="selecter" onClick={() => handleLangChange('en')}>
                     EN
                 </span>}
                 <span className="selecter">{t('footer.cgu')}</span>
