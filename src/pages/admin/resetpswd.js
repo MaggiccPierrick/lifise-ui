@@ -17,7 +17,11 @@ import { ThreeDots } from 'react-loader-spinner';
 import BANNER_VISUAL from "../../assets/images/back_admin.jpg";
 import LOGO_WHITE from "../../assets/images/logo_white.png";
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const AdminResetPswd = () => {
+    const { t } = useTranslation();
     const [email, onChangeEmail] = useState();
     const [password, onChangePassword] = useState();
     const [validation, onChangeValidation] = useState(false);
@@ -29,13 +33,13 @@ const AdminResetPswd = () => {
         // eslint-disable-next-line
         let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
         if (!email || !re.test(email)) {
-            toast.error('Email syntax invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_email'), TOAST_OPTIONS);
         } else {
             onChangeLoading(true);
             try {
                 const resp = await AdminService.sendReset(email);
                 if (resp.status) {
-                    toast.success(`Reset code sent to ${email}`, TOAST_OPTIONS);
+                    toast.success(`${t('admin.reset_code')} ${email}`, TOAST_OPTIONS);
                     onChangeValidation(true);
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
@@ -48,15 +52,15 @@ const AdminResetPswd = () => {
 
     const newPswd = async () => {
         if (!code || code.length !== 8)
-            toast.error('Verification code format invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_code'), TOAST_OPTIONS);
         else if (!password || password.length < 8)
-            toast.error('Password format invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_password'), TOAST_OPTIONS);
         else {
             onChangeLoading(true);
             try {
                 const resp = await AdminService.resetPswd(email, password, code);
                 if (resp.status) {
-                    toast.success(`New password successfully registered`, TOAST_OPTIONS);
+                    toast.success(t('admin.new_pswd_success'), TOAST_OPTIONS);
                     onChangeSuccess(true);
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
@@ -81,26 +85,26 @@ const AdminResetPswd = () => {
                 </div>
                 {!validation ?
                     <div className="right_sign">
-                        <p className="instructions">Fill all required information to receive a reset code</p>
-                        <h1>Receive verification code</h1>
-                        <label>Email</label>
+                        <p className="instructions">{t('admin.fill_required_code')}</p>
+                        <h1>{t('admin.receive_code')}</h1>
+                        <label>{t('admin.email')}</label>
                         <input type="email" placeholder="john.doe@mail.com" onChange={e => onChangeEmail(e.target.value)} />
-                        <Button title={"Send reset code"} click={sendReset} loading={loading} />
+                        <Button title={t('admin.send_reset')} click={sendReset} loading={loading} />
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     </div>
                     :
                     <div className="right_sign">
-                        <p className="instructions">Set the verification code and new password</p>
-                        <h1>Set new password</h1>
-                        <label>Verification code</label>
+                        <p className="instructions">{t('admin.set_code_pswd')}</p>
+                        <h1>{t('admin.set_new_pswd')}</h1>
+                        <label>{t('admin.verif_code')}</label>
                         <input type="text" placeholder="Code" onChange={e => onChangeCode(e.target.value)} value={code}/>
-                        <label>Password</label>
-                        <input type="password" placeholder="Secured password" onChange={e => onChangePassword(e.target.value)}/>
+                        <label>{t('admin.pswd')}</label>
+                        <input type="password" placeholder={t('admin.secured_pswd')} onChange={e => onChangePassword(e.target.value)}/>
                         {!loading && !success && <>
-                            <Button title={"Set new password"} click={newPswd} /> <FollowUp intro={"Did not receive it ?"} description={"Resend code"} action={sendReset} />
+                            <Button title={t('admin.set_new_pswd')} click={newPswd} /> <FollowUp intro={t('admin.did_not_receive')} description={t('admin.resend_code')} action={sendReset} />
                         </>}
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
-                        <Button title={"Go to Sign In"} click={signRedirect} loading={loading || !success} />
+                        <Button title={t('admin.go_sign_in')} click={signRedirect} loading={loading || !success} />
                     </div>
                 }
             </div>

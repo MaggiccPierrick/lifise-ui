@@ -18,7 +18,11 @@ import { ThreeDots } from 'react-loader-spinner';
 import LOGO_BLACK from '../../assets/images/logo_black.png';
 import BANKINGWEB3 from '../../assets/images/digital_banking.png';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Transfers = ({ magic }) => {
+    const { t } = useTranslation();
     const [amount, setAmount] = useState("");
     const [beneficiary, setBeneficiary] = useState(null);
     const [balance, setBalance] = useState("-");
@@ -37,14 +41,14 @@ const Transfers = ({ magic }) => {
 
     const transfer = async () => {
         if (!beneficiary)
-            toast.error('Receiving address invalid!', TOAST_OPTIONS);
+            toast.error(t('transfer.invalid_address'), TOAST_OPTIONS);
         else if (!amount || amount < 1 || amount === "-" || amount > balance)
-            toast.error('Amount invalid!', TOAST_OPTIONS);
+            toast.error(t('transfer.invalid_amount'), TOAST_OPTIONS);
         else {
             onChangeLoading(true);
             try {
                 const receipt = await transferERC20(magic, amount * (10 ** 6), beneficiary.public_address);
-                toast.success(`Funds successfuly sent with operation ID ${receipt.transactionHash.substring(0, 10)}...${receipt.transactionHash.substring(receipt.transactionHash.length - 10, receipt.transactionHash.length - 1)}`, TOAST_OPTIONS);
+                toast.success(`${t('transfer.funds_sent')} ${receipt.transactionHash.substring(0, 10)}...${receipt.transactionHash.substring(receipt.transactionHash.length - 10, receipt.transactionHash.length - 1)}`, TOAST_OPTIONS);
                 setAmount("")
                 setBeneficiary(null)
                 onChangeLoading(false);
@@ -69,11 +73,12 @@ const Transfers = ({ magic }) => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"Transfer funds"} />
+                <BoardHeader title={t('transfer.transfer_funds')} />
                 <div className="content">
-                    <label>Select beneficiary</label>
+                    <label>{t('transfer.select_beneficiary')}</label>
                     {beneficiaries && <div className="select">
                         <Select
+                            placeholder={t('transfer.select_beneficiary')}
                             options={beneficiaries}
                             value={beneficiary}
                             onChange={(value) => setBeneficiary(value)}
@@ -89,24 +94,24 @@ const Transfers = ({ magic }) => {
                                 <div className="select_profile">
                                     <div className="select_avatar" style={{ backgroundImage: `url('https://api.multiavatar.com/${beneficiary.public_address}.png')` }}></div>
                                     <div className="select_info">
-                                        <span className="select_name">{beneficiary.email || 'External account'}</span>
+                                        <span className="select_name">{beneficiary.email || t('transfer.external_account')}</span>
                                         <span className="select_email">{beneficiary.public_address.substring(0, 10)}...{beneficiary.public_address.substring(0, 15)}</span>
                                     </div>
                                 </div>
                             )}
                         />
                     </div>}
-                    <FollowUp intro={"Can't find your beneficiary ?"} description={"Add a new beneficiary"} link={"/beneficiaries"} />
-                    <label>Set amount to send</label>
+                    <FollowUp intro={t('transfer.cant_find')} description={t('transfer.add_beneficiary')} link={"/beneficiaries"} />
+                    <label>{t('transfer.set_amount')}</label>
                     <div className="relative display-inline-block">
-                        <input type="number" className="semi" placeholder={"CâaEuro amount"} onChange={(e) => setAmount(e.target.value)} value={amount} />
+                        <input type="number" className="semi" placeholder={t('transfer.caaeuro_amount')} onChange={(e) => setAmount(e.target.value)} value={amount} />
                         <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
                         <label className="mt-0 mb-40"><small>Max {balance} <img src={LOGO_BLACK} width={"8px"} alt="Logo CâaEuro" /></small></label>
                     </div>
                     {!loading &&
                         <div className="relative display-inline-block mobile_block">
-                            <Button title={"Send funds"} click={transfer} />
-                            <FollowUp intro={"No fees required"} />
+                            <Button title={t('transfer.send_funds')} click={transfer} />
+                            <FollowUp intro={t('transfer.no_fees')} />
                         </div>}
                     <div className="relative display-inline-block mobile_block ml-20">
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />

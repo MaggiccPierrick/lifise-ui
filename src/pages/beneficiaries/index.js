@@ -16,7 +16,11 @@ import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button'
 import PopUpMFA from '../../components/popup/MFA';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Beneficiaries = () => {
+    const { t } = useTranslation();
     const [searchField, changeSearchField] = useState("");
     const [profile, setProfile] = useState(null);
     const [addr, setAddr] = useState(null);
@@ -39,7 +43,7 @@ const Beneficiaries = () => {
         // eslint-disable-next-line
         let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/
         if (!searchField) {
-            toast.error('Invalid email or adddress', TOAST_OPTIONS)
+            toast.error(t('beneficiaries.invalid_email'), TOAST_OPTIONS)
         } else if (validateAddr(searchField.toLocaleLowerCase())) {
             setAddr(searchField)
         } else if (re.test(searchField)) {
@@ -50,7 +54,7 @@ const Beneficiaries = () => {
             } else
                 toast.error(data.message, TOAST_OPTIONS)
         } else {
-            toast.error('Invalid email or adddress', TOAST_OPTIONS)
+            toast.error(t('beneficiaries.invalid_email'), TOAST_OPTIONS)
         }
     }
 
@@ -64,7 +68,7 @@ const Beneficiaries = () => {
 
     const confirm = async (mfa) => {
         if (!mfa) {
-            toast.error('Invalid 2FA validation', TOAST_OPTIONS)
+            toast.error(t('beneficiaries.invalid_2fa'), TOAST_OPTIONS)
         } else if (profile) {
             const data = await UserService.addReferencedBeneficiary(profile.user_uuid, mfa)
             if (data.status) {
@@ -85,7 +89,7 @@ const Beneficiaries = () => {
             } else
                 toast.error(data.message, TOAST_OPTIONS)
         } else {
-            toast.error('Invalid 2FA validation', TOAST_OPTIONS)
+            toast.error(t('beneficiaries.invalid_2fa'), TOAST_OPTIONS)
         }
         closeDisplay()
     }
@@ -107,7 +111,7 @@ const Beneficiaries = () => {
     }
 
     const removeBeneficiary = async (beneficiary_uuid) => {
-        if (window.confirm("Do you confirm beneficiary removal?")) {
+        if (window.confirm(t('beneficiaries.confirm_remove'))) {
             try {
                 const data = await UserService.rmBeneficiary(beneficiary_uuid)
                 if (data.status) {
@@ -127,12 +131,12 @@ const Beneficiaries = () => {
             <div className="dashboard">
                 <Menu />
                 <div className="right_board">
-                    <BoardHeader title={"Beneficiaries"} />
+                    <BoardHeader title={t('beneficiaries.beneficiaries')} />
                     <div className="content">
-                        <p><strong>Manage your beneficiaries</strong></p>
+                        <p><strong>{t('beneficiaries.manage')}</strong></p>
                         <div className="search">
-                            <input type="text" placeholder="Search an email or set an address" onChange={(e) => changeSearchField(e.target.value)} value={searchField} />
-                            <Button title={"Search"} click={searchUser} />
+                            <input type="text" placeholder={t('beneficiaries.search_email')} onChange={(e) => changeSearchField(e.target.value)} value={searchField} />
+                            <Button title={t('beneficiaries.search')} click={searchUser} />
                         </div>
                         <div className="beneficiaries">
                             {profile && <div className="profile">
@@ -151,11 +155,11 @@ const Beneficiaries = () => {
                             </div>}
                             {addr && <div className="mt-10 mb-40">
                                 <div className="relative display-inline-block mr-20">
-                                    <label>Set an email address to referefence <strong>{addr}</strong></label>
+                                    <label>{t('beneficiaries.set_email')} <strong>{addr}</strong></label>
                                     <div className="relative display-inline-block">
                                         <input type="email" className="semi" placeholder={`Email address`} onChange={(e) => onChangeEmail(e.target.value)} />
                                     </div>
-                                    <Button title={"Add"} click={addBeneficiary}/>
+                                    <Button title={t('beneficiaries.add')} click={addBeneficiary} />
                                 </div>
                             </div>}
                             {beneficiaries && beneficiaries.map(beneficiary =>
@@ -180,8 +184,8 @@ const Beneficiaries = () => {
                                         <div className="profile_info">
                                             <span className="profile_name">{beneficiary.email}</span>
                                             <span className="profile_email">
-                                                External account
-                                                <br/>
+                                                {t('beneficiaries.external_account')}
+                                                <br />
                                                 <small>{beneficiary.public_address}</small>
                                             </span>
                                         </div>

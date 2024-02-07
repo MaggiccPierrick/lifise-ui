@@ -3,34 +3,37 @@ import Menu from '../../components/menu';
 import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Assistance = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"Assistance"} />
+                <BoardHeader title={t('assistance.assistance')} />
                 <div className="content">
-                    <p className="left"><strong>Describe your problem or remark</strong></p>
+                    <p className="left"><strong>{t('assistance.describe_pb')}</strong></p>
                     <p className="left">
                         <small>
-                            Once sent, we will get in touch with you as soon as possible.
+                            {t('assistance.get_in_touch')}
                             <br />
-                            Thank you for your trust and support.
+                            {t('assistance.thank_you')}
                         </small>
                     </p>
-                    <textarea placeholder="Your message..."></textarea>
+                    <textarea placeholder={t('assistance.your_message')}></textarea>
                     <div className="conditions">
-                            By submitting this form, you consent to MetaBANK using your personal information to contact you and respond to your request for information.
-                            Your information will be kept for the duration of our commercial exchanges and for a maximum of 2 years from our last exchange.
-                            You benefit in particular from the rights of access, rectification and deletion of your data.
+                        {t('assistance.disclaimer_sub')}
                     </div>
                     <div className="conditions">
-                        You can exercise these rights by emailing us at <a href={"mailTo:contact@metabank.fr"}>contact@metabank.fr</a>
+                        {t('assistance.exercice_rights')} <a href={"mailTo:contact@metabank.fr"}>contact@metabank.fr</a>
                     </div>
                     <div className="conditions">
-                        To find out more about protecting your data, you can consult our <a href={"https://www.metabank-france.eu/politique-de-confidentialité"} target="_blank" rel="noreferrer">Privacy policy</a>.
+                        {t('assistance.find_more')} <a href={"https://www.metabank-france.eu/politique-de-confidentialité"} target="_blank" rel="noreferrer">{t('assistance.policy')}</a>.
                     </div>
-                    <Button title={"Send message"}/>
+                    <Button title={t('assistance.send_msg')} />
                 </div>
             </div>
         </div>

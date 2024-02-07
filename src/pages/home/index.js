@@ -15,9 +15,13 @@ import BANNER_DARK_VISUAL from "../../assets/images/girl_back_metabank_dark.jpg"
 import DISCORD_GROUP from "../../assets/images/discord_group.png";
 import EUROPE from "../../assets/images/europe_flag.jpg";
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 let deferredPrompt;
 
 const Home = () => {
+    const { t } = useTranslation();
     const [displayAMF, setDisplayAMF] = useState(!window.sessionStorage.getItem('amf_warning'));
     const [displayIOS, setDisplayIOS] = useState(false);
 
@@ -58,147 +62,131 @@ const Home = () => {
             <Header />
             <div className="container">
                 {displayAMF && <PopUp acceptAMFwarning={acceptAMFwarning} />}
-                {displayIOS && <PWAPrompt promptOnVisit={50} timesToShow={50} copyClosePrompt="Close" debug={true}/>}
+                {displayIOS && <PWAPrompt promptOnVisit={50} timesToShow={50} copyClosePrompt="Close" debug={true} />}
                 {isMobile ?
                     <>
                         <div className="right_b mt--20">
-                            <img src={BANNER_DARK_VISUAL} className="banner_visual" alt="Girl standing in front of a graffiti wall" />
+                            <img src={BANNER_DARK_VISUAL} className="banner_visual" alt={t('home.alt_banner')} />
                         </div>
                         <div className="left_b mt-reducer">
-                            <span className="tagline ml-20 shadowed">Liberté</span>
-                            <span className="tagline shadowed">Fiabilité</span>
-                            <span className="tagline shadowed">Sécurité</span>
+                            <span className="tagline ml-20 shadowed">{t('home.freedom')}</span>
+                            <span className="tagline shadowed">{t('home.reliability')}</span>
+                            <span className="tagline shadowed">{t('home.security')}</span>
                             <h2 className="ml-20 mb-reducer shadowed">
-                                <small>The open Neo Bank powered by web3 for everyone <big>🚀</big></small>
+                                <small>{t('home.neo_bank')} <big>🚀</big></small>
                             </h2>
                             <p>
-                                We are bringing banking to a whole new level leveraging CaâEuro stablecoin and top notch technology.
+                                {t('home.banking_level')} {t('home.caaeuro_tech')}
                             </p>
                             <div className="center">
-                                <Button title={"Get started now"} click={navigateSignUp}/>
-                                <Button title={"Install App"} framed={true} click={isIOS? toggleIOSdisplay : handleInstallClick} />
+                                <Button title={t('home.get_started')} click={navigateSignUp} />
+                                <Button title={t('home.intall_app')} framed={true} click={isIOS ? toggleIOSdisplay : handleInstallClick} />
                             </div>
                         </div>
                     </>
                     :
                     <>
                         <div className="left_b">
-                            <span className="tagline">Liberté</span>
-                            <span className="tagline">Fiabilité</span>
-                            <span className="tagline">Sécurité</span>
+                            <span className="tagline">{t('home.freedom')}</span>
+                            <span className="tagline">{t('home.reliability')}</span>
+                            <span className="tagline">{t('home.security')}</span>
                             <h2>
-                                The open Neo Bank powered by web3 for everyone <big>🚀</big>
+                                {t('home.neo_bank')} <big>🚀</big>
                             </h2>
                             <p>
-                                We are bringing banking to a whole new level leveraging
+                                {t('home.banking_level')}
                                 <br />
-                                CaâEuro stablecoin and top notch technology.
+                                {t('home.caaeuro_tech')}
                             </p>
-                            <Button title={"Get started now"} click={navigateSignUp}/>
+                            <Button title={t('home.get_started')} click={navigateSignUp} />
                         </div>
                         <div className="right_b">
-                            <img src={BANNER_VISUAL} className="banner_visual" alt="Girl standing in front of a graffiti wall" />
+                            <img src={BANNER_VISUAL} className="banner_visual" alt={t('home.alt_banner')} />
                         </div>
                     </>}
                 <div className="box left">
                     <div className="display-inline-block mr-50">
-                        <span className="tag">More freedom</span>
-                        <span className="tag">More safety</span>
-                        <span className="tag">More trust</span>
+                        <span className="tag">{t('home.more_freedom')}</span>
+                        <span className="tag">{t('home.more_safety')}</span>
+                        <span className="tag">{t('home.more_trust')}</span>
                     </div>
                     <div className="display-inline-block mr-50">
                         <span className="maxi">✨</span>
                     </div>
                 </div>
                 <div className="box center">
-                    <span className="tag">Join us</span>
-                    <img src={DISCORD_GROUP} className="discord_group" alt="Discord group" />
-                    <span className="subtitle">A growing community</span>
+                    <span className="tag">{t('home.join_us')}</span>
+                    <img src={DISCORD_GROUP} className="discord_group" alt={t('home.alt_discord')} />
+                    <span className="subtitle">{t('home.growing_community')}</span>
                 </div>
                 <div className="box center">
-                    <span className="tag">Circulating funds</span>
+                    <span className="tag">{t('home.circulating_funds')}</span>
                     <span className="big_number">100K+</span>
-                    <span className="subtitle">Fully decentralized and free</span>
+                    <span className="subtitle">{t('home.fully_decentralized')}</span>
                 </div>
                 <div className="box center mr-0">
-                    <span className="tag">Active accounts</span>
+                    <span className="tag">{t('home.active_accounts')}</span>
                     <span className="big_number">540</span>
-                    <span className="subtitle">Free and open for all Europeans</span>
+                    <span className="subtitle">{t('home.free_europeans')}</span>
                 </div>
                 <div className="mt-50">
-                    <span className="tagline">Monnaie numérique grand public</span>
+                    <span className="tagline">{t('home.public_money')}</span>
                     <h2>
-                        CaâEuro stablecoin
+                        {t('home.caaeuro_stablecoin')}
                     </h2>
                     <p>
-                        Accès par la blockchains publique Polygon et le système bancaire traditionnel à une monnaie stable numérique de type euro à 445 millions de consommateurs et 23 millions d'entreprises.
+                        {t('home.blockchain_access')}
                     </p>
                     <div className="shader grey-shade-one">
-                        Collatéral sécurisé par  une Banque française
+                        {t('home.secured_by_fr_bank')}
                     </div>
                     <div className="shader grey-shade-two">
-                        Tranparence et sécurisation des échanges
+                        {t('home.transparency')}
                     </div>
                     <div className="shader grey-shade-three">
-                        Un stablecoin collatérisé en 1 pour 1
+                        {t('home.1_on_1')}
                     </div>
                     <div className="shader grey-shade-four">
-                        Déplafonnement de l'euro numérique
+                        {t('home.euro_num')}
                     </div>
                     <div className="shader grey-shade-five">
-                        Echanges cryptographiques en P2P (OTC)
+                        {t('home.p2p_crypto')}
                     </div>
                     <div className="shader grey-shade-six">
-                        Protocole d'émission sécurisé et audité
+                        {t('home.emission')}
                     </div>
                     <p>
-                        <big><strong>La monnaie de paiement numérique grand public complémentaire et alternative au MNBCE</strong></big>
+                        <big><strong>{t('home.mnbce')}</strong></big>
                     </p>
                 </div>
                 <div className="mt-100">
                     <h2>
-                        Our values
+                        {t('home.values')}
                     </h2>
                     <div className="value w-22 ml-0">
-                        <p className="title">Stabilité accrue</p>
-                        Bien que les cryptomonnaies telles que le Bitcoin soient populaires,
-                        elles sont sujettes à des fluctuations de prix importantes. Un euro stablecoin, en revanche, est conçu pour maintenir une valeur stable
-                        par rapport à l'euro. Cela signifie que les joueurs peuvent effectuer des transactions sans craindre
-                        que la valeur de leurs fonds ne diminue brusquement.
+                        <p className="title">{t('home.stability')}</p>
+                        {t('home.fluctuations')}
                     </div>
                     <div className="value dark w-22">
-                        <p className="title">Réduction des risques</p>
-                        Les fluctuations de prix des cryptomonnaies traditionnelles peuvent créer des risques pour les opérateurs de jeux d'argent
-                        et les joueurs. En acceptant un euro stablecoin, les risques liés aux variations de prix sont minimisés, offrant ainsi
-                        une plus grande prévisibilité des revenus et des dépenses.
+                        <p className="title">{t('home.price_reduction')}</p>
+                        {t('home.predictability')}
                     </div>
                     <div className="value w-28">
-                        <p className="title">Simplification des transactions</p>
-                        L'utilisation d'un euro stablecoin peut simplifier les transactions pour les joueurs et les opérateurs de jeux d'argent.
-                        Les dépôts et les retraits peuvent être effectués rapidement et facilement, sans avoir à se soucier des conversions de devises
-                        ou des procédures complexes. Cela améliore l'expérience utilisateur et facilite la gestion des flux de trésorerie
-                        pour les opérateurs de casinos.
+                        <p className="title">{t('home.simplified_tx')}</p>
+                        {t('home.usage')}
                     </div>
                     <div className="value dark w-28 mr-0">
-                        <p className="title">Frais de transactions réduits</p>
-                        Les paiements par cryptomonnaie, y compris les stablecoins, peuvent généralement entraîner des frais de transaction moins
-                        élevés que les méthodes de paiement traditionnelles. Cela peut bénéficier tant aux joueurs qu'aux opérateurs de casinos
-                        en réduisant les coûts liés aux paiements et en augmentant ainsi les marges bénéficiaires.
+                        <p className="title">{t('home.tx_fees')}</p>
+                        {t('home.crypto_payment')}
                     </div>
                     <div className="value dark w-28 ml-0">
-                        <p className="title">Marché mondial élargi</p>
-                        L'euro est l'une des principales devises mondiales. En utilisant un euro stablecoin, les casinos en ligne
-                        et les sites de jeux d'argent peuvent attirer des joueurs du monde entier, indépendamment des différences
-                        de devises et des contraintes de taux de change. Cela peut élargir leur base de clients et stimuler
-                        la croissance de leur activité.
+                        <p className="title">{t('home.world_market')}</p>
+                        {t('home.world_currency')}
                     </div>
                     <div className="europe" style={{ backgroundImage: `url('${EUROPE}')` }}></div>
                     <div className="value w-28 mr-0">
-                        <p className="title">Confidentialité et sécurité</p>
-                        Comme pour les autres cryptomonnaies, l'utilisation d'un euro stablecoin peut offrir un certain niveau d'anonymat
-                        pour les transactions. Cela peut être attrayant pour les joueurs qui souhaitent préserver leur vie privée.
-                        De plus, les transactions effectuées avec un euro stablecoin sont généralement sécurisées à l'aide de technologies
-                        de cryptographie avancées, offrant ainsi une protection supplémentaire contre les fraudes et les atteintes à la sécurité.
+                        <p className="title">{t('home.privacy')}</p>
+                        {t('home.privacy_content')}
                     </div>
                 </div>
             </div>

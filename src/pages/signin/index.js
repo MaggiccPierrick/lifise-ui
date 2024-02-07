@@ -16,7 +16,11 @@ import { ThreeDots } from "react-loader-spinner";
 import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
 import LOGO_BLACK from "../../assets/images/logo_black.png";
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const SignIn = ({ magic }) => {
+    const { t } = useTranslation();
     const [email, onChangeEmail] = useState();
     const [loading, onChangeLoading] = useState(false);
 
@@ -26,7 +30,7 @@ const SignIn = ({ magic }) => {
         // eslint-disable-next-line
         let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
         if (!email || !re.test(email)) {
-            toast.error('Email syntax invalid!', TOAST_OPTIONS);
+            toast.error(t('signin.error_email'), TOAST_OPTIONS);
         } else {
             try {
                 onChangeLoading(true);
@@ -41,7 +45,7 @@ const SignIn = ({ magic }) => {
                         onChangeLoading(false);
                     }
                 }else{
-                    toast.error("No MetaBank account found", TOAST_OPTIONS);
+                    toast.error(t('signin.no_account_found'), TOAST_OPTIONS);
                     onChangeLoading(false);
                 }
             } catch (e) {
@@ -61,14 +65,14 @@ const SignIn = ({ magic }) => {
                     <span className="metabank_typo" onClick={homeRedirect}>MetaBank</span>
                 </div>
                 <div className="right_sign">
-                    <p className="instructions">Fill all required information to access your account</p>
-                    <h1>Access your account</h1>
-                    <label>Email</label>
-                    <input type="text" placeholder="Email address" onChange={e => onChangeEmail(e.target.value)} />
+                    <p className="instructions">{t('signin.fill_required_info')}</p>
+                    <h1>{t('signin.access_account')}</h1>
+                    <label>{t('signin.email_address')}</label>
+                    <input type="text" placeholder={t('signin.email_address')} onChange={e => onChangeEmail(e.target.value)} />
                     <label className="mt-10">Powered by <a href="https://magic.link" target="_blank" rel="noreferrer">Magic.link</a></label>
                     {!loading &&
                         <>
-                            <Button title={"Sign In"} click={magicLogin} /> <FollowUp intro={"No account ?"} description={"Create yours today"} link={"/signup"} />
+                            <Button title={t('signin.sign_in')} click={magicLogin} /> <FollowUp intro={t('signin.no_account')} description={t('signin.create_yours')} link={"/signup"} />
                         </>}
                     <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                 </div>

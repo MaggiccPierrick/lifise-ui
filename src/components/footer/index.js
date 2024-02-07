@@ -10,40 +10,54 @@ import XTWITTER from '../../assets/images/twitter-x-logo.png';
 import YOUTUBE from '../../assets/images/youtube.png';
 import POLYGON from '../../assets/images/polygon-matic-logo.png';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Footer = () => {
     const currentPath = window.location.pathname;
+    const { t, i18n } = useTranslation();
 
-    return ( (!isMobile || ["/", "/signin", "/signup"].includes(currentPath)) &&
+    const handleLangChange = lang => {
+        i18n.changeLanguage(lang);
+    };
+
+    return ((!isMobile || ["/", "/signin", "/signup"].includes(currentPath)) &&
         <footer>
             <div className="split">
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
                 <span className="metabank_typo">MetaBank</span>
-                <span className="selecter">General terms of use</span>
-                <span className="selecter"onClick={() => window.open("https://www.metabank-france.eu/politique-de-confidentialité")}>Privacy policy</span>
+                {i18n.language === "en" && <span className="selecter" onClick={() => handleLangChange('fr')}>
+                    FR
+                </span>}
+                {i18n.language === "fr" && <span className="selecter" onClick={() => handleLangChange('en')}>
+                    EN
+                </span>}
+                <span className="selecter">{t('footer.cgu')}</span>
+                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/politique-de-confidentialité")}>{t('footer.policy')}</span>
             </div>
             <div className="split">
                 <h4>
-                    Editor
+                    {t('footer.editor')}
                 </h4>
                 <p>
-                    The publisher of the Site is SAS En Liens ! Rovaltain-web.com - Capital 47 600€ - 914 291 372 R.C.S. Romans - France
-                    <br/>
-                    VAT number: FR18907943088
+                    {t('footer.publisher')}
+                    <br />
+                    {t('footer.vat_number')}
                 </p>
                 <p>
                     Email : <strong><a href={"mailTo:contact@metabank-france.eu"}>contact@metabank-france.eu</a></strong>
-                    <br/>
-                    Publishing director: Mr. Pierrick TORASSO
+                    <br />
+                    {t('footer.publising_director')}
                 </p>
             </div>
 
             <div className="split">
                 <h4>
-                    Follow us
+                    {t('footer.follow_us')}
                 </h4>
-                <img src={LINKEDIN} alt="LinkedIn" className="social" onClick={() => window.open("https://www.linkedin.com/company/80497650")}/>
-                <img src={XTWITTER} alt="X Twitter" className="social" onClick={() => window.open("https://twitter.com/MetabankFrance")}/>
-                <img src={YOUTUBE} alt="Youtube" className="social" onClick={() => window.open("https://www.youtube.com/channel/UCscHwitaskD9i8IT_r3YVCA")}/>
+                <img src={LINKEDIN} alt="LinkedIn" className="social" onClick={() => window.open("https://www.linkedin.com/company/80497650")} />
+                <img src={XTWITTER} alt="X Twitter" className="social" onClick={() => window.open("https://twitter.com/MetabankFrance")} />
+                <img src={YOUTUBE} alt="Youtube" className="social" onClick={() => window.open("https://www.youtube.com/channel/UCscHwitaskD9i8IT_r3YVCA")} />
                 <h4 className="mt-30">
                     Smart contract
                 </h4>

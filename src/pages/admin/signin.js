@@ -17,7 +17,11 @@ import BANNER_VISUAL from "../../assets/images/back_admin.jpg";
 import LOGO_WHITE from "../../assets/images/logo_white.png";
 import { ThreeDots } from 'react-loader-spinner';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const AdminSignIn = () => {
+    const { t } = useTranslation();
     const [email, onChangeEmail] = useState();
     const [password, onChangePassword] = useState();
     const [validation, onChangeValidation] = useState(false);
@@ -29,15 +33,15 @@ const AdminSignIn = () => {
         // eslint-disable-next-line
         let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
         if (!email || !re.test(email)) {
-            toast.error('Email syntax invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_email'), TOAST_OPTIONS);
         } else if (!password || password.length < 8) {
-            toast.error('Password format invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_password'), TOAST_OPTIONS);
         } else {
             onChangeLoading(true);
             try {
                 const resp = await AdminService.login(email, password);
                 if (resp.status) {
-                    toast.success(`Authentication code sent to ${email}`, TOAST_OPTIONS);
+                    toast.success(`${t('admin.auth_code_sent')} ${email}`, TOAST_OPTIONS);
                     onChangeValidation(true);
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
@@ -53,7 +57,7 @@ const AdminSignIn = () => {
 
     const verify = async () => {
         if (!code || code.length !== 6)
-            toast.error('Verification code format invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_code'), TOAST_OPTIONS);
         else {
             onChangeLoading(true);
             try {
@@ -82,33 +86,33 @@ const AdminSignIn = () => {
                 </div>
                 {!validation ?
                     <div className="right_sign">
-                        <p className="instructions">Fill all required information to access administration</p>
-                        <h1>Administration access</h1>
-                        <label>Email</label>
+                        <p className="instructions">{t('admin.fill_required')}</p>
+                        <h1>{t('admin.admin_access')}s</h1>
+                        <label>{t('admin.email')}</label>
                         <input type="email" placeholder="john.doe@mail.com" onChange={e => onChangeEmail(e.target.value)} />
-                        <label>Password</label>
-                        <input type="password" placeholder="Secured password" onChange={e => onChangePassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && login()} />
+                        <label>{t('admin.pswd')}</label>
+                        <input type="password" placeholder={t('admin.secured_pswd')} onChange={e => onChangePassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && login()} />
                         {isGA &&
                             <React.Fragment>
-                                <label>Authenticator OTP</label>
+                                <label>{t('admin.auth_otp')}</label>
                                 <input type="number" placeholder="Google authenticator" onChange={e => onChangeCode(e.target.value)} />
                             </React.Fragment>
                         }
                         {!loading &&
                             <>
-                                <Button title={"Sign In"} click={isGA? verify : login} /> <FollowUp intro={"No password or forgotten?"} description={"Set new password"} link={"/admin/reset"} />
+                                <Button title={t('admin.sign_in')} click={isGA? verify : login} /> <FollowUp intro={t('admin.no_pswd')} description={t('admin.set_pswd')} link={"/admin/reset"} />
                             </>}
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     </div>
                     :
                     <div className="right_sign">
-                        <p className="instructions">Set the verification code received in your email inbox</p>
-                        <h1>Access verification</h1>
-                        <label>Authentication code</label>
+                        <p className="instructions">{t('admin.set_code')}</p>
+                        <h1>{t('admin.verif_access')}</h1>
+                        <label>{t('admin.auth_code')}</label>
                         <input type="text" placeholder="Code" value={code} onChange={e => onChangeCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && verify()} />
                         {!loading &&
                             <>
-                                <Button title={"Verify"} click={verify} />
+                                <Button title={t('admin.verify')} click={verify} />
                             </>}
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     </div>

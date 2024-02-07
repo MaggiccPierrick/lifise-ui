@@ -6,18 +6,22 @@ import Button from '../button';
 //VISUALS
 import LOGO from '../../assets/images/logo.png';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Header = () => {
     const navigateSignUp = () => window.location.href = "/signup";
+    const { t } = useTranslation();
 
     return (
         <header>
             <img src={LOGO} alt="MetaBank logo" className="logo" />
             <span className="metabank_typo">MetaBank</span>
             <a href={"/"} className="selecter">CaâEuro</a>
-            <a href={"/"} className="selecter">Values</a>
-            <a href="https://www.linkedin.com/company/en-liens-rovaltain-web-com/posts/?feedView=all" target="_blank" rel="noreferrer" className="selecter">News</a>
-            <a href={"/signin"} className="selecter float-right mobile-keeper">Sign In</a>
-            <Button title={"Open FREE account"} right={true} click={navigateSignUp}/>
+            <a href={"/"} className="selecter">{t('header.values')}</a>
+            <a href="https://www.linkedin.com/company/en-liens-rovaltain-web-com/posts/?feedView=all" target="_blank" rel="noreferrer" className="selecter">{t('header.news')}</a>
+            <a href={"/signin"} className="selecter float-right mobile-keeper">{t('header.sign_in')}</a>
+            <Button title={t('header.open_account')} right={true} click={navigateSignUp}/>
         </header>
     )
 };

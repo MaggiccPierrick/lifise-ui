@@ -13,7 +13,11 @@ import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button';
 import { ThreeDots } from 'react-loader-spinner';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Profile = () => {
+    const { t } = useTranslation();
     const inputRef = useRef();
     const [profile, setProfile] = useState({});
     const [firstname, onChangeFirstname] = useState("");
@@ -29,9 +33,9 @@ const Profile = () => {
         const reader = new FileReader()
         const extension = event.target.files[0] && event.target.files[0].name.split('.').pop().toLowerCase()
         if (!extension || !['jpg', 'png', 'jpeg'].includes(extension)) {
-            toast.error('Invalid image extension', TOAST_OPTIONS);
+            toast.error(t('profile.invalid_img_ext'), TOAST_OPTIONS);
         } else if (event.target.files[0].size > 32000000) {
-            toast.error('Image file exceeeded', TOAST_OPTIONS);
+            toast.error(t('profile.img_size_exceed'), TOAST_OPTIONS);
         } else {
             onChangeExtension(extension)
             reader.onloadend = () => processFile(reader)
@@ -61,15 +65,15 @@ const Profile = () => {
 
     const updateProfile = async () => {
         if (!firstname)
-            toast.error('Firstname syntax invalid!', TOAST_OPTIONS);
+            toast.error(t('profile.error_firstname'), TOAST_OPTIONS);
         else if (!lastname)
-            toast.error('Lastname syntax invalid!', TOAST_OPTIONS);
+            toast.error(t('profile.error_lastname'), TOAST_OPTIONS);
         else {
             onChangeLoading("profile");
             try {
                 const resp = await UserService.updateProfile(firstname, lastname, birthdate, avB64, avExt);
                 if (resp.status) {
-                    toast.success(`Profile successfully updated`, TOAST_OPTIONS);
+                    toast.success(t('profile.profile_updated'), TOAST_OPTIONS);
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
@@ -84,9 +88,9 @@ const Profile = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"Profile"} />
+                <BoardHeader title={t('profile.profile')} />
                 <div className="content">
-                    <p><strong>Edit your profile</strong></p>
+                    <p><strong>{t('profile.edit_profile')}</strong></p>
                     <div className="big_avatar"
                         onClick={handleAvatarUpload}
                         style={{
@@ -97,24 +101,24 @@ const Profile = () => {
                     <input className="display-none" type="file" ref={inputRef}
                         accept="image/png,image/jpeg"
                         onChange={(e) => onAvatarHandler(e)} />
-                    <small>Press to change profile picture</small>
+                    <small>{t('profile.press_picture')}</small>
                     <div className="mt-30">
-                        <label>Firstname</label>
+                        <label>{t('profile.firstname')}</label>
                         <input type="text" value={firstname} onChange={(e) => onChangeFirstname(e.target.value)} />
                     </div>
                     <div className="mt-10 mb-20">
-                        <label>Lastname</label>
+                        <label>{t('profile.lastname')}</label>
                         <input type="text" value={lastname} onChange={(e) => onChangeLastname(e.target.value)} />
                     </div>
                     <div className="mt-10 mb-20">
-                        <label>Birthdate</label>
+                        <label>{t('profile.birthdate')}</label>
                         <input type="date" value={birthdate} onChange={(e) => onChangeBirthdate(e.target.value)} />
                     </div>
-                    <Button title={"Update profile"} loading={loading === "profile"} click={updateProfile} />
+                    <Button title={t('profile.update_profile')} loading={loading === "profile"} click={updateProfile} />
                     <ThreeDots visible={loading === "profile"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                 </div>
                 <div className="disconnect">
-                    <Button title={"Disconnect"} click={logout} />
+                    <Button title={t('profile.disconnect')} click={logout} />
                 </div>
             </div>
             <ToastContainer />

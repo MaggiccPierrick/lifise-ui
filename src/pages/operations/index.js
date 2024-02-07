@@ -15,7 +15,11 @@ import UserService from '../../services/user_services';
 import TokenService from '../../services/token_services';
 import { EXPLORER } from '../../constants';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Operations = () => {
+    const { t } = useTranslation();
     const [profile, setProfile] = useState({});
     const [operations, setOperations] = useState([]);
     const [beneficiaries, setBeneficiaries] = useState([]);
@@ -32,7 +36,6 @@ const Operations = () => {
         setBeneficiaries(benfs)
         const ops = await UserService.getOperations()
         setOperations(ops)
-        console.log(ops)
         onChangeLoading(false)
     }
 
@@ -45,13 +48,13 @@ const Operations = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"Operations"} />
+                <BoardHeader title={t('ops.operations')} />
                 <div className="content">
-                    <p><strong>Browse past operations</strong></p>
+                    <p><strong>{t('ops.browse_ops')}</strong></p>
                     <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     {!loading && operations.map(op =>
                         <div className={profile.public_address.toLowerCase() === op.from ? "operation mobile-ml-40" : "operation"} key={op.hash}>
-                            <div className="op_type">{profile.public_address.toLowerCase() === op.from ? "SENT" : "RECEIVED"} </div>
+                            <div className="op_type">{profile.public_address.toLowerCase() === op.from ? t('ops.sent') : t('ops.received')} </div>
                             <div className="op_link" onClick={() => window.open(`${EXPLORER}/tx/${op.hash}`)}>{op.hash}</div>
                             <div className="op_date">{new Date(op.block_time).toLocaleDateString()} {new Date(op.block_time).toLocaleTimeString()}</div>
                             <div className="select">
@@ -73,7 +76,7 @@ const Operations = () => {
                                                     :
                                                     `${op.to.substring(0, 10)}...${op.to.substring(0, 15)}`}
                                             </span>
-                                            <span className="select_email">{beneficiaries[op.to] ? beneficiaries[op.to].email_address : 'Unreferenced receiver'}</span>
+                                            <span className="select_email">{beneficiaries[op.to] ? beneficiaries[op.to].email_address : t('ops.unreferenced_receiver')}</span>
                                         </div>
                                     </div>
                                     :
@@ -84,7 +87,7 @@ const Operations = () => {
                                                 <span className="select_name">
                                                     MetaBank
                                                 </span>
-                                                <span className="select_email">Offered to you by <strong>MetaBank</strong></span>
+                                                <span className="select_email">{t('ops.offered_by')} <strong>MetaBank</strong></span>
                                             </div>
                                         </div>
                                         :
@@ -105,7 +108,7 @@ const Operations = () => {
                                                         :
                                                         `${op.from.substring(0, 10)}...${op.from.substring(0, 15)}`}
                                                 </span>
-                                                <span className="select_email">{beneficiaries[op.from] ? beneficiaries[op.from].email_address : 'Unreferenced sender'}</span>
+                                                <span className="select_email">{beneficiaries[op.from] ? beneficiaries[op.from].email_address : t('ops.unreferenced_sender')}</span>
                                             </div>
                                         </div>
                                 }

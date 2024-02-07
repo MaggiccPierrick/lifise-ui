@@ -12,7 +12,11 @@ import Header from "../../components/header";
 import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
 import LOGO_BLACK from "../../assets/images/logo_black.png";
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Decline = () => {
+    const { t } = useTranslation();
     // eslint-disable-next-line
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -37,8 +41,8 @@ const Decline = () => {
                     <span className="metabank_typo" onClick={homeRedirect}>MetaBank</span>
                 </div>
                 <div className="right_sign">
-                    <p className="instructions">Your request has been validated</p>
-                    <h1>Your account is now deactivated</h1>
+                    <p className="instructions">{t('decline.validated_request')}</p>
+                    <h1>{t('decline.deactivated_account')}</h1>
                 </div>
             </div>
         </>

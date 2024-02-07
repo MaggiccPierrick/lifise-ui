@@ -13,7 +13,11 @@ import Button from '../../components/button';
 import { ToastContainer, toast } from 'react-toastify';
 import { ThreeDots } from 'react-loader-spinner';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const AdminDashboard = () => {
+    const { t } = useTranslation();
     // eslint-disable-next-line
     const [searchParams, setSearchParams] = useSearchParams();
     const [profile, setProfile] = useState({});
@@ -39,11 +43,11 @@ const AdminDashboard = () => {
     }
 
     const deactivate = async (admin_uuid) => {
-        if (window.confirm("Do you confirm deactivation?")) {
+        if (window.confirm(t('admin.confirm_deactivation'))) {
             try {
                 const resp = await AdminService.deactivate(admin_uuid);
                 if (resp.status) {
-                    toast.success(`Administration account successfully deactivated`, TOAST_OPTIONS);
+                    toast.success(t('admin.account_deactivated'), TOAST_OPTIONS);
                     loadAdmins();
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
@@ -57,7 +61,7 @@ const AdminDashboard = () => {
         try {
             const resp = await AdminService.reactivate(admin_uuid);
             if (resp.status) {
-                toast.success(`Administration account successfully reactivated`, TOAST_OPTIONS);
+                toast.success(t('admin.account_reactivated'), TOAST_OPTIONS);
                 loadAdmins();
             } else
                 toast.error(resp.message, TOAST_OPTIONS);
@@ -70,17 +74,17 @@ const AdminDashboard = () => {
         // eslint-disable-next-line
         let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
         if (!email || !re.test(email))
-            toast.error('Email syntax invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_email'), TOAST_OPTIONS);
         else if (!firstname)
-            toast.error('Firstname invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_firstname'), TOAST_OPTIONS);
         else if (!lastname)
-            toast.error('Lastname invalid!', TOAST_OPTIONS);
+            toast.error(t('admin.invalid_lastname'), TOAST_OPTIONS);
         else {
             onChangeLoading(true);
             try {
                 const resp = await AdminService.createAdmin(email, firstname, lastname);
                 if (resp.status) {
-                    toast.success(`Account successfully created`, TOAST_OPTIONS);
+                    toast.success(t('admin.account_created'), TOAST_OPTIONS);
                     loadAdmins();
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
@@ -101,11 +105,11 @@ const AdminDashboard = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"Administrators"} />
+                <BoardHeader title={t('admin.admins')} />
                 <div className="content">
-                    <p><strong>Manage administration accounts</strong></p>
+                    <p><strong>{t('admin.manage_admins')}</strong></p>
                         <label className="ml-0">
-                            Filter : <span className={deactivated? "filter": "filter heavy"} onClick={() => window.location.href = "/admin/dashboard"}>Active</span> | <span className={deactivated? "filter heavy": "filter"}  onClick={() => window.location.href = "/admin/dashboard?deactivated=true"}>Deactivated</span>
+                        {t('admin.filter')} : <span className={deactivated? "filter": "filter heavy"} onClick={() => window.location.href = "/admin/dashboard"}>{t('admin.activated')}</span> | <span className={deactivated? "filter heavy": "filter"}  onClick={() => window.location.href = "/admin/dashboard?deactivated=true"}>{t('admin.deactivated')}</span>
                         </label>
                     <div className="beneficiaries">
                         {accounts.map(account =>
@@ -114,7 +118,7 @@ const AdminDashboard = () => {
                                 <div className="profile_info">
                                     <span className="profile_name mt-10">{account.firstname} {account.lastname}</span>
                                     {profile.admin_uuid === account.admin_uuid ?
-                                        <span className="profile_email">{account.email_address} | <a href={"/admin/profile"}>Update</a></span>
+                                        <span className="profile_email">{account.email_address} | <a href={"/admin/profile"}>{t('admin.update')}</a></span>
                                         :
                                         <span className="profile_email">{account.email_address}</span>
                                     }
@@ -130,24 +134,24 @@ const AdminDashboard = () => {
                             </div>
                         )}
                     </div>
-                    <Button title={"New account"} click={toggleCreation} loading={displayCreation} />
+                    <Button title={t('admin.new_account')} click={toggleCreation} loading={displayCreation} />
                     {displayCreation && <div className="white_board">
-                        <p><strong>Create new administration account</strong></p>
+                        <p><strong>{t('admin.create_new_admin')}</strong></p>
                         <div className="mt-30">
-                            <label>Firstname</label>
+                            <label>{t('admin.firstname')}</label>
                             <input type="text" placeholder='John' onChange={e => onChangeFirstname(e.target.value)} />
                         </div>
                         <div className="mt-10">
-                            <label>Lastname</label>
+                            <label>{t('admin.lastname')}</label>
                             <input type="text" placeholder='Doe' onChange={e => onChangeLastname(e.target.value)} />
                         </div>
                         <div className="mt-10 mb-20">
-                            <label>Email</label>
+                            <label>{t('admin.email')}</label>
                             <input type="text" placeholder='john.doe@mail.com' onChange={e => onChangeEmail(e.target.value)} />
                         </div>
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
-                        <Button title={"Create"} click={createAdmin} loading={loading} />
-                        <Button title={"Cancel"} click={toggleCreation} loading={loading} framed={true} />
+                        <Button title={t('admin.create')} click={createAdmin} loading={loading} />
+                        <Button title={t('admin.cancel')} click={toggleCreation} loading={loading} framed={true} />
                     </div>}
                 </div>
             </div>

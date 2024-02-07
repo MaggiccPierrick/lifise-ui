@@ -10,7 +10,11 @@ import LOGO_BLACK from '../../assets/images/logo_black.png';
 import POLYGON from '../../assets/images/polygon-matic-logo.png';
 import Button from "../button";
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const Menu = () => {
+    const { t } = useTranslation();
     const [balances, setBalances] = useState("-");
     const [address, setAddress] = useState(null);
     const currentPath = window.location.pathname;
@@ -36,10 +40,10 @@ const Menu = () => {
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
                 <span className="metabank_typo">MetaBank</span>
                 <a href={"/admin/dashboard"} className={currentPath === "/admin/dashboard" ? "entry active mt-50" : "entry mt-50"}>
-                    <span className="icon">🥋</span> Administrators
+                    <span className="icon">🥋</span> {t('admin.admins')}
                 </a>
                 <a href={"/admin/users"} className={currentPath === "/admin/users" ? "entry active" : "entry"}>
-                    <span className="icon">👥</span> Users
+                    <span className="icon">👥</span> {t('admin.users')}
                 </a>
 
                 <div className="share">
@@ -49,7 +53,7 @@ const Menu = () => {
                     <p className="center">
                         <small>{address}</small>
                         <br />
-                        <big><strong>Reserve account balance</strong></big>
+                        <big><strong>{t('admin.reserve_balance')}</strong></big>
                     </p>
                     {balances && <table>
                         <tbody>
@@ -71,7 +75,7 @@ const Menu = () => {
                             </tr>
                         </tbody>
                     </table>}
-                    <Button title={"Disconnect"} click={logout}/>
+                    <Button title={t('admin.disconnect')} click={logout}/>
                 </div>
             </div>
             <div className="mobile_menu">

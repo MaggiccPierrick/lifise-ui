@@ -16,7 +16,11 @@ import Button from '../../components/button';
 import { ToastContainer, toast } from 'react-toastify';
 import { ThreeDots } from 'react-loader-spinner';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const AdminUsers = () => {
+    const { t } = useTranslation();
     // eslint-disable-next-line
     const [searchParams, setSearchParams] = useSearchParams();
     const [accounts, setAccounts] = useState([]);
@@ -48,13 +52,13 @@ const AdminUsers = () => {
                 if (!entry || entry.length < 4) {
                     console.error('Invalid entry')
                 } else if (!re.test(entry)) {
-                    toast.warn(`Email ${entry} invalid. Invitation not sent for this user!`, TOAST_OPTIONS);
+                    toast.warn(`${entry} ${t('admin.invalid_format_invit')}`, TOAST_OPTIONS);
                 } else
                     mailingList.push(entry)
             }
             const resp = await AdminService.inviteUsers(mailingList, amount);
             if (resp.status) {
-                toast.success(`Invitations successfully sent`, TOAST_OPTIONS);
+                toast.success(t('admin.invits_sent'), TOAST_OPTIONS);
                 loadUsers();
             } else
                 toast.error(resp.message, TOAST_OPTIONS);
@@ -66,11 +70,11 @@ const AdminUsers = () => {
     }
 
     const deactivate = async (user_uuid) => {
-        if (window.confirm("Do you confirm deactivation?")) {
+        if (window.confirm(t('admin.confirm_deactivation'))) {
             try {
                 const resp = await AdminService.deactivateUser(user_uuid);
                 if (resp.status) {
-                    toast.success(`Administration account successfully deactivated`, TOAST_OPTIONS);
+                    toast.success(t('admin.account_deactivated'), TOAST_OPTIONS);
                     loadUsers();
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
@@ -84,7 +88,7 @@ const AdminUsers = () => {
         try {
             const resp = await AdminService.reactivateUser(user_uuid);
             if (resp.status) {
-                toast.success(`Administration account successfully reactivated`, TOAST_OPTIONS);
+                toast.success(t('admin.account_reactivated'), TOAST_OPTIONS);
                 loadUsers();
             } else
                 toast.error(resp.message, TOAST_OPTIONS);
@@ -102,7 +106,7 @@ const AdminUsers = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"MetaBank Users"} />
+                <BoardHeader title={t('admin.metabank_users')} />
                 <div className="content">
                     {/* <div className="search mb-20">
                         <input type="text" className="semi" placeholder="Search email or address" />
@@ -110,21 +114,21 @@ const AdminUsers = () => {
                     </div> */}
                     {displayForm ?
                         <React.Fragment>
-                            <label>Email addresses <small>Seperate by comma ","</small></label>
+                            <label>{t('admin.email_addresses')} <small>{t('admin.seperate_comma')} ","</small></label>
                             <div className="relative display-inline-block">
-                                <textarea placeholder={"Emails to receive link"} onChange={e => onChangeEmails(e.target.value)}></textarea>
+                                <textarea placeholder={t('admin.emails_link')} onChange={e => onChangeEmails(e.target.value)}></textarea>
                             </div>
-                            <label>Set amount to send <small>(Optional)</small></label>
+                            <label>{t('admin.amount_send')} <small>{t('admin.optionnal')}</small></label>
                             <div className="relative display-inline-block">
-                                <input type="number" className="semi" placeholder={"CâaEuro amount"} onChange={e => onChangeAmount(e.target.value)} />
+                                <input type="number" className="semi" placeholder={t('admin.caaeuro_amount')} onChange={e => onChangeAmount(e.target.value)} />
                                 <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
                             </div>
-                            <Button title={"Send"} loading={loading} click={sendInvits} />
+                            <Button title={t('admin.send')}loading={loading} click={sendInvits} />
                             <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                         </React.Fragment>
                         :
                         <div className="float-right">
-                            <Button title={"Send invits and CaaEUR"} click={() => setDisplayForm(true)} />
+                            <Button title={t('admin.send_invits')} click={() => setDisplayForm(true)} />
                         </div>
                     }
                     <div className="mt-30">
@@ -135,7 +139,7 @@ const AdminUsers = () => {
                     </div> */}
                         <div className="relative display-inline-block">
                             <label>
-                                Filter : <span className={deactivated ? "filter" : "filter heavy"} onClick={() => window.location.href = "/admin/users"}>Active</span> | <span className={deactivated ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?deactivated=true"}>Deactivated</span> | <span className={pending ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?pending=true"}>Pending</span>
+                            {t('admin.filter')} : <span className={deactivated ? "filter" : "filter heavy"} onClick={() => window.location.href = "/admin/users"}>{t('admin.activated')}</span> | <span className={deactivated ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?deactivated=true"}>{t('admin.deactivated')}</span> | <span className={pending ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?pending=true"}>{t('admin.pending_cap')}</span>
                             </label>
                         </div>
                     </div>
@@ -147,8 +151,8 @@ const AdminUsers = () => {
                                     <div className="avatar" style={{ backgroundImage: `url('https://api.dicebear.com/7.x/initials/svg?seed=${account.email_address}')` }}></div>
                                     <div className="profile_info locked">
                                         <span className="profile_name">{account.email_address}</span>
-                                        <span className="small_desc left">Invit sent {new Date(account.created_date).toLocaleDateString()}</span>
-                                        <span className="profile_name">{account.token_claims.to_claim.length} <small>pending</small> → {account.token_claims.total_to_claim} <small>CaaEUR</small></span>
+                                        <span className="small_desc left">{t('admin.invit_sent')} {new Date(account.created_date).toLocaleDateString()}</span>
+                                        <span className="profile_name">{account.token_claims.to_claim.length} <small>{t('admin.pending_lw')}pending</small> → {account.token_claims.total_to_claim} <small>CaaEUR</small></span>
                                     </div>
                                     <div className="rm_beneficiary float-right">
                                         🕒
@@ -156,7 +160,7 @@ const AdminUsers = () => {
                                 </div>
                                 :
                                 <div className="profile max" key={account.user_uuid}>
-                                    <div className="avatar" style={{ backgroundImage: account.selfie ? `url('data:image/${account.selfie_ext};base64,${account.selfie}')` : `url('https://api.multiavatar.com/${account.user_uuid}.png')` }}></div>
+                                <div className="avatar" style={{ backgroundImage: `url('https://api.dicebear.com/7.x/initials/svg?seed=${account.email_address}')` }}></div>
                                     <div className="profile_info locked">
                                         <span className="profile_name">{account.firstname || "-"} {account.lastname || "-"}</span>
                                         <span className="profile_email">{account.email_address}</span>
@@ -165,9 +169,9 @@ const AdminUsers = () => {
                                     <div className="profile_info pointer">
                                         <span className="small_desc">{new Date(account.created_date).toLocaleDateString()} | Birth: {account.birthdate || "-"}</span>
                                         <div className="redeemer">
-                                            {account.token_claims.already_claimed.length} claimed → {account.token_claims.total_claimed} <small>CaaEUR</small>
+                                            {account.token_claims.already_claimed.length} {t('admin.claimed')} → {account.token_claims.total_claimed} <small>CaaEUR</small>
                                             <br/>
-                                            {account.token_claims.to_claim.length} pending → {account.token_claims.total_to_claim} <small>CaaEUR</small>
+                                            {account.token_claims.to_claim.length} {t('admin.pending')} → {account.token_claims.total_to_claim} <small>CaaEUR</small>
                                         </div>
                                     </div>
                                     {account.public_address && <div className="profile_info float-right mr-70">
