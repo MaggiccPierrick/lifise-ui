@@ -23,6 +23,7 @@ const AdminSignIn = () => {
     const [validation, onChangeValidation] = useState(false);
     const [code, onChangeCode] = useState('');
     const [loading, onChangeLoading] = useState(false);
+    const [isGA, setGA] = useState(false);
 
     const login = async () => {
         // eslint-disable-next-line
@@ -41,7 +42,10 @@ const AdminSignIn = () => {
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
-                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+                if (e.response && e.response.data && e.response.data.message === "error_authentication_method") {
+                    setGA(true)
+                } else
+                    toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
             }
             onChangeLoading(false);
         }
@@ -83,10 +87,16 @@ const AdminSignIn = () => {
                         <label>Email</label>
                         <input type="email" placeholder="john.doe@mail.com" onChange={e => onChangeEmail(e.target.value)} />
                         <label>Password</label>
-                        <input type="password" placeholder="Secured password" onChange={e => onChangePassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && login()}/>
+                        <input type="password" placeholder="Secured password" onChange={e => onChangePassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && login()} />
+                        {isGA &&
+                            <React.Fragment>
+                                <label>Authenticator OTP</label>
+                                <input type="number" placeholder="Google authenticator" onChange={e => onChangeCode(e.target.value)} />
+                            </React.Fragment>
+                        }
                         {!loading &&
                             <>
-                                <Button title={"Sign In"} click={login} /> <FollowUp intro={"No password or forgotten?"} description={"Set new password"} link={"/admin/reset"} />
+                                <Button title={"Sign In"} click={isGA? verify : login} /> <FollowUp intro={"No password or forgotten?"} description={"Set new password"} link={"/admin/reset"} />
                             </>}
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     </div>
@@ -95,10 +105,10 @@ const AdminSignIn = () => {
                         <p className="instructions">Set the verification code received in your email inbox</p>
                         <h1>Access verification</h1>
                         <label>Authentication code</label>
-                        <input type="text" placeholder="Code" value={code} onChange={e => onChangeCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && verify()}/>
+                        <input type="text" placeholder="Code" value={code} onChange={e => onChangeCode(e.target.value)} onKeyDown={(e) => e.key === "Enter" && verify()} />
                         {!loading &&
                             <>
-                                <Button title={"Verify"} click={verify} /> <FollowUp intro={"Did not receive it ?"} description={"Resend code"} link={"#resend"} />
+                                <Button title={"Verify"} click={verify} />
                             </>}
                         <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     </div>

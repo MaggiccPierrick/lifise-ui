@@ -11,6 +11,7 @@ import Menu from '../../components/menu/admin';
 import BoardHeader from '../../components/boardheader/admin';
 import Button from '../../components/button';
 import { ThreeDots } from 'react-loader-spinner';
+import QRCode from "react-qr-code";
 
 const AdminProfile = () => {
     const [firstname, onChangeFirstname] = useState("");
@@ -19,6 +20,8 @@ const AdminProfile = () => {
     const [newPswd, onChangeNewPassword] = useState({});
     const [currentPswd, onChangeCurrentPassword] = useState({});
     const [loading, onChangeLoading] = useState(null);
+    const [qr, onChangeQR] = useState();
+    const [otp, onChangeOTP] = useState("");
 
     useEffect(() => {
         const data = TokenService.getUser();
@@ -90,6 +93,40 @@ const AdminProfile = () => {
         }
     }
 
+    const activateOTP = async () => {
+        if (!otp || otp.length !== 6)
+            toast.error('Current OTP format invalid!', TOAST_OPTIONS);
+        else {
+            onChangeLoading("generation");
+            try {
+                const resp = await AdminService.activateGA(otp);
+                if (resp.status) {
+                    toast.success(resp.message, TOAST_OPTIONS);
+                } else
+                    toast.error(resp.message, TOAST_OPTIONS);
+            } catch (e) {
+                console.log(e.response.data)
+                toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+            }
+            onChangeLoading(null);
+        }
+    }
+
+    const generateQR = async () => {
+        onChangeLoading("generation");
+        try {
+            const resp = await AdminService.generateGA();
+            if (resp.status) {
+                onChangeQR(resp.otp_auth_url)
+            } else
+                toast.error(resp.message, TOAST_OPTIONS);
+        } catch (e) {
+            console.log(e.response.data)
+            toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+        }
+        onChangeLoading(null);
+    }
+
     return (
         <div className="dashboard">
             <Menu />
@@ -105,13 +142,13 @@ const AdminProfile = () => {
                         <label>Lastname</label>
                         <input type="text" value={lastname} onChange={(e) => onChangeLastname(e.target.value)} />
                     </div>
-                    <Button title={"Update profile"} loading={loading === "profile"} click={updateProfile}/>
+                    <Button title={"Update profile"} loading={loading === "profile"} click={updateProfile} />
                     <ThreeDots visible={loading === "profile"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     <div className="mt-30 mb-20">
                         <label>Email</label>
                         <input type="text" value={email} onChange={(e) => onChangeEmail(e.target.value)} />
                     </div>
-                    <Button title={"Update email"} loading={loading === "email"} click={updateEmail}/>
+                    <Button title={"Update email"} loading={loading === "email"} click={updateEmail} />
                     <ThreeDots visible={loading === "email"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                     <div className="mt-30">
                         <label>Current password</label>
@@ -121,8 +158,31 @@ const AdminProfile = () => {
                         <label>New password</label>
                         <input type="password" onChange={(e) => onChangeNewPassword(e.target.value)} />
                     </div>
-                    <Button title={"Update password"} loading={loading === "password"} click={updatePassword}/>
+                    <Button title={"Update password"} loading={loading === "password"} click={updatePassword} />
                     <ThreeDots visible={loading === "password"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    {qr ?
+                        <div className="mt-30">
+                            <label>
+                                Scan & activate Google Authentication
+                            </label>
+                            <QRCode
+                                size={256}
+                                value={qr}
+                                style={{display: 'block', margin: '10px 20px'}}
+                                bgColor={'transparent'}
+                                viewBox={`0 0 256 256`}
+                            />
+                            <input type="text" value={otp} onChange={(e) => onChangeOTP(e.target.value)} />
+                            <Button title={"Activate"} loading={loading === "activation"} click={activateOTP} />
+                            <ThreeDots visible={loading === "activation"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        </div>
+                        :
+                        <div className="mt-30">
+                            <label>Initialize Google Authentication</label>
+                            <Button title={"Generate QR"} loading={loading === "generation"} click={generateQR} />
+                            <ThreeDots visible={loading === "generation"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        </div>
+                    }
                 </div>
             </div>
             <ToastContainer />

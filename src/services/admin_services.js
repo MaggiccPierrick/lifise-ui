@@ -153,9 +153,26 @@ class AdminService {
         return response.data;
       });
   }
+  
   async getAdminBalance() {
     return await api
       .get(`/admin/wallet/balance`)
+      .then(async (response) => {
+        return response.data;
+      });
+  }
+  
+  async generateGA() {
+    return await api
+      .get(`/admin/totp/generate`)
+      .then(async (response) => {
+        return response.data;
+      });
+  }
+
+  async activateGA(totp_token) {
+    return await api
+      .post('/admin/totp/activate', { totp_token })
       .then(async (response) => {
         return response.data;
       });

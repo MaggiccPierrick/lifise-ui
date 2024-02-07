@@ -32,6 +32,7 @@ const Operations = () => {
         setBeneficiaries(benfs)
         const ops = await UserService.getOperations()
         setOperations(ops)
+        console.log(ops)
         onChangeLoading(false)
     }
 
@@ -76,26 +77,37 @@ const Operations = () => {
                                         </div>
                                     </div>
                                     :
-                                    <div className="select_profile">
-                                        <div className="select_avatar" style={{
-                                            backgroundImage:
-                                                beneficiaries[op.from] ?
-                                                    beneficiaries[op.from].selfie ?
-                                                        `url('data:image/${beneficiaries[op.from].selfie_ext};base64,${beneficiaries[op.from].selfie}')`
-                                                        :
-                                                        `url('https://api.multiavatar.com/${beneficiaries[op.from].user_uuid}.png')`
-                                                    : `url('https://api.multiavatar.com/${op.from}.png')`
-                                        }}></div>
-                                        <div className="select_info">
-                                            <span className="select_name">
-                                                {beneficiaries[op.from] && beneficiaries[op.from].firstname ?
-                                                    `${beneficiaries[op.from].firstname} ${beneficiaries[op.from].lastname}`
-                                                    :
-                                                    `${op.from.substring(0, 10)}...${op.from.substring(0, 15)}`}
-                                            </span>
-                                            <span className="select_email">{beneficiaries[op.from] ? beneficiaries[op.from].email_address : 'Unreferenced sender'}</span>
+                                    op.claim_uuid ?
+                                        <div className="select_profile">
+                                            <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
+                                            <div className="select_info">
+                                                <span className="select_name">
+                                                    MetaBank
+                                                </span>
+                                                <span className="select_email">Offered to you by <strong>MetaBank</strong></span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        :
+                                        <div className="select_profile">
+                                            <div className="select_avatar" style={{
+                                                backgroundImage:
+                                                    beneficiaries[op.from] ?
+                                                        beneficiaries[op.from].selfie ?
+                                                            `url('data:image/${beneficiaries[op.from].selfie_ext};base64,${beneficiaries[op.from].selfie}')`
+                                                            :
+                                                            `url('https://api.multiavatar.com/${beneficiaries[op.from].user_uuid}.png')`
+                                                        : `url('https://api.multiavatar.com/${op.from}.png')`
+                                            }}></div>
+                                            <div className="select_info">
+                                                <span className="select_name">
+                                                    {beneficiaries[op.from] && beneficiaries[op.from].firstname ?
+                                                        `${beneficiaries[op.from].firstname} ${beneficiaries[op.from].lastname}`
+                                                        :
+                                                        `${op.from.substring(0, 10)}...${op.from.substring(0, 15)}`}
+                                                </span>
+                                                <span className="select_email">{beneficiaries[op.from] ? beneficiaries[op.from].email_address : 'Unreferenced sender'}</span>
+                                            </div>
+                                        </div>
                                 }
                             </div>
                             {profile.public_address.toLowerCase() === op.to ?
