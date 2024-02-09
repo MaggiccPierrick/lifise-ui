@@ -109,7 +109,7 @@
         "account_number": "Numéro de compte",
         "caaeuro_balance": "CaâEuro Solde",
         "purchase_funds": "Acheter des fonds",
-        "ending_claims": "Réclamations en attente",
+        "pending_claims": "Réclamations en attente",
         "press_to_claim": "Appuyez sur 💸 pour réclamer",
         "received_on": "Reçu le",
         "send_link": "Envoyez un lien pour inviter vos amis",
