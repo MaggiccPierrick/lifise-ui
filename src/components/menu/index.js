@@ -31,23 +31,25 @@ const Menu = () => {
                     <span className="icon">🛟</span> {t('menu.assistance')}
                 </a>
 
-                {navigator.share && <div className="share">
-                    <div className="rocket">
-                        🚀
-                    </div>
-                    <p className="center">
-                        {t('menu.send_link')}
-                        <br />
-                        {t('menu.join_you')}
-                    </p>
-                    <button className="action" onClick={() => navigator.share({
-                        text: t('menu.join_me'),
-                        url: `https://metabank.codinsight.com`,
-                        title: t('menu.join_me'),
-                    })}>{t('menu.share')}</button>
+                <div className="share">
+                    {navigator.share && <React.Fragment>
+                        <div className="rocket">
+                            🚀
+                        </div>
+                        <p className="center">
+                            {t('menu.send_link')}
+                            <br />
+                            {t('menu.join_you')}
+                        </p>
+                        <button className="action" onClick={() => navigator.share({
+                            text: t('menu.join_me'),
+                            url: `https://metabank.codinsight.com`,
+                            title: t('menu.join_me'),
+                        })}>{t('menu.share')}</button>
+                    </React.Fragment>}
                     <p className="center"><a href="#terms">{t('menu.cgu')}</a></p>
                     <p className="center"><a href="https://www.metabank-france.eu/politique-de-confidentialité" target="_blank" rel="noreferrer">{t('menu.policy')}</a></p>
-                </div>}
+                </div>
             </div>
             <div className="mobile_menu">
                 <div className={currentPath === "/dashboard" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/dashboard"}>
