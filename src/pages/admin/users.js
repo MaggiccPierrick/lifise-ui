@@ -65,7 +65,7 @@ const AdminUsers = () => {
             setLoading(false)
         } catch (e) {
             setLoading(false)
-            toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+            toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
         }
     }
 
@@ -79,7 +79,7 @@ const AdminUsers = () => {
                 } else
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
-                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
         }
     }
@@ -93,7 +93,7 @@ const AdminUsers = () => {
             } else
                 toast.error(resp.message, TOAST_OPTIONS);
         } catch (e) {
-            toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+            toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
         }
     }
 

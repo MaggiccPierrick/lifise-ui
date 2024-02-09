@@ -49,7 +49,7 @@ const AdminSignIn = () => {
                 if (e.response && e.response.data && e.response.data.message === "error_authentication_method") {
                     setGA(true)
                 } else
-                    toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+                    toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
             onChangeLoading(false);
         }

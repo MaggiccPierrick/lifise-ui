@@ -277,5 +277,9 @@
         "users": "Users",
         "reserve_balance": "Reserve account balance",
         "disconnect": "Disconnect"
+    },
+    "back":
+    {
+
     }
 }

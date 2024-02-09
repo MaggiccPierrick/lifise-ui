@@ -1,4 +1,5 @@
 import "./menu.css";
+import React from 'react';
 
 //VISUALS
 import LOGO from '../../assets/images/logo.png';

@@ -277,5 +277,9 @@
         "users": "Utilisateurs",
         "reserve_balance": "Solde du wallet Reserve",
         "disconnect": "Déconnexion"
+    },
+    "back":
+    {
+
     }
 }

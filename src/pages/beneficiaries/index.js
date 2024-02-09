@@ -120,7 +120,7 @@ const Beneficiaries = () => {
                 } else
                     toast.error(data.message, TOAST_OPTIONS)
             } catch (e) {
-                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
         }
     }

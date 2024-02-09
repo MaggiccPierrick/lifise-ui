@@ -60,7 +60,7 @@ const SignUp = ({ magic }) => {
                 }
             } catch (e) {
                 console.log(e);
-                toast.error(uuuid? `${t('signup.could_not_open')} ${email}` : e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+                toast.error(uuuid? `${t('signup.could_not_open')} ${email}` : e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
                 onChangeLoading(false);
             }
         }

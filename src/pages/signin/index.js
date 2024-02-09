@@ -50,7 +50,7 @@ const SignIn = ({ magic }) => {
                 }
             } catch (e) {
                 console.log(e);
-                toast.error(e.response && e.response.data ? e.response.data.message : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
                 onChangeLoading(false);
             }
         }
