@@ -28,7 +28,7 @@ const Assistance = () => {
                         {t('assistance.disclaimer_sub')}
                     </div>
                     <div className="conditions">
-                        {t('assistance.exercice_rights')} <a href={"mailTo:contact@metabank.fr"}>contact@metabank.fr</a>
+                        {t('assistance.exercice_rights')} <a href={"mailTo:contact@metabank-france.eu"}>contact@metabank-france.eu</a>
                     </div>
                     <div className="conditions">
                         {t('assistance.find_more')} <a href={"https://www.metabank-france.eu/politique-de-confidentialité"} target="_blank" rel="noreferrer">{t('assistance.policy')}</a>.

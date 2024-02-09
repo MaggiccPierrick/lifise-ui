@@ -31,7 +31,7 @@ const Menu = () => {
                     <span className="icon">🛟</span> {t('menu.assistance')}
                 </a>
 
-                <div className="share">
+                {navigator.share && <div className="share">
                     <div className="rocket">
                         🚀
                     </div>
@@ -47,7 +47,7 @@ const Menu = () => {
                     })}>{t('menu.share')}</button>
                     <p className="center"><a href="#terms">{t('menu.cgu')}</a></p>
                     <p className="center"><a href="https://www.metabank-france.eu/politique-de-confidentialité" target="_blank" rel="noreferrer">{t('menu.policy')}</a></p>
-                </div>
+                </div>}
             </div>
             <div className="mobile_menu">
                 <div className={currentPath === "/dashboard" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/dashboard"}>
