@@ -70,7 +70,10 @@
         "vat_number": "Numéro de TVA : FR18907943088",
         "publising_director": "Directeur de la publication : M. Pierrick TORASSO",
         "follow_us": "Suivez-nous",
-        "languages": "Langues"
+        "languages": "Langues",
+        "legals": "Mentions légales",
+        "head_office": "Siège social",
+        "joint_company": "par actions simplifiée au capital de"
     },
     "signup": {
         "error_email": "Syntaxe d'e-mail invalide !",

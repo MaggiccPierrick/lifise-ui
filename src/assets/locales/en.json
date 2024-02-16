@@ -70,7 +70,10 @@
         "vat_number": "VAT number: FR18907943088",
         "publising_director": "Publishing director: Mr. Pierrick TORASSO",
         "follow_us": "Follow us",
-        "languages": "Languages"
+        "languages": "Languages",
+        "legals": "Legals",
+        "head_office": "Head office",
+        "joint_company": "simplified joint stock company with capital of"
     },
     "signup": {
         "error_email": "Email syntax invalid!",

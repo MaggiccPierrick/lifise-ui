@@ -51,6 +51,19 @@ const Footer = () => {
                     {t('footer.publising_director')}
                 </p>
             </div>
+            <div className="split">
+                <h4>
+                    {t('footer.legals')}
+                </h4>
+                <p>
+                    En Liens! Rovaltain Web Société {t('footer.joint_company')} 67.530,40 euros
+                </p>
+                <p>
+                    {t('footer.head_office')} : 16 Cours Alexandre Borodine
+                    <br/>
+                    26000 VALENCE 914 291 372 RCS ROMANS
+                </p>
+            </div>
 
             <div className="split">
                 <h4>
