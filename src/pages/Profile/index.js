@@ -78,7 +78,7 @@ const Profile = () => {
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
                 console.log(e.response.data)
-                toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
             onChangeLoading(null);
         }

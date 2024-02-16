@@ -162,6 +162,14 @@ class UserService {
             });
     }
 
+    async requestAssist(message) {
+        return await api
+            .post('/user/assistance', { message })
+            .then(async (response) => {
+                return response.data;
+            });
+    }
+
 }
 
 // eslint-disable-next-line

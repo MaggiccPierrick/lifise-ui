@@ -66,7 +66,7 @@
         "cgu": "General terms of use",
         "policy": "Privacy policy",
         "editor": "Editor",
-        "pusblisher": "The publisher of the Site is SAS En Liens ! Rovaltain-web.com - Capital 47 600€ - 914 291 372 R.C.S. Romans - France",
+        "publisher": "The publisher of the Site is SAS En Liens ! Rovaltain-web.com - Capital 47 600€ - 914 291 372 R.C.S. Romans - France",
         "vat_number": "VAT number: FR18907943088",
         "publising_director": "Publishing director: Mr. Pierrick TORASSO",
         "follow_us": "Follow us",
@@ -146,16 +146,16 @@
         "update_profile": "Update profile",
         "disconnect": "Disconnect"
     },
-    "ops":{
+    "ops": {
         "operations": "Operations",
         "browse_ops": "Browse past operations",
-        "sent": "SENT", 
+        "sent": "SENT",
         "received": "RECEIVED",
         "unreferenced_receiver": "Unreferenced receiver",
         "offered_by": "Offered to you by",
         "unreferenced_sender": "Unreferenced sender"
     },
-    "beneficiaries":{
+    "beneficiaries": {
         "invalid_email": "Invalid email or adddress",
         "invalid_2fa": "Invalid 2FA validation",
         "confirm_remove": "Do you confirm beneficiary removal?",
@@ -178,7 +178,9 @@
         "exercice_rights": "You can exercise these rights by emailing us at",
         "find_more": "To find out more about protecting your data, you can consult our",
         "policy": "Privacy policy",
-        "send_msg": "Send message"
+        "send_msg": "Send message",
+        "invalid_msg": "Invalid message format",
+        "message_sent": "Message successfully sent. We will reach back to you as soon as possible."
     },
     "decline": {
         "validated_request": "Your request has been validated",
@@ -193,7 +195,7 @@
         "confirm_age": "I understand and I am an adult",
         "quit_app": "Quit the application"
     },
-    "admin":{
+    "admin": {
         "invalid_email": "Email syntax invalid!",
         "invalid_password": "Password format invalid!",
         "auth_code_sent": "Authentication code sent to ",
@@ -246,7 +248,7 @@
         "invalid_new_pswd": "New password format invalid!",
         "pswd_updated": "Password successfully updated",
         "invalid_current_otp": "Current OTP format invalid!",
-        "profile": "Profile",
+        "profile_title": "Profile",
         "edit_admin": "Edit your administration account",
         "update_profile": "Update profile",
         "update_email": "Update email",
@@ -273,13 +275,74 @@
         "pending_lw": "pending",
         "birth": "Birth",
         "claimed": "claimed",
+        "pending": "pending",
         "invit_sent": "Invit sent",
         "users": "Users",
         "reserve_balance": "Reserve account balance",
-        "disconnect": "Disconnect"
+        "disconnect": "Disconnect",
+        "profile": {
+            "email": "Email",
+            "address": "Public address",
+            "birthdate": "Birth date",
+            "matic": "Matic balance",
+            "caaeuro": "CaaEUR balance",
+            "pending": "Pending claims",
+            "created_date": "Creation",
+            "awaiting": "Awaiting",
+            "already_claimed": "Already claimed",
+            "claimed_date": "Claim date"
+        }
     },
-    "back":
-    {
-
+    "back": {
+        "success_operation_saved": "Operation successfully saved",
+        "success_login": "Login successfull",
+        "success_logout": "Logout successfull",
+        "success_admin_creation": "Account successfully created",
+        "success_account_updated": "Account successfully updated",
+        "success_updated": "SucessFull update",
+        "success_token_set": "Token successfully set",
+        "success_token_valid": "Token successfully validated",
+        "success_admin_accounts": "Accounts successfully loaded",
+        "success_user_register": "Successfully registered",
+        "success_valid": "Successfully validated",
+        "success_no_user": "No user",
+        "success_user_found": "No user found",
+        "success_beneficiary_added": "Beneficiary successfully added",
+        "success_beneficiary_retrieved": "Beneficiary successfully removed",
+        "success_removed": "Successfully removed",
+        "success_deactivated": "Successfully deactivated",
+        "success_reactivated": "Successfully reactivated",
+        "success_operation": "Operation successfully processed",
+        "success_exist": "Successfully matched",
+        "success_not_exist": "No match found",
+        "success_refresh": "Successfully refreshed",
+        "success_account": "Successfully retrieved",
+        "success_wallet_balance": "Successfully retrieved balance",
+        "success_user_accounts": "Accounts successfully loaded",
+        "error_login": "Error on login",
+        "error_magic_link": "Error processing Magic Link token",
+        "error_firstname": "Error on firstname",
+        "error_lastname": "Error on lastname",
+        "error_email": "Error on email",
+        "error_birthdate": "Error on birthdate",
+        "error_selfie_failed": "Selfie failed",
+        "error_exist": "Already exists",
+        "error_not_exist": "Do not exist",
+        "error_admin_creation": "Error account creation",
+        "error_email_exists": "Email already referenced",
+        "error_account_update": "Error account update",
+        "error_email_format": "Invalid mail format",
+        "error_token_expired": "Token expired",
+        "error_token": "Invalid token",
+        "error_user_register": "Could not create account",
+        "error_account_active": "Error account already active",
+        "error_deactivated": "Error account deactivated",
+        "error_expired": "Expired",
+        "error_bad_request": "Bad request",
+        "error_wait_retry": "Please wait to retry",
+        "error_logout": "Error logout",
+        "error_no_address": "No address found",
+        "error_email_not_sent": "Email could not be sent",
+        "error_invalid": "Invalid"
     }
 }

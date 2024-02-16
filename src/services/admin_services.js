@@ -95,6 +95,14 @@ class AdminService {
       });
   }
 
+  async getUser(user_uuid) {
+    return await api
+      .get(`/admin/users/${user_uuid}`)
+      .then(async (response) => {
+        return response.data.user_details;
+      });
+  }
+
   async deactivateUser(user_uuid) {
     return await api
       .post('/admin/user/deactivate', { user_uuid })

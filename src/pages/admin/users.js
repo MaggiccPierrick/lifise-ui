@@ -7,7 +7,6 @@ import AdminService from '../../services/admin_services';
 
 //VISUALS
 import LOGO_BLACK from '../../assets/images/logo_black.png';
-import POLYGON from '../../assets/images/polygon-matic-logo.png';
 
 //COMPONENTS
 import Menu from '../../components/menu/admin';
@@ -123,7 +122,7 @@ const AdminUsers = () => {
                                 <input type="number" className="semi" placeholder={t('admin.caaeuro_amount')} onChange={e => onChangeAmount(e.target.value)} />
                                 <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
                             </div>
-                            <Button title={t('admin.send')}loading={loading} click={sendInvits} />
+                            <Button title={t('admin.send')} loading={loading} click={sendInvits} />
                             <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                         </React.Fragment>
                         :
@@ -139,7 +138,7 @@ const AdminUsers = () => {
                     </div> */}
                         <div className="relative display-inline-block">
                             <label>
-                            {t('admin.filter')} : <span className={deactivated ? "filter" : "filter heavy"} onClick={() => window.location.href = "/admin/users"}>{t('admin.activated')}</span> | <span className={deactivated ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?deactivated=true"}>{t('admin.deactivated')}</span> | <span className={pending ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?pending=true"}>{t('admin.pending_cap')}</span>
+                                {t('admin.filter')} : <span className={deactivated ? "filter" : "filter heavy"} onClick={() => window.location.href = "/admin/users"}>{t('admin.activated')}</span> | <span className={deactivated ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?deactivated=true"}>{t('admin.deactivated')}</span> | <span className={pending ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/users?pending=true"}>{t('admin.pending_cap')}</span>
                             </label>
                         </div>
                     </div>
@@ -160,7 +159,10 @@ const AdminUsers = () => {
                                 </div>
                                 :
                                 <div className="profile max" key={account.user_uuid}>
-                                <div className="avatar" style={{ backgroundImage: `url('https://api.dicebear.com/7.x/initials/svg?seed=${account.email_address}')` }}></div>
+                                    <div className="avatar"
+                                        onClick={() => window.open(`/admin/user/${account.user_uuid}`)}
+                                        style={{ backgroundImage: `url('https://api.dicebear.com/7.x/initials/svg?seed=${account.email_address}')` }}>
+                                    </div>
                                     <div className="profile_info locked">
                                         <span className="profile_name">{account.firstname || "-"} {account.lastname || "-"}</span>
                                         <span className="profile_email">{account.email_address}</span>
@@ -169,20 +171,14 @@ const AdminUsers = () => {
                                     <div className="profile_info pointer">
                                         <span className="small_desc">{new Date(account.created_date).toLocaleDateString()} | Birth: {account.birthdate || "-"}</span>
                                         <div className="redeemer">
-                                            {account.token_claims.already_claimed.length} {t('admin.claimed')} → {account.token_claims.total_claimed} <small>CaaEUR</small>
-                                            <br/>
                                             {account.token_claims.to_claim.length} {t('admin.pending')} → {account.token_claims.total_to_claim} <small>CaaEUR</small>
                                         </div>
                                     </div>
-                                    {account.public_address && <div className="profile_info float-right mr-70">
-                                        <span className="balance_plus">
-                                            {parseFloat(account.wallet.token_balance).toFixed(2)} <img src={LOGO_BLACK} className="balance_logo" alt="Logo CâaEuro" />
-                                            <br/>
-                                            <small>{parseFloat(account.wallet.matic).toFixed(2)}</small> <img src={POLYGON} className="matic_logo" alt="Logo Matic Polygon"/>
-                                        </span>
-                                    </div>}
+                                    <div className="browse float-right" onClick={() => window.open(`/admin/user/${account.user_uuid}`)}>
+                                        ➕
+                                    </div>
                                     {deactivated ?
-                                        account.public_address && 
+                                        account.public_address &&
                                         <div className="rm_beneficiary float-right" onClick={() => reactivate(account.user_uuid)}>
                                             ✅
                                         </div>

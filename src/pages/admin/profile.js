@@ -49,7 +49,7 @@ const AdminProfile = () => {
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
                 console.log(e.response.data)
-                toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
             onChangeLoading(null);
         }
@@ -70,7 +70,7 @@ const AdminProfile = () => {
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
                 console.log(e.response.data)
-                toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
             onChangeLoading(null);
         }
@@ -91,7 +91,7 @@ const AdminProfile = () => {
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
                 console.log(e.response.data)
-                toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
             onChangeLoading(null);
         }
@@ -110,7 +110,7 @@ const AdminProfile = () => {
                     toast.error(resp.message, TOAST_OPTIONS);
             } catch (e) {
                 console.log(e.response.data)
-                toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
             }
             onChangeLoading(null);
         }
@@ -126,7 +126,7 @@ const AdminProfile = () => {
                 toast.error(resp.message, TOAST_OPTIONS);
         } catch (e) {
             console.log(e.response.data)
-            toast.error(e.response && e.response.data ? e.response.data.message || e.response.data.msg : e.message, TOAST_OPTIONS);
+            toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
         }
         onChangeLoading(null);
     }
@@ -135,7 +135,7 @@ const AdminProfile = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={t('admin.profile')} />
+                <BoardHeader title={t('admin.profile_title')} />
                 <div className="content">
                     <p><strong>{t('admin.edit_admin')} </strong></p>
                     <div className="mt-30">
