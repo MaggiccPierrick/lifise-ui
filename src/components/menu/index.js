@@ -2,7 +2,7 @@ import "./menu.css";
 import React from 'react';
 
 //VISUALS
-import LOGO from '../../assets/images/logo.png';
+import LOGO from '../../assets/images/full_dark.png';
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,6 @@ const Menu = () => {
         <>
             <div className="left_menu">
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
-                <span className="metabank_typo">MetaBank</span>
                 <a href={"/dashboard"} className={currentPath === "/dashboard" ? "entry active mt-50" : "entry mt-50"}>
                     <span className="icon">💳</span> {t('menu.my_account')}
                 </a>

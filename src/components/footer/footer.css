@@ -30,9 +30,8 @@ footer p {
 }
 
 footer .split .logo {
-    position: absolute;
-    left: 0;
-    top: 0;
+    position: relative;
+    margin-bottom: 0;
     height: 34px;
 }
 

@@ -14,7 +14,7 @@ import { ThreeDots } from "react-loader-spinner";
 
 //VISUALS
 import BANNER_VISUAL from "../../assets/images/girl_back_metabank.jpg";
-import LOGO_BLACK from "../../assets/images/logo_black.png";
+import LOGO_BLACK from "../../assets/images/full_dark.png";
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
@@ -62,7 +62,6 @@ const SignIn = ({ magic }) => {
             <div className="container mt-0">
                 <div className="left_sign" style={{ backgroundImage: `url('${BANNER_VISUAL}')` }}>
                     <img src={LOGO_BLACK} alt="MetaBank logo" className="logo" onClick={homeRedirect} />
-                    <span className="metabank_typo" onClick={homeRedirect}>MetaBank</span>
                 </div>
                 <div className="right_sign">
                     <p className="instructions">{t('signin.fill_required_info')}</p>

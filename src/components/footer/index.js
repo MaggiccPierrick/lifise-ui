@@ -4,7 +4,7 @@ import './footer.css';
 import { isMobile } from 'react-device-detect';
 
 //VISUALS
-import LOGO from '../../assets/images/logo.png';
+import LOGO from '../../assets/images/full_white.png';
 import LINKEDIN from '../../assets/images/LinkedIn_logo_initials.png';
 import XTWITTER from '../../assets/images/twitter-x-logo.png';
 import YOUTUBE from '../../assets/images/youtube.png';
@@ -25,7 +25,6 @@ const Footer = () => {
         <footer>
             <div className="split">
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
-                <span className="metabank_typo">MetaBank</span>
                 {i18n.language === "en"? <span className="selecter" onClick={() => handleLangChange('fr')}>
                     FR
                 </span>

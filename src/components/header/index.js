@@ -4,7 +4,7 @@ import './header.css';
 import Button from '../button';
 
 //VISUALS
-import LOGO from '../../assets/images/logo.png';
+import LOGO from '../../assets/images/full_white.png';
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,6 @@ const Header = () => {
     return (
         <header>
             <img src={LOGO} alt="MetaBank logo" className="logo" />
-            <span className="metabank_typo">MetaBank</span>
             <a href={"/"} className="selecter">CaâEuro</a>
             <a href={"/"} className="selecter">{t('header.values')}</a>
             <a href="https://www.linkedin.com/company/en-liens-rovaltain-web-com/posts/?feedView=all" target="_blank" rel="noreferrer" className="selecter">{t('header.news')}</a>

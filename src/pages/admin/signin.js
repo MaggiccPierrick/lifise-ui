@@ -14,7 +14,7 @@ import Button from "../../components/button";
 
 //VISUALS
 import BANNER_VISUAL from "../../assets/images/back_admin.jpg";
-import LOGO_WHITE from "../../assets/images/logo_white.png";
+import LOGO_WHITE from "../../assets/images/full_white.png";
 import { ThreeDots } from 'react-loader-spinner';
 
 //TRANSLATION
@@ -82,7 +82,6 @@ const AdminSignIn = () => {
             <div className="container mt-0">
                 <div className="left_sign" style={{ backgroundImage: `url('${BANNER_VISUAL}')` }}>
                     <img src={LOGO_WHITE} alt="MetaBank logo" className="logo" onClick={homeRedirect} />
-                    <span className="metabank_typo white" onClick={homeRedirect}>MetaBank</span>
                 </div>
                 {!validation ?
                     <div className="right_sign">

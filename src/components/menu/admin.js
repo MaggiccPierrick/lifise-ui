@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import AdminService from "../../services/admin_services";
 
 //VISUALS
-import LOGO from '../../assets/images/logo.png';
+import LOGO from '../../assets/images/full_dark.png';
 import LOGO_BLACK from '../../assets/images/logo_black.png';
 import POLYGON from '../../assets/images/polygon-matic-logo.png';
 import Button from "../button";
@@ -38,7 +38,6 @@ const Menu = () => {
         <>
             <div className="left_menu">
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
-                <span className="metabank_typo">MetaBank</span>
                 <a href={"/admin/dashboard"} className={currentPath === "/admin/dashboard" ? "entry active mt-50" : "entry mt-50"}>
                     <span className="icon">🥋</span> {t('admin.admins')}
                 </a>
