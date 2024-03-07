@@ -129,7 +129,7 @@ const Home = () => {
                     <span className="big_number">540</span>
                     <span className="subtitle">{t('home.free_europeans')}</span>
                 </div>
-                <div className="mt-50">
+                <div className="mt-50" id="caaeuro">
                     <span className="tagline">{t('home.public_money')}</span>
                     <h2>
                         {t('home.caaeuro_stablecoin')}
@@ -159,7 +159,7 @@ const Home = () => {
                         <big><strong>{t('home.mnbce')}</strong></big>
                     </p>
                 </div>
-                <div className="mt-100">
+                <div className="mt-100" id="values">
                     <h2>
                         {t('home.values')}
                     </h2>

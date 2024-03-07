@@ -58,7 +58,8 @@
     },
     "header": {
         "values": "Values",
-        "news": "News",
+        "news": "Caâm token",
+        "website": "Website",
         "sign_in": "Sign In",
         "open_account": "Open FREE account"
     },

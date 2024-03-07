@@ -23,9 +23,9 @@ header .metabank_typo {
 
 header .selecter {
     font-family: 'Raleway-bold';
-    font-size: 16px;
+    font-size: 15px;
     text-align: left;
-    margin-left: 100px;
+    margin-left: 60px;
     cursor: pointer;
     color: #FFF;
     text-decoration: none;

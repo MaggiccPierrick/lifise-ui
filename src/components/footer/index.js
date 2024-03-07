@@ -9,6 +9,8 @@ import LINKEDIN from '../../assets/images/LinkedIn_logo_initials.png';
 import XTWITTER from '../../assets/images/twitter-x-logo.png';
 import YOUTUBE from '../../assets/images/youtube.png';
 import POLYGON from '../../assets/images/polygon-matic-logo.png';
+import INSTAGRAM from '../../assets/images/instagram.png';
+import FACEBOOK from '../../assets/images/facebook.png';
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
@@ -71,6 +73,9 @@ const Footer = () => {
                 <img src={LINKEDIN} alt="LinkedIn" className="social" onClick={() => window.open("https://www.linkedin.com/company/80497650")} />
                 <img src={XTWITTER} alt="X Twitter" className="social" onClick={() => window.open("https://twitter.com/MetabankFrance")} />
                 <img src={YOUTUBE} alt="Youtube" className="social" onClick={() => window.open("https://www.youtube.com/channel/UCscHwitaskD9i8IT_r3YVCA")} />
+                <img src={FACEBOOK} alt="X Twitter" className="social" onClick={() => window.open("https://www.facebook.com/teamCaamaloth")} />
+                <img src={INSTAGRAM} alt="X Twitter" className="social" onClick={() => window.open("https://www.instagram.com/metapokerseries/")} />
+                <img src={FACEBOOK} alt="Youtube" className="social" onClick={() => window.open("https://www.facebook.com/SireDeLogres")} />
                 <h4 className="mt-30">
                     Smart contract
                 </h4>

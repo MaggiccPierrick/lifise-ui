@@ -16,9 +16,10 @@ const Header = () => {
     return (
         <header>
             <img src={LOGO} alt="MetaBank logo" className="logo" />
-            <a href={"/"} className="selecter">CaâEuro</a>
-            <a href={"/"} className="selecter">{t('header.values')}</a>
-            <a href="https://www.linkedin.com/company/en-liens-rovaltain-web-com/posts/?feedView=all" target="_blank" rel="noreferrer" className="selecter">{t('header.news')}</a>
+            <a href={"/#caaeuro"} className="selecter">CaâEuro</a>
+            <a href={"/#values"} className="selecter">{t('header.values')}</a>
+            <span onClick={() => alert('Coming soon')} target="_blank" rel="noreferrer" className="selecter">{t('header.news')}</span>
+            <span onClick={() => alert(`${t('header.website')} coming soon`)} target="_blank" rel="noreferrer" className="selecter">{t('header.website')}</span>
             <a href={"/signin"} className="selecter float-right mobile-keeper">{t('header.sign_in')}</a>
             <Button title={t('header.open_account')} right={true} click={navigateSignUp}/>
         </header>
