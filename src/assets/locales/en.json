@@ -74,7 +74,8 @@
         "languages": "Languages",
         "legals": "Legals",
         "head_office": "Head office",
-        "joint_company": "simplified joint stock company with capital of"
+        "joint_company": "simplified joint stock company with capital of",
+        "tva": "VAT"
     },
     "signup": {
         "error_email": "Email syntax invalid!",

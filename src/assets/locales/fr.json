@@ -74,7 +74,8 @@
         "languages": "Langues",
         "legals": "Mentions légales",
         "head_office": "Siège social",
-        "joint_company": "par actions simplifiée au capital de"
+        "joint_company": "par actions simplifiée au capital de",
+        "tva": "TVA"
     },
     "signup": {
         "error_email": "Syntaxe d'e-mail invalide !",

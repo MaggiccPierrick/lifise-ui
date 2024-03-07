@@ -62,7 +62,7 @@ const Footer = () => {
                 <p>
                     {t('footer.head_office')} : 16 Cours Alexandre Borodine
                     <br/>
-                    26000 VALENCE 914 291 372 RCS ROMANS
+                    26000 VALENCE 914 291 372 RCS ROMANS - {t('footer.tva')} : FR84914291372
                 </p>
             </div>
 
