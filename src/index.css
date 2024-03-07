@@ -282,6 +282,7 @@ body {
   width: fit-content;
   display: inline-block;
   vertical-align: top;
+  max-width: 19%;
 }
 
 .container .box .tag {
