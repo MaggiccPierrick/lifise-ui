@@ -54,6 +54,10 @@ body {
   min-height: 80vh;
 }
 
+.primary {
+  color: var(--primary) !important;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -666,6 +670,13 @@ textarea:focus {
   margin-bottom: 10px;
 }
 
+.dashboard .operation .op_pending {
+  color: #ff8000de;
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-family: 'Raleway-bold';
+}
+
 .dashboard .operation .tx_value {
   display: block;
   position: absolute;
@@ -918,6 +929,15 @@ textarea:focus {
 
 .dashboard .heavy{
   font-family: 'Raleway-bold' !important;
+}
+
+.dashboard .receipt_order{
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 8px 20px 8px 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: #000 !important;
 }
 
 @media screen and (max-width: 940px) {

@@ -34,8 +34,9 @@ const Footer = () => {
                 <span className="selecter" onClick={() => handleLangChange('en')}>
                     EN
                 </span>}
-                <span className="selecter">{t('footer.cgu')}</span>
-                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/politique-de-confidentialité")}>{t('footer.policy')}</span>
+                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/cgu")}>{t('footer.cgu')}</span>
+                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/declaration-confidentialite")}>{t('footer.policy')}</span>
+                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/whitepaper")}>{t('footer.whitepaper')}</span>
             </div>
             <div className="split">
                 <h4>

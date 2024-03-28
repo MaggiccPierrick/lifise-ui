@@ -44,6 +44,9 @@ const Menu = () => {
                 <a href={"/admin/users"} className={currentPath === "/admin/users" ? "entry active" : "entry"}>
                     <span className="icon">👥</span> {t('admin.users')}
                 </a>
+                <a href={"#orders"} onClick={() => alert("Work in progress")} className={currentPath === "/admin/orders" ? "entry active" : "entry"}>
+                    <span className="icon">🗃️</span> {t('admin.orders')}
+                </a>
 
                 <div className="share">
                     <div className="rocket">

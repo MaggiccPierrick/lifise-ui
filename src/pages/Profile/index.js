@@ -16,7 +16,7 @@ import { ThreeDots } from 'react-loader-spinner';
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
 
-const Profile = () => {
+const Profile = ({ magic }) => {
     const { t } = useTranslation();
     const inputRef = useRef();
     const [profile, setProfile] = useState({});
@@ -60,7 +60,9 @@ const Profile = () => {
     }, []);
 
     const logout = () => {
-        UserService.logout()
+        magic.user.logout().then(() => {
+            UserService.logout()
+        });
     }
 
     const updateProfile = async () => {

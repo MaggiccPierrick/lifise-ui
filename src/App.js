@@ -38,7 +38,7 @@ function App() {
           <Route path='/operations' exact element={<Operations />} />
           <Route path='/beneficiaries' exact element={<Beneficiaries />} />
           <Route path='/assistance' exact element={<Assistance />} />
-          <Route path='/profile' exact element={<Profile />} />
+          <Route path='/profile' exact element={<Profile magic={magic} />} />
           <Route path='/decline' exact element={<Decline />} />
           <Route path="*" element={<Home />} />
           {/*ADMIN ROUTES*/}

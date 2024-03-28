@@ -54,7 +54,9 @@
         "join_me": "Rejoignez-moi et ouvre ton compte maintenant sur MetaBank",
         "share": "Partager",
         "cgu": "Conditions générales d'utilisation",
-        "policy": "Confidentialité"
+        "policy": "Confidentialité",
+        "sponsorship": "Parrainage",
+        "whitepaper": "Livre blanc"
     },
     "header": {
         "values": "Valeurs",
@@ -75,7 +77,8 @@
         "legals": "Mentions légales",
         "head_office": "Siège social",
         "joint_company": "par actions simplifiée au capital de",
-        "tva": "TVA"
+        "tva": "TVA",
+        "whitepaper": "Livre blanc"
     },
     "signup": {
         "error_email": "Syntaxe d'e-mail invalide !",
@@ -120,7 +123,28 @@
         "send_link": "Envoyez un lien pour inviter vos amis",
         "join_you": "pour vous rejoindre",
         "join_me": "Rejoignez-moi et ouvrez votre compte maintenant sur MetaBank",
-        "share": "Partager avec des amis"
+        "share": "Partager avec des amis",
+        "confirm_deposit": "Confirmez-vous le dépôt du bon de commande ?",
+        "order_created": "Commande créée avec succès. Veuillez transférer les fonds avec la référence donnée pour recevoir CaâEuro.",
+        "purchase_by_transfer": "Achat par virement bancaire",
+        "amount_to_purchase": "Définir le montant à acheter",
+        "set_order": "Définir l'ordre",
+        "cancel": "Annuler",
+        "order_created_short": "Commande créée avec succès",
+        "order_mail": "Un mail comprenant tous les détails du transfert a été envoyé à votre adresse email",
+        "order_complete1": "Pour finaliser votre commande et recevoir des fonds, veuillez envoyer ",
+        "order_complete2": "un virement bancaire incluant la référence suivante",
+        "order_complete3": "vers Metabank.",
+        "reference": "Référence",
+        "amount": "Montant",
+        "acc_number": "Numéro de compte",
+        "bank_name": "Nom de la banque",
+        "achat": "ACHAT",
+        "awaiting_transfer": "EN ATTENTE DE TRANSFERT",
+        "created": "Créé",
+        "funds_sent": "Fonds envoyés",
+        "purchase_to": "Acheter à",
+        "for": "pour"
     },
     "transfer": {
         "invalid_address": "Adresse de réception invalide !",
@@ -296,7 +320,8 @@
             "awaiting": "En attente",
             "already_claimed": "Déjà réclamé",
             "claimed_date": "Date de claim"
-        }
+        },
+        "orders": "Ordres"
     },
     "success_operation_saved": "Opération enregistrée avec succès",
     "success_login": "Connexion réussie",

@@ -29,7 +29,6 @@ const AdminUser = () => {
 
     const loadUser = async () => {
         const data = await AdminService.getUser(user_uuid);
-        console.log(data)
         setProfile(data);
     }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TOAST_OPTIONS } from '../../constants';
+import { TOAST_OPTIONS, EXPLORER } from '../../constants';
 
 //UTILS
 import { isMobile } from 'react-device-detect';
@@ -26,18 +26,22 @@ const Dashboard = () => {
     const [balance, setBalance] = useState("-");
     const [tokenClaims, setTokenClaims] = useState([]);
     const [claiming, onChangeClaiming] = useState(false);
+    const [displayPurchase, setDisplayPurchase] = useState(false);
+    const [amount, setAmount] = useState("");
+    const [loading, onChangeLoading] = useState(null);
+    const [banking, setBanking] = useState({});
+    const [reference, setReference] = useState(null);
+    const [price, setPrice] = useState(null);
+    const [orders, setOrders] = useState([]);
 
     const loadInfo = async () => {
         const data = TokenService.getUser()
         setProfile(data.account)
         const acc = await UserService.getAccountDetails()
-        console.log(acc)
         setBalance(acc.wallet.token_balance)
         setTokenClaims(acc.token_claims.to_claim)
-    }
-
-    const comingSoon = () => {
-        toast.info(t('dashboard.purchase_soon'), TOAST_OPTIONS);
+        const purchases = await UserService.listOrders()
+        setOrders(purchases)
     }
 
     useEffect(() => {
@@ -70,19 +74,138 @@ const Dashboard = () => {
         }
     }
 
+    const depositOrder = async () => {
+        if (!amount || amount === "-" || (parseInt(amount) < 50))
+            toast.error(t('transfer.invalid_amount') + ' Min. 50 €', TOAST_OPTIONS);
+        else {
+            onChangeLoading(true);
+            if (window.confirm(t('dashboard.confirm_deposit'))) {
+                try {
+                    const resp = await UserService.createOrder(parseInt(amount));
+                    if (resp.status) {
+                        setBanking(resp.bank_account);
+                        setReference(resp.reference);
+                        setPrice(resp.price_eur);
+                        toast.success(t('dashboard.order_created'), TOAST_OPTIONS);
+                    } else
+                        toast.error(resp.message, TOAST_OPTIONS);
+                } catch (e) {
+                    console.log(e.response.data)
+                    toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
+                }
+            }
+            onChangeLoading(false);
+        }
+    }
+
     return (
         <div className="dashboard">
             <Menu />
             <div className="right_board">
                 <BoardHeader title={t('dashboard.my_account')} />
+                {!reference && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
                 <div className="content">
                     <p><small>{t('dashboard.account_number')} {profile.public_address}</small></p>
                     <h2>{t('dashboard.caaeuro_balance')}</h2>
                     <span className="balance">{balance}</span>
                     <img src={LOGO_BLACK} className="currency" alt="CaaEuro logo" />
                     {isMobile && <br />}
-                    <Button title={t('dashboard.purchase_funds')} click={comingSoon} />
-                    {/* <Button title={"Redeem code"} framed={true} /> */}
+                    {!reference && !displayPurchase && <Button title={t('dashboard.purchase_funds')} click={() => setDisplayPurchase(true)} />}
+                    {!reference && displayPurchase &&
+                        <React.Fragment>
+                            <h2 className="mt-50">{t('dashboard.purchase_by_transfer')}</h2>
+                            <label>{t('dashboard.amount_to_purchase')}</label>
+                            <div className="relative display-inline-block">
+                                <input type="number" className="semi" placeholder={"CâaEuro amount"} min="0" step="1" onChange={(e) => setAmount(e.target.value)} value={amount} />
+                                <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
+                            </div>
+                            {!loading &&
+                                <div className="relative display-inline-block mobile_block">
+                                    <Button title={t('dashboard.set_order')} click={depositOrder} />
+                                    <Button title={t('dashboard.cancel')} framed={true} click={() => setDisplayPurchase(false)} />
+                                </div>}
+                            <div className="relative display-inline-block mobile_block ml-20">
+                                <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                            </div>
+                        </React.Fragment>
+                    }
+                    {reference &&
+                        <React.Fragment>
+                            <h2 className="mt-50">{t('dashboard.order_created_short')}</h2>
+                            <label className="ml-0">
+                                <small>{t('dashboard.order_mail')}</small>
+                            </label>
+                            <label className="ml-0">
+                                {t('dashboard.order_complete1')} <strong>{t('dashboard.order_complete2')}</strong> {t('dashboard.order_complete3')}
+                            </label>
+                            <table className="receipt_order">
+                                <tr>
+                                    <td>
+                                        <label>{t('dashboard.reference')}</label>
+                                    </td>
+                                    <td>
+                                        <label><h3 className="primary">{reference}</h3></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>{t('dashboard.amount')}</label>
+                                    </td>
+                                    <td>
+                                        <label><h3>{price} €</h3></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>{t('dashboard.acc_number')}</label>
+                                    </td>
+                                    <td>
+                                        <label><h3>{banking.iban}</h3></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>BIC/SWIFT</label>
+                                    </td>
+                                    <td>
+                                        <label><h3>{banking.bic_swift}</h3></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>{t('dashboard.bank_name')}</label>
+                                    </td>
+                                    <td>
+                                        <label><h3>{banking.bank_name}</h3></label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr/>
+                        </React.Fragment>
+                    }
+                    {!loading && orders.map(op =>
+                        <div className={profile.public_address.toLowerCase() === op.from ? "operation mobile-ml-40" : "operation"} key={op.hash}>
+                            <div className="op_type">{t('dashboard.purchase')}</div>
+                            {op.tx_hash ?
+                                <div className="op_link" onClick={() => window.open(`${EXPLORER}/tx/${op.tx_hash}`)}>{op.tx_hash}</div>
+                                :
+                                <div className="op_pending">{t('dashboard.awaiting_transfer')}</div>
+                            }
+                            <label className="ml-0">{t('dashboard.created')} {new Date(op.created_date).toLocaleDateString()}</label>
+                            {op.payment_date && <label className="ml-0">{t('dashboard.funds_sent')} {op.payment_date}</label>}
+                            <div className="select">
+                                <div className="select_profile">
+                                    <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
+                                    <div className="select_info">
+                                        <span className="select_email">{t('dashboard.purchase_to')} <strong>MetaBank</strong></span>
+                                        <span className="select_name">
+                                        {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     {tokenClaims.length > 0 &&
                         <React.Fragment>
                             <h2 className="mt-50">
@@ -107,7 +230,6 @@ const Dashboard = () => {
                         </React.Fragment>
                     }
                 </div>
-                <img src={BANKINGWEB3} className="visual" alt="Digital banking" />
                 {isMobile &&
                     <div className="share">
                         <p className="center">

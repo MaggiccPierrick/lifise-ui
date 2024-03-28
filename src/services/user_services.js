@@ -91,8 +91,6 @@ class UserService {
             });
     }
 
-    //BENEFICIARIES
-
     async getUser(user_uuid) {
         return await api
             .get(`/user/account/${user_uuid}`)
@@ -167,6 +165,22 @@ class UserService {
             .post('/user/assistance', { message })
             .then(async (response) => {
                 return response.data;
+            });
+    }
+
+    async createOrder(nb_tokens) {
+        return await api
+            .post('/user/purchase/order', { nb_tokens })
+            .then(async (response) => {
+                return response.data;
+            });
+    }
+
+    async listOrders() {
+        return await api
+            .get('/user/purchase/order')
+            .then(async (response) => {
+                return response.data.orders;
             });
     }
 

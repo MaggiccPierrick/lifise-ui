@@ -1,5 +1,9 @@
 import "./menu.css";
 import React from 'react';
+import { TOAST_OPTIONS } from '../../constants';
+
+//COMPONENTS
+import { ToastContainer, toast } from 'react-toastify';
 
 //VISUALS
 import LOGO from '../../assets/images/full_dark.png';
@@ -13,6 +17,7 @@ const Menu = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="left_menu">
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
                 <a href={"/dashboard"} className={currentPath === "/dashboard" ? "entry active mt-50" : "entry mt-50"}>
@@ -30,7 +35,12 @@ const Menu = () => {
                 <a href={"/assistance"} className={currentPath === "/assistance" ? "entry active" : "entry"}>
                     <span className="icon">🛟</span> {t('menu.assistance')}
                 </a>
-
+                <a href={"#airdrop"} onClick={() => toast.info('Coming soon', TOAST_OPTIONS)} className={currentPath === "/airdrop" ? "entry active" : "entry"} >
+                    <span className="icon">🪙</span> Airdrop Caâm
+                </a>
+                <a href={"#sponsor"} onClick={() => toast.info('Coming soon', TOAST_OPTIONS)} className={currentPath === "/sponsor" ? "entry active" : "entry"}>
+                    <span className="icon">🌟</span> {t('menu.sponsorship')}
+                </a>
                 <div className="share">
                     {navigator.share && <React.Fragment>
                         <div className="rocket">
@@ -47,8 +57,9 @@ const Menu = () => {
                             title: t('menu.join_me'),
                         })}>{t('menu.share')}</button>
                     </React.Fragment>}
-                    <p className="center"><a href="#terms">{t('menu.cgu')}</a></p>
-                    <p className="center"><a href="https://www.metabank-france.eu/politique-de-confidentialité" target="_blank" rel="noreferrer">{t('menu.policy')}</a></p>
+                    <p className="center"><a href="https://www.metabank-france.eu/cgu" target="_blank" rel="noreferrer">{t('menu.cgu')}</a></p>
+                    <p className="center"><a href="https://www.metabank-france.eu/declaration-confidentialite" target="_blank" rel="noreferrer">{t('menu.policy')}</a></p>
+                    <p className="center"><a href="https://www.metabank-france.eu/whitepaper" target="_blank" rel="noreferrer">{t('menu.whitepaper')}</a></p>
                 </div>
             </div>
             <div className="mobile_menu">

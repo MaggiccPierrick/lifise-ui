@@ -54,7 +54,9 @@
         "join_me": "Join me and open your account now on MetaBank",
         "share": "Share with friends",
         "cgu": "General terms of use",
-        "policy": "Privacy policy"
+        "policy": "Privacy policy",
+        "sponsorship": "Sponsorship",
+        "whitepaper": "Whitepaper"
     },
     "header": {
         "values": "Values",
@@ -75,7 +77,8 @@
         "legals": "Legals",
         "head_office": "Head office",
         "joint_company": "simplified joint stock company with capital of",
-        "tva": "VAT"
+        "tva": "VAT",
+        "whitepaper": "Whitepaper"
     },
     "signup": {
         "error_email": "Email syntax invalid!",
@@ -120,7 +123,28 @@
         "send_link": "Send a link to invite your friends",
         "join_you": "to join you",
         "join_me": "Join me and open your account now on MetaBank",
-        "share": "Share with friends"
+        "share": "Share with friends",
+        "confirm_deposit": "Do you confirm purchase order deposit ?",
+        "order_created": "Order successfully created. Please transfer funds with the given reference to receive CaâEuro.",
+        "purchase_by_transfer": "Purchase by bank transfer",
+        "amount_to_purchase": "Set amount to purchase",
+        "set_order": "Set order",
+        "cancel": "Cancel",
+        "order_created_short": "Order successfully created",
+        "order_mail": "A mail including all the transfer details has been sent to your email address",
+        "order_complete1": "To complete your order and receive funds please send ",
+        "order_complete2": "a wire transfer including the following reference",
+        "order_complete3": "to Metabank.",
+        "reference": "Reference",
+        "amount": "Amount",
+        "acc_number": "Account number",
+        "bank_name": "Bank name",
+        "purchase": "PURCHASE",
+        "awaiting_transfer": "AWAITING TRANFER",
+        "created": "Created",
+        "funds_sent": "Funds sent",
+        "purchase_to": "Purchase to",
+        "for": "for"
     },
     "transfer": {
         "invalid_address": "Receiving address invalid!",
@@ -296,7 +320,8 @@
             "awaiting": "Awaiting",
             "already_claimed": "Already claimed",
             "claimed_date": "Claim date"
-        }
+        },
+        "orders": "Orders"
     },
     "success_operation_saved": "Operation successfully saved",
     "success_login": "Login successfull",
