@@ -108,8 +108,10 @@ const Dashboard = () => {
         const sessionId = await UserService.initKYC()
         Synaps.init({
             sessionId,
-            onFinish: () => {
+            onFinish: async() => {
                 toast.success(t('dashboard.kyc_finished'), TOAST_OPTIONS)
+                const details = await UserService.detailsKYC()
+                setKYCdetails(details)
             },
             mode: 'modal',
         })
