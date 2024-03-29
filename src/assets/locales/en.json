@@ -328,7 +328,12 @@
             "already_claimed": "Already claimed",
             "claimed_date": "Claim date"
         },
-        "orders": "Orders"
+        "orders": "Orders",
+        "manage_orders": "Manage orders",
+        "confirm_order": "Confirm order",
+        "amount_received": "Amount received and to be sent",
+        "validate": "Validate",
+        "order_validated": "Order successfully validated and funds sent to user"
     },
     "success_operation_saved": "Operation successfully saved",
     "success_login": "Login successfull",

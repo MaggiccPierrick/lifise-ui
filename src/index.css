@@ -62,6 +62,10 @@ body {
   color: #FF4000 !important;
 }
 
+.success {
+  color: #00ca2c !important;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -974,6 +978,7 @@ textarea:focus {
   .container .box {
     margin: 60px auto;
     display: block;
+    max-width: 100%;
     width: 100%;
   }
 

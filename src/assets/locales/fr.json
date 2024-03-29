@@ -139,7 +139,7 @@
         "amount": "Montant",
         "acc_number": "Numéro de compte",
         "bank_name": "Nom de la banque",
-        "achat": "ACHAT",
+        "purchase": "ACHAT DE CaâEuro",
         "awaiting_transfer": "EN ATTENTE DE TRANSFERT",
         "created": "Créé",
         "funds_sent": "Fonds envoyés",
@@ -328,7 +328,12 @@
             "already_claimed": "Déjà réclamé",
             "claimed_date": "Date de claim"
         },
-        "orders": "Ordres"
+        "orders": "Ordres",
+        "manage_orders": "Manage orders",
+        "confirm_order": "Confirmer ordre",
+        "amount_received": "Montant reçu et à envoyer",
+        "validate": "Valider",
+        "order_validated": "Ordre validé avec succès. Les fonds ont été envoyé à l'utilisateur"
     },
     "success_operation_saved": "Opération enregistrée avec succès",
     "success_login": "Connexion réussie",

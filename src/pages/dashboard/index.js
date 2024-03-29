@@ -30,6 +30,7 @@ const Dashboard = () => {
     const [displayPurchase, setDisplayPurchase] = useState(false)
     const [amount, setAmount] = useState("")
     const [loading, onChangeLoading] = useState(null)
+    const [trigger, onChangeTrigger] = useState(false)
     const [banking, setBanking] = useState({})
     const [reference, setReference] = useState(null)
     const [price, setPrice] = useState(null)
@@ -47,6 +48,7 @@ const Dashboard = () => {
         setOrders(purchases)
         const details = await UserService.detailsKYC()
         setKYCdetails(details)
+        onChangeTrigger(true)
     }
 
     useEffect(() => {
@@ -108,7 +110,7 @@ const Dashboard = () => {
         const sessionId = await UserService.initKYC()
         Synaps.init({
             sessionId,
-            onFinish: async() => {
+            onFinish: async () => {
                 toast.success(t('dashboard.kyc_finished'), TOAST_OPTIONS)
                 const details = await UserService.detailsKYC()
                 setKYCdetails(details)
@@ -127,21 +129,24 @@ const Dashboard = () => {
                 <BoardHeader title={t('dashboard.my_account')} />
                 {!reference && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
                 <div className="content">
-                    <p>
+                    {trigger && <p>
                         <small>{t('dashboard.account_number')} {profile.public_address}</small>
                         <br />
                         {kycDetails.kyc_status ?
-                            <small className="primary">{t('dashboard.kyc_status')} : <strong>{kycDetails.kyc_status}</strong></small>
+                            kycDetails.kyc_status === "APPROVED" ?
+                                <small>{t('dashboard.kyc_status')} : <strong className="success">{kycDetails.kyc_status}</strong></small>
+                                :
+                                <small>{t('dashboard.kyc_status')} : <strong className="primary">{kycDetails.kyc_status}</strong></small>
                             :
-                            <small className="warning">{t('dashboard.kyc_status')} : <strong>{t('dashboard.no_kyc')}</strong></small>
+                            <small>{t('dashboard.kyc_status')} : <strong className="warning">{t('dashboard.no_kyc')}</strong></small>
                         }
-                    </p>
+                    </p>}
                     <h2>{t('dashboard.caaeuro_balance')}</h2>
                     <span className="balance">{balance}</span>
                     <img src={LOGO_BLACK} className="currency" alt="CaaEuro logo" />
                     {isMobile && <br />}
-                    {!reference && !displayPurchase && <Button title={t('dashboard.purchase_funds')} click={() => setDisplayPurchase(true)} />}
-                    {!reference && !displayPurchase && !processing && (!kycDetails.kyc_status || ["SUBMISSION_REQUIRED", "REJECTED"].includes(kycDetails.kyc_status)) && <Button title={t('dashboard.process_kyc')} framed={true} click={startKYC} />}
+                    {!reference && !displayPurchase && trigger && <Button title={t('dashboard.purchase_funds')} click={() => setDisplayPurchase(true)} />}
+                    {!reference && !displayPurchase && !processing && (!kycDetails.kyc_status || ["SUBMISSION_REQUIRED", "REJECTED"].includes(kycDetails.kyc_status)) && trigger && <Button title={t('dashboard.process_kyc')} framed={true} click={startKYC} />}
                     {!reference && displayPurchase &&
                         <React.Fragment>
                             <h2 className="mt-50">{t('dashboard.purchase_by_transfer')}</h2>
@@ -215,15 +220,19 @@ const Dashboard = () => {
                         </React.Fragment>
                     }
                     {!loading && orders.map(op =>
-                        <div className={profile.public_address.toLowerCase() === op.from ? "operation mobile-ml-40" : "operation"} key={op.user_purchase_uuid}>
-                            <div className="op_type">{t('dashboard.purchase')}</div>
+                        <div className="operation" key={op.user_purchase_uuid}>
+                            <div className="op_type">
+                                {t('dashboard.purchase')}
+                                <br/>
+                                <small className="primary">REF: {op.reference}</small>
+                            </div>
                             {op.tx_hash ?
                                 <div className="op_link" onClick={() => window.open(`${EXPLORER}/tx/${op.tx_hash}`)}>{op.tx_hash}</div>
                                 :
                                 <div className="op_pending">{t('dashboard.awaiting_transfer')}</div>
                             }
                             <label className="ml-0">{t('dashboard.created')} {new Date(op.created_date).toLocaleDateString()}</label>
-                            {op.payment_date && <label className="ml-0">{t('dashboard.funds_sent')} {op.payment_date}</label>}
+                            {op.payment_date && <label className="ml-0">{t('dashboard.funds_sent')} {new Date(op.payment_date).toLocaleDateString()}</label>}
                             <div className="select">
                                 <div className="select_profile">
                                     <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
@@ -233,8 +242,8 @@ const Dashboard = () => {
                                             {t('dashboard.ordered')} {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
                                         </span>
                                         {op.amount_received && <span className="select_name primary">
-                                            {t('dashboard.received_wire_tx')} {op.amount_received} <small>€</small> 
-                                            <br/>
+                                            {t('dashboard.received_wire_tx')} {op.amount_received} <small>€</small>
+                                            <br />
                                             <small>{t('dashboard.payment_of')}</small> {op.amount_received} <small>CaâEuro</small>
                                         </span>}
                                     </div>

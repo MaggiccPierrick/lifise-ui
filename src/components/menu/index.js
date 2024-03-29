@@ -57,9 +57,6 @@ const Menu = () => {
                             title: t('menu.join_me'),
                         })}>{t('menu.share')}</button>
                     </React.Fragment>}
-                    <p className="center"><a href="https://www.metabank-france.eu/cgu" target="_blank" rel="noreferrer">{t('menu.cgu')}</a></p>
-                    <p className="center"><a href="https://www.metabank-france.eu/declaration-confidentialite" target="_blank" rel="noreferrer">{t('menu.policy')}</a></p>
-                    <p className="center"><a href="https://www.metabank-france.eu/whitepaper" target="_blank" rel="noreferrer">{t('menu.whitepaper')}</a></p>
                 </div>
             </div>
             <div className="mobile_menu">

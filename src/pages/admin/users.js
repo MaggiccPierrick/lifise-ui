@@ -151,7 +151,7 @@ const AdminUsers = () => {
                                     <div className="profile_info locked">
                                         <span className="profile_name">{account.email_address}</span>
                                         <span className="small_desc left">{t('admin.invit_sent')} {new Date(account.created_date).toLocaleDateString()}</span>
-                                        <span className="profile_name">{account.token_claims.to_claim.length} <small>{t('admin.pending_lw')}pending</small> → {account.token_claims.total_to_claim} <small>CaaEUR</small></span>
+                                        <span className="profile_name">{account.token_claims.to_claim.length} <small>{t('admin.pending_lw')}</small> → {account.token_claims.total_to_claim} <small>CaaEUR</small></span>
                                     </div>
                                     <div className="rm_beneficiary float-right">
                                         🕒
@@ -167,6 +167,14 @@ const AdminUsers = () => {
                                         <span className="profile_name">{account.firstname || "-"} {account.lastname || "-"}</span>
                                         <span className="profile_email">{account.email_address}</span>
                                         <span className="small_desc left">{account.public_address}</span>
+                                        {account.kyc_status ?
+                                            account.kyc_status === "APPROVED" ?
+                                                <span className="small_desc left">KYC : <strong className="success">{account.kyc_status}</strong></span>
+                                                :
+                                                <span className="small_desc left">KYC : <strong className="primary">{account.kyc_status}</strong></span>
+                                            :
+                                            <span className="small_desc left">KYC : <strong className="warning">{t('dashboard.no_kyc')}</strong></span>
+                                        }
                                     </div>
                                     <div className="profile_info pointer">
                                         <span className="small_desc">{new Date(account.created_date).toLocaleDateString()} | Birth: {account.birthdate || "-"}</span>

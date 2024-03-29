@@ -4,7 +4,7 @@ import './footer.css';
 import { isMobile } from 'react-device-detect';
 
 //VISUALS
-import LOGO from '../../assets/images/full_white.png';
+import LOGO from '../../assets/images/full_white_baseline.png';
 import LINKEDIN from '../../assets/images/LinkedIn_logo_initials.png';
 import XTWITTER from '../../assets/images/twitter-x-logo.png';
 import YOUTUBE from '../../assets/images/youtube.png';

@@ -16,6 +16,7 @@ import AdminDashboard from './pages/admin/dashboard';
 import AdminProfile from './pages/admin/profile';
 import AdminUsers from './pages/admin/users';
 import AdminUser from './pages/admin/user';
+import AdminOrders from './pages/admin/orders';
 import { Magic } from 'magic-sdk';
 import { ALCHEMY_NODE, CHAIN_ID, REACT_APP_MAGIC_PUBLISHABLE_KEY } from './constants';
 import Decline from './pages/decline';
@@ -48,6 +49,7 @@ function App() {
           <Route path='/admin/profile' exact element={<AdminProfile />} />
           <Route path='/admin/users' exact element={<AdminUsers/>} />
           <Route path='/admin/user/:user_uuid' exact element={<AdminUser />} />
+          <Route path='/admin/orders' exact element={<AdminOrders/>} />
         </Routes>
       </Layout>
     </Router>

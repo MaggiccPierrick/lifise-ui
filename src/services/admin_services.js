@@ -185,6 +185,22 @@ class AdminService {
         return response.data;
       });
   }
+  
+  async listOrders(pending = false) {
+    return await api
+      .get(`/admin/user/purchase/order?pending=${pending}`)
+      .then(async (response) => {
+        return response.data.orders;
+      });
+  }
+  
+  async validateOrder(user_uuid, user_purchase_uuid, amount_received) {
+    return await api
+      .post(`/admin/user/purchase/order/confirm`, {user_uuid, user_purchase_uuid, amount_received})
+      .then(async (response) => {
+        return response.data;
+      });
+  }
 
 }
 

@@ -41,7 +41,7 @@ const AdminUser = () => {
                     <div className="big_avatar"
                         style={{
                             backgroundImage: profile.selfie ? `url('data:image/${profile.selfie_ext};base64,${profile.selfie}')` :
-                                `url('https://api.multiavatar.com/${profile.user_uuid}.png')`
+                                `url('https://api.dicebear.com/7.x/initials/svg?seed=${profile.firstname}')`
                         }}>
                     </div>
                     <div className="mt-10">
