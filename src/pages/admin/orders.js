@@ -105,17 +105,19 @@ const AdminOrders = () => {
                                         style={{ backgroundImage: `url('https://api.dicebear.com/7.x/initials/svg?seed=${op.user.email_address}')` }}>
                                     </div>
                                     <div className="profile_info locked">
-                                        <span className="profile_name">{op.user.firstname || "-"} {op.user.lastname || "-"}</span>
+                                        <span className="profile_name">
+                                            {op.user.firstname || "-"} {op.user.lastname || "-"}
+                                            {op.user.kyc_status ?
+                                                op.user.kyc_status === "APPROVED" ?
+                                                    <small className="ml-10"><strong className="success">KYC {op.user.kyc_status}</strong></small>
+                                                    :
+                                                    <small className="ml-10"><strong className="primary">KYC {op.user.kyc_status}</strong></small>
+                                                :
+                                                <small className="ml-10"><strong className="warning">KYC {t('dashboard.no_kyc')}</strong></small>
+                                            }
+                                        </span>
                                         <span className="profile_email">{op.user.email_address}</span>
                                         <span className="small_desc left">{op.user.public_address}</span>
-                                        {op.user.kyc_status ?
-                                            op.user.kyc_status === "APPROVED" ?
-                                                <span className="small_desc left">KYC : <strong className="success">{op.user.kyc_status}</strong></span>
-                                                :
-                                                <span className="small_desc left">KYC : <strong className="primary">{op.user.kyc_status}</strong></span>
-                                            :
-                                            <span className="small_desc left">KYC : <strong className="warning">{t('dashboard.no_kyc')}</strong></span>
-                                        }
                                     </div>
                                 </div>
                             </div>}
