@@ -144,7 +144,11 @@
         "created": "Créé",
         "funds_sent": "Fonds envoyés",
         "purchase_to": "Acheter à",
-        "for": "pour"
+        "for": "pour",
+        "kyc_finished": "KYC éffectué avec succès. Veuillez attendre quelques minutes avant validation.",
+        "no_kyc": "Aucun KYC validé",
+        "kyc_status": "Validation de votre identité",
+        "process_kyc": "Valider identité"
     },
     "transfer": {
         "invalid_address": "Adresse de réception invalide !",

@@ -108,9 +108,9 @@ const AdminDashboard = () => {
                 <BoardHeader title={t('admin.admins')} />
                 <div className="content">
                     <p><strong>{t('admin.manage_admins')}</strong></p>
-                        <label className="ml-0">
-                        {t('admin.filter')} : <span className={deactivated? "filter": "filter heavy"} onClick={() => window.location.href = "/admin/dashboard"}>{t('admin.activated')}</span> | <span className={deactivated? "filter heavy": "filter"}  onClick={() => window.location.href = "/admin/dashboard?deactivated=true"}>{t('admin.deactivated')}</span>
-                        </label>
+                    <label className="ml-0">
+                        {t('admin.filter')} : <span className={deactivated ? "filter" : "filter heavy"} onClick={() => window.location.href = "/admin/dashboard"}>{t('admin.activated')}</span> | <span className={deactivated ? "filter heavy" : "filter"} onClick={() => window.location.href = "/admin/dashboard?deactivated=true"}>{t('admin.deactivated')}</span>
+                    </label>
                     <div className="beneficiaries">
                         {accounts.map(account =>
                             <div className="profile" key={account.admin_uuid}>

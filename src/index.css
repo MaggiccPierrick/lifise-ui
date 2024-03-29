@@ -58,6 +58,10 @@ body {
   color: var(--primary) !important;
 }
 
+.warning {
+  color: #FF4000 !important;
+}
+
 .pointer {
   cursor: pointer;
 }

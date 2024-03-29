@@ -1,38 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { TOAST_OPTIONS, EXPLORER } from '../../constants';
+import React, { useState, useEffect } from 'react'
+import { TOAST_OPTIONS, EXPLORER } from '../../constants'
 
 //UTILS
-import { isMobile } from 'react-device-detect';
-import TokenService from "../../services/token_services";
-import UserService from '../../services/user_services';
+import { isMobile } from 'react-device-detect'
+import TokenService from "../../services/token_services"
+import UserService from '../../services/user_services'
 
 //VISUALS
-import LOGO_BLACK from '../../assets/images/logo_black.png';
-import BANKINGWEB3 from '../../assets/images/banking_web3.png';
+import LOGO_BLACK from '../../assets/images/logo_black.png'
+import BANKINGWEB3 from '../../assets/images/banking_web3.png'
 
 //COMPONENTS
-import Menu from '../../components/menu';
-import BoardHeader from '../../components/boardheader';
-import Button from '../../components/button';
-import { ToastContainer, toast } from 'react-toastify';
-import { ThreeDots } from 'react-loader-spinner';
+import Menu from '../../components/menu'
+import BoardHeader from '../../components/boardheader'
+import Button from '../../components/button'
+import { ToastContainer, toast } from 'react-toastify'
+import { ThreeDots } from 'react-loader-spinner'
+import { Synaps } from '@synaps-io/verify-sdk'
 
 //TRANSLATION
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 const Dashboard = () => {
-    const { t } = useTranslation();
-    const [profile, setProfile] = useState({});
-    const [balance, setBalance] = useState("-");
-    const [tokenClaims, setTokenClaims] = useState([]);
-    const [claiming, onChangeClaiming] = useState(false);
-    const [displayPurchase, setDisplayPurchase] = useState(false);
-    const [amount, setAmount] = useState("");
-    const [loading, onChangeLoading] = useState(null);
-    const [banking, setBanking] = useState({});
-    const [reference, setReference] = useState(null);
-    const [price, setPrice] = useState(null);
-    const [orders, setOrders] = useState([]);
+    const { t } = useTranslation()
+    const [profile, setProfile] = useState({})
+    const [balance, setBalance] = useState("-")
+    const [tokenClaims, setTokenClaims] = useState([])
+    const [claiming, onChangeClaiming] = useState(false)
+    const [displayPurchase, setDisplayPurchase] = useState(false)
+    const [amount, setAmount] = useState("")
+    const [loading, onChangeLoading] = useState(null)
+    const [banking, setBanking] = useState({})
+    const [reference, setReference] = useState(null)
+    const [price, setPrice] = useState(null)
+    const [orders, setOrders] = useState([])
+    const [processing, onChangeProcessing] = useState(null)
+    const [kycDetails, setKYCdetails] = useState({})
 
     const loadInfo = async () => {
         const data = TokenService.getUser()
@@ -42,60 +45,77 @@ const Dashboard = () => {
         setTokenClaims(acc.token_claims.to_claim)
         const purchases = await UserService.listOrders()
         setOrders(purchases)
+        const details = await UserService.detailsKYC()
+        setKYCdetails(details)
     }
 
     useEffect(() => {
-        loadInfo();
+        loadInfo()
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     const claimFunds = async (claim_uuid) => {
         if (claiming)
-            toast.warn(t('dashboard.wait_claim'), TOAST_OPTIONS);
+            toast.warn(t('dashboard.wait_claim'), TOAST_OPTIONS)
         else {
-            onChangeClaiming(true);
+            onChangeClaiming(true)
             try {
-                const resp = await UserService.claim([claim_uuid]);
+                const resp = await UserService.claim([claim_uuid])
                 if (resp.status && resp.transactions[claim_uuid]) {
-                    toast.success(`${t('dashboard.funds_claimed')} ${resp.transactions[claim_uuid].tx_hash.substring(0, 10)}...${resp.transactions[claim_uuid].tx_hash.substring(resp.transactions[claim_uuid].tx_hash.length - 10, resp.transactions[claim_uuid].tx_hash.length - 1)}`, TOAST_OPTIONS);
+                    toast.success(`${t('dashboard.funds_claimed')} ${resp.transactions[claim_uuid].tx_hash.substring(0, 10)}...${resp.transactions[claim_uuid].tx_hash.substring(resp.transactions[claim_uuid].tx_hash.length - 10, resp.transactions[claim_uuid].tx_hash.length - 1)}`, TOAST_OPTIONS)
                     setTimeout(async () => {
                         await loadInfo()
-                        onChangeClaiming(false);
-                    }, 2500);
+                        onChangeClaiming(false)
+                    }, 2500)
                 } else {
-                    toast.error(resp.message, TOAST_OPTIONS);
-                    onChangeClaiming(false);
+                    toast.error(resp.message, TOAST_OPTIONS)
+                    onChangeClaiming(false)
                 }
             } catch (e) {
                 console.log(e.response.data)
-                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
-                onChangeClaiming(false);
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS)
+                onChangeClaiming(false)
             }
         }
     }
 
     const depositOrder = async () => {
         if (!amount || amount === "-" || (parseInt(amount) < 50))
-            toast.error(t('transfer.invalid_amount') + ' Min. 50 €', TOAST_OPTIONS);
+            toast.error(t('transfer.invalid_amount') + ' Min. 50 €', TOAST_OPTIONS)
         else {
-            onChangeLoading(true);
+            onChangeLoading(true)
             if (window.confirm(t('dashboard.confirm_deposit'))) {
                 try {
-                    const resp = await UserService.createOrder(parseInt(amount));
+                    const resp = await UserService.createOrder(parseInt(amount))
                     if (resp.status) {
-                        setBanking(resp.bank_account);
-                        setReference(resp.reference);
-                        setPrice(resp.price_eur);
-                        toast.success(t('dashboard.order_created'), TOAST_OPTIONS);
+                        setBanking(resp.bank_account)
+                        setReference(resp.reference)
+                        setPrice(resp.price_eur)
+                        toast.success(t('dashboard.order_created'), TOAST_OPTIONS)
                     } else
-                        toast.error(resp.message, TOAST_OPTIONS);
+                        toast.error(resp.message, TOAST_OPTIONS)
                 } catch (e) {
                     console.log(e.response.data)
-                    toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
+                    toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS)
                 }
             }
-            onChangeLoading(false);
+            onChangeLoading(false)
         }
+    }
+
+    const startKYC = async () => {
+        onChangeProcessing(true)
+        const sessionId = await UserService.initKYC()
+        Synaps.init({
+            sessionId,
+            onFinish: () => {
+                toast.success(t('dashboard.kyc_finished'), TOAST_OPTIONS)
+            },
+            mode: 'modal',
+        })
+        setTimeout(() => {
+            Synaps.show()
+        }, 1000)
     }
 
     return (
@@ -105,12 +125,21 @@ const Dashboard = () => {
                 <BoardHeader title={t('dashboard.my_account')} />
                 {!reference && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
                 <div className="content">
-                    <p><small>{t('dashboard.account_number')} {profile.public_address}</small></p>
+                    <p>
+                        <small>{t('dashboard.account_number')} {profile.public_address}</small>
+                        <br />
+                        {kycDetails.kyc_status ?
+                            <small className="primary">{t('dashboard.kyc_status')} : <strong>{kycDetails.kyc_status}</strong></small>
+                            :
+                            <small className="warning">{t('dashboard.kyc_status')} : <strong>{t('dashboard.no_kyc')}</strong></small>
+                        }
+                    </p>
                     <h2>{t('dashboard.caaeuro_balance')}</h2>
                     <span className="balance">{balance}</span>
                     <img src={LOGO_BLACK} className="currency" alt="CaaEuro logo" />
                     {isMobile && <br />}
                     {!reference && !displayPurchase && <Button title={t('dashboard.purchase_funds')} click={() => setDisplayPurchase(true)} />}
+                    {!reference && !displayPurchase && !processing && (!kycDetails.kyc_status || ["SUBMISSION_REQUIRED", "REJECTED"].includes(kycDetails.kyc_status)) && <Button title={t('dashboard.process_kyc')} framed={true} click={startKYC} />}
                     {!reference && displayPurchase &&
                         <React.Fragment>
                             <h2 className="mt-50">{t('dashboard.purchase_by_transfer')}</h2>
@@ -180,11 +209,11 @@ const Dashboard = () => {
                                     </td>
                                 </tr>
                             </table>
-                            <hr/>
+                            <hr />
                         </React.Fragment>
                     }
                     {!loading && orders.map(op =>
-                        <div className={profile.public_address.toLowerCase() === op.from ? "operation mobile-ml-40" : "operation"} key={op.hash}>
+                        <div className={profile.public_address.toLowerCase() === op.from ? "operation mobile-ml-40" : "operation"} key={op.user_purchase_uuid}>
                             <div className="op_type">{t('dashboard.purchase')}</div>
                             {op.tx_hash ?
                                 <div className="op_link" onClick={() => window.open(`${EXPLORER}/tx/${op.tx_hash}`)}>{op.tx_hash}</div>
@@ -199,7 +228,7 @@ const Dashboard = () => {
                                     <div className="select_info">
                                         <span className="select_email">{t('dashboard.purchase_to')} <strong>MetaBank</strong></span>
                                         <span className="select_name">
-                                        {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
+                                            {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
                                         </span>
                                     </div>
                                 </div>
@@ -248,6 +277,6 @@ const Dashboard = () => {
             <ToastContainer />
         </div>
     )
-};
+}
 
-export default Dashboard;
+export default Dashboard

@@ -184,6 +184,21 @@ class UserService {
             });
     }
 
+    async initKYC() {
+        return await api
+            .get('/user/kyc/session')
+            .then(async (response) => {
+                return response.data.kyc_session_id;
+            });
+    }
+
+    async detailsKYC() {
+        return await api
+            .get('/user/kyc/details')
+            .then(async (response) => {
+                return response.data;
+            });
+    }
 }
 
 // eslint-disable-next-line
