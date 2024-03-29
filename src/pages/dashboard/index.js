@@ -228,8 +228,13 @@ const Dashboard = () => {
                                     <div className="select_info">
                                         <span className="select_email">{t('dashboard.purchase_to')} <strong>MetaBank</strong></span>
                                         <span className="select_name">
-                                            {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
+                                            {t('dashboard.ordered')} {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
                                         </span>
+                                        {op.amount_received && <span className="select_name primary">
+                                            {t('dashboard.received_wire_tx')} {op.amount_received} <small>€</small> 
+                                            <br/>
+                                            <small>{t('dashboard.payment_of')}</small> {op.amount_received} <small>CaâEuro</small>
+                                        </span>}
                                     </div>
                                 </div>
                             </div>

@@ -148,7 +148,10 @@
         "kyc_finished": "KYC éffectué avec succès. Veuillez attendre quelques minutes avant validation.",
         "no_kyc": "Aucun KYC validé",
         "kyc_status": "Validation de votre identité",
-        "process_kyc": "Valider identité"
+        "process_kyc": "Valider identité",
+        "ordered": "Ordre de",
+        "received_wire_tx": "Virement reçu de",
+        "payment_of": "Paiement de"
     },
     "transfer": {
         "invalid_address": "Adresse de réception invalide !",
