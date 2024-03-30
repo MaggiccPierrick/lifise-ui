@@ -21,6 +21,7 @@ const AdminOrders = () => {
     const { t } = useTranslation();
     const [pending, setPending] = useState(true);
     const [orders, setOrders] = useState(null);
+    const [users, setUsers] = useState({});
     const [loading, onChangeLoading] = useState(false);
     const [amount, setAmount] = useState("");
     const [displayValidation, setDisplayValidation] = useState(null);
@@ -28,10 +29,8 @@ const AdminOrders = () => {
     const loadOrders = async () => {
         setOrders(null)
         let ords = await AdminService.listOrders(pending);
-        for (let ord of ords) {
-            ord.user = await AdminService.getUser(ord.user_uuid)
-        }
-        setOrders(ords);
+        setOrders(ords.orders);
+        setUsers(ords.user_info);
     }
 
     const toggleValidation = (uuid) => {
@@ -98,26 +97,26 @@ const AdminOrders = () => {
                             }
                             <label className="ml-0">{t('dashboard.created')} {new Date(op.created_date).toLocaleDateString()}</label>
                             {op.payment_date && <label className="ml-0">{t('dashboard.funds_sent')} {new Date(op.payment_date).toLocaleDateString()}</label>}
-                            {op.user && <div className="beneficiaries">
+                            {users[op.user_uuid] && <div className="beneficiaries">
                                 <div className="profile">
                                     <div className="avatar"
-                                        onClick={() => window.open(`/admin/user/${op.user.user_uuid}`)}
-                                        style={{ backgroundImage: `url('https://api.dicebear.com/7.x/initials/svg?seed=${op.user.email_address}')` }}>
+                                        onClick={() => window.open(`/admin/user/${op.user_uuid}`)}
+                                        style={{ backgroundImage: `url('https://api.dicebear.com/7.x/initials/svg?seed=${users[op.user_uuid].firstname}')` }}>
                                     </div>
                                     <div className="profile_info locked">
                                         <span className="profile_name">
-                                            {op.user.firstname || "-"} {op.user.lastname || "-"}
-                                            {op.user.kyc_status ?
-                                                op.user.kyc_status === "APPROVED" ?
-                                                    <small className="ml-10"><strong className="success">KYC {op.user.kyc_status}</strong></small>
+                                            {users[op.user_uuid].firstname || "-"} {users[op.user_uuid].lastname || "-"}
+                                            {users[op.user_uuid].kyc_status ?
+                                                users[op.user_uuid].kyc_status === "APPROVED" ?
+                                                    <small className="ml-10"><strong className="success">KYC {users[op.user_uuid].kyc_status}</strong></small>
                                                     :
-                                                    <small className="ml-10"><strong className="primary">KYC {op.user.kyc_status}</strong></small>
+                                                    <small className="ml-10"><strong className="primary">KYC {users[op.user_uuid].kyc_status}</strong></small>
                                                 :
                                                 <small className="ml-10"><strong className="warning">KYC {t('dashboard.no_kyc')}</strong></small>
                                             }
                                         </span>
-                                        <span className="profile_email">{op.user.email_address}</span>
-                                        <span className="small_desc left">{op.user.public_address}</span>
+                                        <span className="profile_email">{users[op.user_uuid].email}</span>
+                                        <span className="small_desc left">{users[op.user_uuid].public_address}</span>
                                     </div>
                                 </div>
                             </div>}

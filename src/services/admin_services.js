@@ -190,7 +190,7 @@ class AdminService {
     return await api
       .get(`/admin/user/purchase/order?pending=${pending}`)
       .then(async (response) => {
-        return response.data.orders;
+        return response.data;
       });
   }
   
