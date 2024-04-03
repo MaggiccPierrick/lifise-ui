@@ -121,7 +121,6 @@ const Operations = () => {
                             <img className="tx_symbol" alt="CaâEuro symbol" src={profile.public_address.toLowerCase() === op.to ? LOGO : LOGO_BLACK} />
                         </div>
                     )}
-                    <div style={{height: "120px"}}></div>
                 </div>
                 {!isMobile && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
             </div>

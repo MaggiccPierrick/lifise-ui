@@ -1077,7 +1077,8 @@ textarea:focus {
 
   .dashboard .content {
     padding: 10px 20px 120px 20px !important;
-    height: calc(100vh - 91px);
+    height: auto;
+    min-height: calc(100vh - 91px);
     text-align: center;
   }
 
@@ -1198,5 +1199,11 @@ textarea:focus {
 
   .dashboard .beneficiaries .profile .profile_info .profile_email {
     font-size: 11px;
+  }
+
+  .share_mobile{
+    display: block !important;
+    bottom: auto !important;
+    margin: 30px auto !important;
   }
 }

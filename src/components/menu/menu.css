@@ -174,7 +174,7 @@
 
   .dashboard .share {
     position: relative;
-    bottom: 120px;
+    bottom: auto;
     width: calc(100% - 40px);
   }
 }

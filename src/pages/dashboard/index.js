@@ -283,21 +283,21 @@ const Dashboard = () => {
                             </div>}
                         </React.Fragment>
                     }
+                    {isMobile &&
+                        <div className="share share_mobile">
+                            <p className="center">
+                                {t('dashboard.send_link')}
+                                <br />
+                                {t('dashboard.join_you')}
+                            </p>
+                            <button className="action" onClick={() => navigator.share({
+                                text: t('dashboard.join_me'),
+                                url: `https://metabank.codinsight.com`,
+                                title: t('dashboard.join_me'),
+                            })}>{t('dashboard.share')}</button>
+                        </div>
+                    }
                 </div>
-                {isMobile &&
-                    <div className="share">
-                        <p className="center">
-                            {t('dashboard.send_link')}
-                            <br />
-                            {t('dashboard.join_you')}
-                        </p>
-                        <button className="action" onClick={() => navigator.share({
-                            text: t('dashboard.join_me'),
-                            url: `https://metabank.codinsight.com`,
-                            title: t('dashboard.join_me'),
-                        })}>{t('dashboard.share')}</button>
-                    </div>
-                }
             </div>
             <ToastContainer />
         </div>
