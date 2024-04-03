@@ -132,6 +132,7 @@ const Beneficiaries = () => {
                 <Menu />
                 <div className="right_board">
                     <BoardHeader title={t('beneficiaries.beneficiaries')} />
+                    {!isMobile && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
                     <div className="content">
                         <p><strong>{t('beneficiaries.manage')}</strong></p>
                         <div className="search">
@@ -196,7 +197,6 @@ const Beneficiaries = () => {
                             )}
                         </div>
                     </div>
-                    {!isMobile && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
                 </div>
                 <ToastContainer />
             </div>

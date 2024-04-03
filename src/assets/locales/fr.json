@@ -384,5 +384,6 @@
     "error_logout": "Erreur de déconnexion",
     "error_no_address": "Aucune adresse trouvée",
     "error_email_not_sent": "L'e-mail n'a pas pu être envoyé",
-    "error_invalid": "Invalide"
+    "error_invalid": "Invalide",
+    "error_own_address": "Vous ne pouvez pas vous rajouter en bénéficiaire"
 }

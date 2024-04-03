@@ -384,5 +384,6 @@
     "error_logout": "Error logout",
     "error_no_address": "No address found",
     "error_email_not_sent": "Email could not be sent",
-    "error_invalid": "Invalid"
+    "error_invalid": "Invalid",
+    "error_own_address": "Cannot set yourself as beneficiary"
 }
