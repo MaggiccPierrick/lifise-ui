@@ -14,6 +14,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import UserService from '../../services/user_services';
 import TokenService from '../../services/token_services';
 import { EXPLORER } from '../../constants';
+import { isMobile } from 'react-device-detect';
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
@@ -120,8 +121,9 @@ const Operations = () => {
                             <img className="tx_symbol" alt="CaâEuro symbol" src={profile.public_address.toLowerCase() === op.to ? LOGO : LOGO_BLACK} />
                         </div>
                     )}
+                    <div style={{height: "120px"}}></div>
                 </div>
-                <img src={BANKINGWEB3} className="visual" alt="Digital banking" />
+                {!isMobile && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
             </div>
         </div>
     )

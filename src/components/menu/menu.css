@@ -173,7 +173,8 @@
   }
 
   .dashboard .share {
-    bottom: 100px;
+    position: relative;
+    bottom: 120px;
     width: calc(100% - 40px);
   }
 }

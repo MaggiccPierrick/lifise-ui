@@ -1076,7 +1076,7 @@ textarea:focus {
   }
 
   .dashboard .content {
-    padding: 10px 20px;
+    padding: 10px 20px 120px 20px !important;
     height: calc(100vh - 91px);
     text-align: center;
   }
@@ -1117,6 +1117,11 @@ textarea:focus {
     margin: -40px auto 0 auto !important;
   }
 
+  .mobile_simple_block {
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
   .dashboard .right_board .select {
     width: 90%;
     display: block;
@@ -1135,7 +1140,12 @@ textarea:focus {
 
   .dashboard .operation {
     width: calc(100% - 40px);
-    height: 150px;
+    height: auto;
+    padding-bottom: 60px;
+  }
+
+  .dashboard .purchase {
+    padding-bottom: 30px !important;
   }
 
   .dashboard .operation .op_link {

@@ -37,6 +37,15 @@ const Dashboard = () => {
     const [orders, setOrders] = useState([])
     const [processing, onChangeProcessing] = useState(null)
     const [kycDetails, setKYCdetails] = useState({})
+    const [copied, setCopied] = useState(null)
+
+    const copyClipboard = (key, value) => {
+        setCopied(key)
+        navigator.clipboard.writeText(value)
+        setTimeout(() => {
+            setCopied(null)
+        }, 2000)
+    }
 
     const loadInfo = async () => {
         const data = TokenService.getUser()
@@ -127,7 +136,7 @@ const Dashboard = () => {
             <Menu />
             <div className="right_board">
                 <BoardHeader title={t('dashboard.my_account')} />
-                {!reference && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
+                {!reference && !isMobile && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
                 <div className="content">
                     {trigger && <p>
                         <small>{t('dashboard.account_number')} {profile.public_address}</small>
@@ -156,11 +165,11 @@ const Dashboard = () => {
                                 <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
                             </div>
                             {!loading &&
-                                <div className="relative display-inline-block mobile_block">
+                                <div className="relative display-inline-block mobile_simple_block">
                                     <Button title={t('dashboard.set_order')} click={depositOrder} />
                                     <Button title={t('dashboard.cancel')} framed={true} click={() => setDisplayPurchase(false)} />
                                 </div>}
-                            <div className="relative display-inline-block mobile_block ml-20">
+                            <div className="relative display-inline-block mobile_simple_block ml-20">
                                 <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
                             </div>
                         </React.Fragment>
@@ -180,7 +189,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.reference')}</label>
                                     </td>
                                     <td>
-                                        <label><h3 className="primary">{reference}</h3></label>
+                                        <label><h3 className="primary">{reference} <span className="pointer" onClick={() => copyClipboard("ref", reference)}>{copied === "ref"? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -188,7 +197,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.amount')}</label>
                                     </td>
                                     <td>
-                                        <label><h3>{price} €</h3></label>
+                                        <label><h3>{price} € <span className="pointer" onClick={() => copyClipboard("price", price)}>{copied === "price"? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -196,7 +205,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.acc_number')}</label>
                                     </td>
                                     <td>
-                                        <label><h3>{banking.iban}</h3></label>
+                                        <label><h3>{banking.iban} <span className="pointer" onClick={() => copyClipboard("iban", banking.iban)}>{copied === "iban"? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -204,7 +213,7 @@ const Dashboard = () => {
                                         <label>BIC/SWIFT</label>
                                     </td>
                                     <td>
-                                        <label><h3>{banking.bic_swift}</h3></label>
+                                        <label><h3>{banking.bic_swift} <span className="pointer" onClick={() => copyClipboard("bic", banking.bic_swift)}>{copied === "bic"? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -212,7 +221,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.bank_name')}</label>
                                     </td>
                                     <td>
-                                        <label><h3>{banking.bank_name}</h3></label>
+                                        <label><h3>{banking.bank_name} <span className="pointer" onClick={() => copyClipboard("bank_name", banking.bank_name)}>{copied === "bank_name"? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                             </table>
@@ -220,7 +229,7 @@ const Dashboard = () => {
                         </React.Fragment>
                     }
                     {!loading && orders.map(op =>
-                        <div className="operation" key={op.user_purchase_uuid}>
+                        <div className="operation purchase" key={op.user_purchase_uuid}>
                             <div className="op_type">
                                 {t('dashboard.purchase')}
                                 <br/>

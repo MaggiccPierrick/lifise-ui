@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TOAST_OPTIONS } from "../../constants";
 
 //UTILS
@@ -34,9 +34,9 @@ const SignIn = ({ magic }) => {
         } else {
             try {
                 onChangeLoading(true);
-                const status = await UserService.checkEmail(email)
+                const status = await UserService.checkEmail(email.toLowerCase())
                 if (status) {
-                    const didToken = await magic.auth.loginWithEmailOTP({ email });
+                    const didToken = await magic.auth.loginWithEmailOTP({ email: email.toLowerCase() });
                     const resp = await UserService.login(didToken);
                     if (resp.status)
                         window.location.href = "/dashboard"
@@ -55,6 +55,15 @@ const SignIn = ({ magic }) => {
             }
         }
     }
+
+    const logout = async() => {
+        await magic.user.logout()
+    }
+
+    useEffect(() => {
+        logout();
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <>

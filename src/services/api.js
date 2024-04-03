@@ -47,7 +47,10 @@ instance.interceptors.response.use(
         originalConfig._retry = true;
         console.error(`Server error 500 for ${originalConfig.url} :(`);
         return instance(originalConfig);
-      } else
+      }else if (err.response.status === 403) {
+        console.log('Unauthorized');
+        TokenService.removeUser();
+      }else
         console.warn(err.response)
     }
     return Promise.reject(err);
