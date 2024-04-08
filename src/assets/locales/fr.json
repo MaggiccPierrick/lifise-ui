@@ -151,7 +151,9 @@
         "process_kyc": "Valider identité",
         "ordered": "Ordre de",
         "received_wire_tx": "Virement reçu de",
-        "payment_of": "Paiement de"
+        "payment_of": "Paiement de",
+        "approved_kyc": "Vous devez avoir un KYC validé pour acheter des fonds CaâEuro",
+        "claim_kyc": "Vous devez avoir un KYC validé pour récupérer vos CaâEuros"
     },
     "transfer": {
         "invalid_address": "Adresse de réception invalide !",

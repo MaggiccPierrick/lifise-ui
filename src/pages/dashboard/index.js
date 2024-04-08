@@ -39,6 +39,13 @@ const Dashboard = () => {
     const [kycDetails, setKYCdetails] = useState({})
     const [copied, setCopied] = useState(null)
 
+    const togglePurchase = () => {
+        if (kycDetails && kycDetails.kyc_status === "APPROVED")
+            setDisplayPurchase(true)
+        else
+            toast.error(t('dashboard.approved_kyc'), TOAST_OPTIONS);
+    }
+
     const copyClipboard = (key, value) => {
         setCopied(key)
         navigator.clipboard.writeText(value)
@@ -66,28 +73,32 @@ const Dashboard = () => {
     }, [])
 
     const claimFunds = async (claim_uuid) => {
-        if (claiming)
-            toast.warn(t('dashboard.wait_claim'), TOAST_OPTIONS)
-        else {
-            onChangeClaiming(true)
-            try {
-                const resp = await UserService.claim([claim_uuid])
-                if (resp.status && resp.transactions[claim_uuid]) {
-                    toast.success(`${t('dashboard.funds_claimed')} ${resp.transactions[claim_uuid].tx_hash.substring(0, 10)}...${resp.transactions[claim_uuid].tx_hash.substring(resp.transactions[claim_uuid].tx_hash.length - 10, resp.transactions[claim_uuid].tx_hash.length - 1)}`, TOAST_OPTIONS)
-                    setTimeout(async () => {
-                        await loadInfo()
+        if (kycDetails && kycDetails.kyc_status === "APPROVED") {
+            if (claiming)
+                toast.warn(t('dashboard.wait_claim'), TOAST_OPTIONS)
+            else {
+                onChangeClaiming(true)
+                try {
+                    const resp = await UserService.claim([claim_uuid])
+                    if (resp.status && resp.transactions[claim_uuid]) {
+                        toast.success(`${t('dashboard.funds_claimed')} ${resp.transactions[claim_uuid].tx_hash.substring(0, 10)}...${resp.transactions[claim_uuid].tx_hash.substring(resp.transactions[claim_uuid].tx_hash.length - 10, resp.transactions[claim_uuid].tx_hash.length - 1)}`, TOAST_OPTIONS)
+                        setTimeout(async () => {
+                            await loadInfo()
+                            onChangeClaiming(false)
+                        }, 2500)
+                    } else {
+                        toast.error(resp.message, TOAST_OPTIONS)
                         onChangeClaiming(false)
-                    }, 2500)
-                } else {
-                    toast.error(resp.message, TOAST_OPTIONS)
+                    }
+                } catch (e) {
+                    console.log(e.response.data)
+                    toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS)
                     onChangeClaiming(false)
                 }
-            } catch (e) {
-                console.log(e.response.data)
-                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS)
-                onChangeClaiming(false)
             }
         }
+        else
+            toast.error(t('dashboard.claim_kyc'), TOAST_OPTIONS);
     }
 
     const depositOrder = async () => {
@@ -154,7 +165,7 @@ const Dashboard = () => {
                     <span className="balance">{balance}</span>
                     <img src={LOGO_BLACK} className="currency" alt="CaaEuro logo" />
                     {isMobile && <br />}
-                    {!reference && !displayPurchase && trigger && <Button title={t('dashboard.purchase_funds')} click={() => setDisplayPurchase(true)} />}
+                    {!reference && !displayPurchase && trigger && <Button title={t('dashboard.purchase_funds')} click={togglePurchase} />}
                     {!reference && !displayPurchase && !processing && (!kycDetails.kyc_status || ["SUBMISSION_REQUIRED", "REJECTED"].includes(kycDetails.kyc_status)) && trigger && <Button title={t('dashboard.process_kyc')} framed={true} click={startKYC} />}
                     {!reference && displayPurchase &&
                         <React.Fragment>
@@ -189,7 +200,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.reference')}</label>
                                     </td>
                                     <td>
-                                        <label><h3 className="primary">{reference} <span className="pointer" onClick={() => copyClipboard("ref", reference)}>{copied === "ref"? "✅" : "📋"}</span></h3></label>
+                                        <label><h3 className="primary">{reference} <span className="pointer" onClick={() => copyClipboard("ref", reference)}>{copied === "ref" ? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -197,7 +208,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.amount')}</label>
                                     </td>
                                     <td>
-                                        <label><h3>{price} € <span className="pointer" onClick={() => copyClipboard("price", price)}>{copied === "price"? "✅" : "📋"}</span></h3></label>
+                                        <label><h3>{price} € <span className="pointer" onClick={() => copyClipboard("price", price)}>{copied === "price" ? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,7 +216,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.acc_number')}</label>
                                     </td>
                                     <td>
-                                        <label><h3>{banking.iban} <span className="pointer" onClick={() => copyClipboard("iban", banking.iban)}>{copied === "iban"? "✅" : "📋"}</span></h3></label>
+                                        <label><h3>{banking.iban} <span className="pointer" onClick={() => copyClipboard("iban", banking.iban)}>{copied === "iban" ? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -213,7 +224,7 @@ const Dashboard = () => {
                                         <label>BIC/SWIFT</label>
                                     </td>
                                     <td>
-                                        <label><h3>{banking.bic_swift} <span className="pointer" onClick={() => copyClipboard("bic", banking.bic_swift)}>{copied === "bic"? "✅" : "📋"}</span></h3></label>
+                                        <label><h3>{banking.bic_swift} <span className="pointer" onClick={() => copyClipboard("bic", banking.bic_swift)}>{copied === "bic" ? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -221,7 +232,7 @@ const Dashboard = () => {
                                         <label>{t('dashboard.bank_name')}</label>
                                     </td>
                                     <td>
-                                        <label><h3>{banking.bank_name} <span className="pointer" onClick={() => copyClipboard("bank_name", banking.bank_name)}>{copied === "bank_name"? "✅" : "📋"}</span></h3></label>
+                                        <label><h3>{banking.bank_name} <span className="pointer" onClick={() => copyClipboard("bank_name", banking.bank_name)}>{copied === "bank_name" ? "✅" : "📋"}</span></h3></label>
                                     </td>
                                 </tr>
                             </table>
@@ -232,7 +243,7 @@ const Dashboard = () => {
                         <div className="operation purchase" key={op.user_purchase_uuid}>
                             <div className="op_type">
                                 {t('dashboard.purchase')}
-                                <br/>
+                                <br />
                                 <small className="primary">REF: {op.reference}</small>
                             </div>
                             {op.tx_hash ?
