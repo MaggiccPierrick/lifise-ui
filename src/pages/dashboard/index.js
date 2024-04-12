@@ -44,7 +44,8 @@ const Dashboard = () => {
             setDisplayPurchase(true);
         else{
             toast.info(t('dashboard.approved_kyc'), TOAST_OPTIONS);
-            startKYC();
+            if(!kycDetails ||  kycDetails.kyc_status !== "PENDING_VERIFICATION")
+                startKYC();
         }
     }
 
@@ -101,7 +102,8 @@ const Dashboard = () => {
         }
         else{
             toast.info(t('dashboard.claim_kyc'), TOAST_OPTIONS);
-            startKYC();
+            if(!kycDetails ||  kycDetails.kyc_status !== "PENDING_VERIFICATION")
+                startKYC();
         }
     }
 
