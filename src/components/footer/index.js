@@ -35,7 +35,7 @@ const Footer = () => {
                     EN
                 </span>}
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/cgu")}>{t('footer.cgu')}</span>
-                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/declaration-confidentialite")}>{t('footer.policy')}</span>
+                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/avis-general-de-confidentialite")}>{t('footer.policy')}</span>
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/whitepaper")}>{t('footer.whitepaper')}</span>
             </div>
             <div className="split">

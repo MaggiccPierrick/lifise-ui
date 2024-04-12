@@ -99,7 +99,7 @@ const SignUp = ({ magic }) => {
                         <input type="checkbox" onClick={() => toggleEuropeCheck(!checkEurope)}/> {t('signup.declare_citizenship')}
                     </label>
                     <label className="ml-0">
-                        <input type="checkbox" onClick={() => toggleTermsCheck(!checkTerms)}/> {t('signup.i_agree')} <a href={"/"}>{t('signup.cgu')}</a>
+                        <input type="checkbox" onClick={() => toggleTermsCheck(!checkTerms)}/> {t('signup.i_agree')} <a href={"https://www.metabank-france.eu/cgu"} target="_blank" rel="noreferrer">{t('signup.cgu')}</a>
                     </label>
                     {!loading &&
                         <>
