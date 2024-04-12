@@ -137,7 +137,7 @@
         "order_complete3": "to Metabank.",
         "reference": "Reference",
         "amount": "Amount",
-        "acc_number": "Account number",
+        "acc_number": "IBAN",
         "bank_name": "Bank name",
         "purchase": "PURCHASE",
         "awaiting_transfer": "AWAITING TRANFER",

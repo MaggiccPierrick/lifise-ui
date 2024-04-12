@@ -137,7 +137,7 @@
         "order_complete3": "vers Metabank.",
         "reference": "Référence",
         "amount": "Montant",
-        "acc_number": "Numéro de compte",
+        "acc_number": "IBAN",
         "bank_name": "Nom de la banque",
         "purchase": "ACHAT DE CaâEuro",
         "awaiting_transfer": "EN ATTENTE DE TRANSFERT",

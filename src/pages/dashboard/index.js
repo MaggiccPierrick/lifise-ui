@@ -41,9 +41,11 @@ const Dashboard = () => {
 
     const togglePurchase = () => {
         if (kycDetails && kycDetails.kyc_status === "APPROVED")
-            setDisplayPurchase(true)
-        else
-            toast.error(t('dashboard.approved_kyc'), TOAST_OPTIONS);
+            setDisplayPurchase(true);
+        else{
+            toast.info(t('dashboard.approved_kyc'), TOAST_OPTIONS);
+            startKYC();
+        }
     }
 
     const copyClipboard = (key, value) => {
@@ -97,8 +99,10 @@ const Dashboard = () => {
                 }
             }
         }
-        else
-            toast.error(t('dashboard.claim_kyc'), TOAST_OPTIONS);
+        else{
+            toast.info(t('dashboard.claim_kyc'), TOAST_OPTIONS);
+            startKYC();
+        }
     }
 
     const depositOrder = async () => {
