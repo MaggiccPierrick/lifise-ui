@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
-import Home from './pages/home';
+//import Home from './pages/home';
 import Layout from './components/layout';
 import SignIn from './pages/signin';
 import SignUp from './pages/signup';
@@ -31,7 +31,7 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-          <Route path='/' exact element={<Home />} />
+          <Route path='/' exact element={<SignIn />} />
           <Route path='/signin' exact element={<SignIn magic={magic} />} />
           <Route path='/signup' exact element={<SignUp magic={magic} />} />
           <Route path='/dashboard' exact element={<Dashboard />} />
@@ -41,7 +41,7 @@ function App() {
           <Route path='/assistance' exact element={<Assistance />} />
           <Route path='/profile' exact element={<Profile magic={magic} />} />
           <Route path='/decline' exact element={<Decline />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<Dashboard />} />
           {/*ADMIN ROUTES*/}
           <Route path='/admin/signin' exact element={<AdminSignIn />} />
           <Route path='/admin/reset' exact element={<AdminResetPswd />} />
