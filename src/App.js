@@ -31,7 +31,7 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-          <Route path='/' exact element={<SignIn />} />
+          <Route path='/' exact element={<SignIn magic={magic} />} />
           <Route path='/signin' exact element={<SignIn magic={magic} />} />
           <Route path='/signup' exact element={<SignUp magic={magic} />} />
           <Route path='/dashboard' exact element={<Dashboard />} />
