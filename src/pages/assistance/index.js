@@ -1,38 +1,72 @@
+import React, { useState } from 'react';
+import { TOAST_OPTIONS } from '../../constants';
+
+//UTILS
+import UserService from '../../services/user_services';
+
 //COMPONENTS
 import Menu from '../../components/menu';
 import BoardHeader from '../../components/boardheader';
 import Button from '../../components/button';
+import { ThreeDots } from 'react-loader-spinner';
+import { ToastContainer, toast } from 'react-toastify';
+
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
 
 const Assistance = () => {
+    const { t } = useTranslation();
+    const [message, setMessage] = useState();
+    const [loading, onChangeLoading] = useState(false);
+
+    const sendMsg = async () => {
+        if (!message || message.length < 8)
+            toast.error(t('assistance.invalid_msg'), TOAST_OPTIONS);
+        else {
+            onChangeLoading(true);
+            try {
+                const resp = await UserService.requestAssist(message);
+                if (resp.status) {
+                    toast.success(t('assistance.message_sent'), TOAST_OPTIONS);
+                } else
+                    toast.error(resp.message, TOAST_OPTIONS);
+            } catch (e) {
+                console.log(e.response.data)
+                toast.error(e.response && e.response.data ? t(e.response.data.message) : t(e.message), TOAST_OPTIONS);
+            }
+            onChangeLoading(false);
+        }
+    }
+
     return (
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"Assistance"} />
+                <BoardHeader title={t('assistance.assistance')} />
                 <div className="content">
-                    <p className="left"><strong>Describe your problem or remark</strong></p>
+                    <p className="left"><strong>{t('assistance.describe_pb')}</strong></p>
                     <p className="left">
                         <small>
-                            Once sent, we will get in touch with you as soon as possible.
+                            {t('assistance.get_in_touch')}
                             <br />
-                            Thank you for your trust and support.
+                            {t('assistance.thank_you')}
                         </small>
                     </p>
-                    <textarea placeholder="Your message..."></textarea>
+                    <textarea placeholder={t('assistance.your_message')} onChange={(e) => setMessage(e.target.value)}></textarea>
                     <div className="conditions">
-                            By submitting this form, you consent to MetaBANK using your personal information to contact you and respond to your request for information.
-                            Your information will be kept for the duration of our commercial exchanges and for a maximum of 2 years from our last exchange.
-                            You benefit in particular from the rights of access, rectification and deletion of your data.
+                        {t('assistance.disclaimer_sub')}
                     </div>
                     <div className="conditions">
-                        You can exercise these rights by emailing us at <a href={"mailTo:contact@metabank.fr"}>contact@metabank.fr</a>
+                        {t('assistance.exercice_rights')} <a href={"mailTo:contact@metabank-france.eu"}>contact@metabank-france.eu</a>
                     </div>
                     <div className="conditions">
-                        To find out more about protecting your data, you can consult our <a href={"https://www.metabank-france.eu/politique-de-confidentialité"} target="_blank" rel="noreferrer">Privacy policy</a>.
+                        {t('assistance.find_more')} <a href={"https://www.metabank-france.eu/politique-de-confidentialité"} target="_blank" rel="noreferrer">{t('assistance.policy')}</a>.
                     </div>
-                    <Button title={"Send message"}/>
+                    <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <Button title={t('assistance.send_msg')} loading={loading} click={sendMsg}/>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 };

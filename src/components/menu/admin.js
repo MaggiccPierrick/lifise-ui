@@ -1,0 +1,98 @@
+import "./menu.css";
+import React, { useState, useEffect } from 'react';
+
+//UTILS
+import AdminService from "../../services/admin_services";
+
+//VISUALS
+import LOGO from '../../assets/images/full_dark.png';
+import LOGO_BLACK from '../../assets/images/logo_black.png';
+import POLYGON from '../../assets/images/polygon-matic-logo.png';
+import Button from "../button";
+
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
+const Menu = () => {
+    const { t } = useTranslation();
+    const [balances, setBalances] = useState("-");
+    const [address, setAddress] = useState(null);
+    const currentPath = window.location.pathname;
+
+    const logout = () => {
+        AdminService.logout()
+    }
+
+    const loadBalances = async() => {
+        const data = await AdminService.getAdminBalance()
+        setBalances(data.balances)
+        setAddress(data.address)
+    } 
+
+    useEffect(() => {
+        loadBalances();
+        // eslint-disable-next-line
+    }, []);
+
+    return (
+        <>
+            <div className="left_menu">
+                <img src={LOGO} alt="MetaBank logo" className="logo" />
+                <a href={"/admin/dashboard"} className={currentPath === "/admin/dashboard" ? "entry active mt-50" : "entry mt-50"}>
+                    <span className="icon">🥋</span> {t('admin.admins')}
+                </a>
+                <a href={"/admin/users"} className={currentPath === "/admin/users" ? "entry active" : "entry"}>
+                    <span className="icon">👥</span> {t('admin.users')}
+                </a>
+                <a href={"/admin/orders"} className={currentPath === "/admin/orders" ? "entry active" : "entry"}>
+                    <span className="icon">🗃️</span> {t('admin.orders')}
+                </a>
+
+                <div className="share">
+                    <div className="rocket">
+                        🏦
+                    </div>
+                    <p className="center">
+                        <small>{address}</small>
+                        <br />
+                        <big><strong>{t('admin.reserve_balance')}</strong></big>
+                    </p>
+                    {balances && <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h1>{parseFloat(balances.token_balance).toFixed(2)}</h1>
+                                </td>
+                                <td>
+                                    <img src={LOGO_BLACK} width={"25px"} alt="Logo black"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>{parseFloat(balances.matic).toFixed(2)}</h3>
+                                </td>
+                                <td>
+                                    <img src={POLYGON} width={"15px"} alt="Logo Matic Polygon"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>}
+                    <Button title={t('admin.disconnect')} click={logout}/>
+                </div>
+            </div>
+            <div className="mobile_menu">
+                <div className={currentPath === "/admin/dashboard" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/admin/dashboard"}>
+                    🥋
+                </div>
+                <div className={currentPath === "/admin/users" ? "entry realigned active" : "entry realigned"} onClick={() => window.location.href = "/admin/users"}>
+                    👥
+                </div>
+                <div className={"entry realigned"} onClick={logout}>
+                    🈵
+                </div>
+            </div>
+        </>
+    )
+};
+
+export default Menu;

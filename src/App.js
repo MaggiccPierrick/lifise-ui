@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
-import { magic } from './services/magic';
-import { UserContext } from './services/UserContext';
-import Home from './pages/home';
+//import Home from './pages/home';
 import Layout from './components/layout';
 import SignIn from './pages/signin';
 import SignUp from './pages/signup';
@@ -12,39 +10,48 @@ import Operations from './pages/operations';
 import Beneficiaries from './pages/beneficiaries';
 import Assistance from './pages/assistance';
 import Profile from './pages/Profile';
+import AdminSignIn from './pages/admin/signin';
+import AdminResetPswd from './pages/admin/resetpswd';
+import AdminDashboard from './pages/admin/dashboard';
+import AdminProfile from './pages/admin/profile';
+import AdminUsers from './pages/admin/users';
+import AdminUser from './pages/admin/user';
+import AdminOrders from './pages/admin/orders';
+import { Magic } from 'magic-sdk';
+import { ALCHEMY_NODE, CHAIN_ID, REACT_APP_MAGIC_PUBLISHABLE_KEY } from './constants';
+import Decline from './pages/decline';
 
 function App() {
-  const [user, setUser] = useState();
 
-  // If isLoggedIn is true, set the UserContext with user data
-  // Otherwise, set it to {user: null}
-  useEffect(() => {
-    setUser({ loading: true });
-    magic.user.isLoggedIn().then((isLoggedIn) => {
-      return isLoggedIn
-        ? magic.user.getMetadata().then((userData) => setUser(userData))
-        : setUser({ user: null });
-    });
-  }, []);
+  const magic = new Magic(REACT_APP_MAGIC_PUBLISHABLE_KEY, { 
+    network: {rpcUrl: ALCHEMY_NODE, chainId: CHAIN_ID},
+  });
 
   return (
     <Router>
-      <UserContext.Provider value={[user, setUser]}>
-        <Layout>
-          <Routes>
-            <Route path='/' exact element={<Home />} />
-            <Route path='/signin' exact element={<SignIn />} />
-            <Route path='/signup' exact element={<SignUp />} />
-            <Route path='/dashboard' exact element={<Dashboard />} />
-            <Route path='/transfers' exact element={<Transfers />} />
-            <Route path='/operations' exact element={<Operations />} />
-            <Route path='/beneficiaries' exact element={<Beneficiaries />} />
-            <Route path='/assistance' exact element={<Assistance />} />
-            <Route path='/profile' exact element={<Profile />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </Layout>
-      </UserContext.Provider>
+      <Layout>
+        <Routes>
+          <Route path='/' exact element={<SignIn magic={magic} />} />
+          <Route path='/signin' exact element={<SignIn magic={magic} />} />
+          <Route path='/signup' exact element={<SignUp magic={magic} />} />
+          <Route path='/dashboard' exact element={<Dashboard />} />
+          <Route path='/transfers' exact element={<Transfers magic={magic} />} />
+          <Route path='/operations' exact element={<Operations />} />
+          <Route path='/beneficiaries' exact element={<Beneficiaries />} />
+          <Route path='/assistance' exact element={<Assistance />} />
+          <Route path='/profile' exact element={<Profile magic={magic} />} />
+          <Route path='/decline' exact element={<Decline />} />
+          <Route path="*" element={<Dashboard />} />
+          {/*ADMIN ROUTES*/}
+          <Route path='/admin/signin' exact element={<AdminSignIn />} />
+          <Route path='/admin/reset' exact element={<AdminResetPswd />} />
+          <Route path='/admin/dashboard' exact element={<AdminDashboard />} />
+          <Route path='/admin/profile' exact element={<AdminProfile />} />
+          <Route path='/admin/users' exact element={<AdminUsers/>} />
+          <Route path='/admin/user/:user_uuid' exact element={<AdminUser />} />
+          <Route path='/admin/orders' exact element={<AdminOrders/>} />
+        </Routes>
+      </Layout>
     </Router>
   );
 }
