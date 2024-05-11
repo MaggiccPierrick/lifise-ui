@@ -30,10 +30,9 @@ footer p {
 }
 
 footer .split .logo {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 34px;
+    position: relative;
+    margin-bottom: 0;
+    height: 40px;
 }
 
 footer .split .metabank_typo {

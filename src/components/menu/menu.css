@@ -1,7 +1,7 @@
 .dashboard .left_menu {
-  padding: 20px;
+  padding: 40px 20px 20px 20px;
   width: 260px;
-  height: calc(80vh - 40px);
+  height: calc(80vh - 60px);
   border-right: 1px solid #ABBCCC;
   position: relative;
   display: inline-block;
@@ -12,7 +12,7 @@
   position: absolute;
   left: 55px;
   top: 21px;
-  height: 28px;
+  height: 34px;
 }
 
 .dashboard .left_menu .metabank_typo {
@@ -54,6 +54,31 @@
   background: linear-gradient(145deg, #E7F3FE 0%, #D4E5F3 100%);
 }
 
+.dashboard .left_menu table{
+  margin: 0 auto;
+}
+
+.dashboard .left_menu table td{
+  vertical-align: bottom;
+}
+
+.dashboard .left_menu h1{
+  margin: 0;
+  font-family: 'Raleway-bold';
+  text-align: right;
+}
+
+.dashboard .left_menu h3{
+  margin: 0;
+  font-family: 'Raleway-bold';
+  text-align: right;
+}
+
+.dashboard .left_menu button{
+  margin: 10px auto;
+  display: block;
+}
+
 .dashboard .share {
   position: absolute;
   bottom: 10px;
@@ -89,7 +114,7 @@
   border-radius: 20px;
   padding: 0 18px;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 }
 
 .dashboard .share a {
@@ -148,7 +173,8 @@
   }
 
   .dashboard .share {
-    bottom: 100px;
+    position: relative;
+    bottom: auto;
     width: calc(100% - 40px);
   }
 }
