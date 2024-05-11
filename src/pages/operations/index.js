@@ -1,72 +1,128 @@
+import React, { useState, useEffect } from 'react';
+
 //VISUALS
 import BANKINGWEB3 from '../../assets/images/digital_banking.png';
-import USER3 from '../../assets/images/user3.jpg';
-import USER4 from '../../assets/images/user4.jpg';
 import LOGO from '../../assets/images/logo.png';
 import LOGO_BLACK from '../../assets/images/logo_black.png';
 
 //COMPONENTS
 import Menu from '../../components/menu';
 import BoardHeader from '../../components/boardheader';
+import { ThreeDots } from 'react-loader-spinner';
+
+//UTILS
+import UserService from '../../services/user_services';
+import TokenService from '../../services/token_services';
+import { EXPLORER } from '../../constants';
+import { isMobile } from 'react-device-detect';
+
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
 
 const Operations = () => {
+    const { t } = useTranslation();
+    const [profile, setProfile] = useState({});
+    const [operations, setOperations] = useState([]);
+    const [beneficiaries, setBeneficiaries] = useState([]);
+    const [loading, onChangeLoading] = useState(true);
+
+    const loadOps = async () => {
+        const data = TokenService.getUser()
+        setProfile(data.account)
+        const bs = await UserService.getBeneficiaries()
+        let benfs = {}
+        for (let b of bs) {
+            benfs[b.public_address.toLowerCase()] = b
+        }
+        setBeneficiaries(benfs)
+        const ops = await UserService.getOperations()
+        setOperations(ops)
+        onChangeLoading(false)
+    }
+
+    useEffect(() => {
+        loadOps();
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={"Operations"} />
+                <BoardHeader title={t('ops.operations')} />
                 <div className="content">
-                    <p><strong>Browse past operations</strong></p>
-                    <div className="operation">
-                        <div className="op_type">Received</div>
-                        <div className="op_link">0x7a6953bff412a986935b2b07ffebb5adca6a4e0fb7d679f1934c4646baefdec1</div>
-                        <div className="op_date">December 14th 2023, 09:43</div>
-                        <div className="select">
-                            <div className="select_profile">
-                                <div className="select_avatar" style={{ backgroundImage: `url('${USER4}')` }}></div>
-                                <div className="select_info">
-                                    <span className="select_name">Kamala Khan</span>
-                                    <span className="select_email">kamala.khan@avengers.com</span>
-                                </div>
+                    <p><strong>{t('ops.browse_ops')}</strong></p>
+                    <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    {!loading && operations.map(op =>
+                        <div className={profile.public_address.toLowerCase() === op.from ? "operation mobile-ml-40" : "operation"} key={op.hash}>
+                            <div className="op_type">{profile.public_address.toLowerCase() === op.from ? t('ops.sent') : t('ops.received')} </div>
+                            <div className="op_link" onClick={() => window.open(`${EXPLORER}/tx/${op.hash}`)}>{op.hash}</div>
+                            <div className="op_date">{new Date(op.block_time).toLocaleDateString()} {new Date(op.block_time).toLocaleTimeString()}</div>
+                            <div className="select">
+                                {profile.public_address.toLowerCase() === op.from ?
+                                    <div className="select_profile">
+                                        <div className="select_avatar" style={{
+                                            backgroundImage:
+                                                beneficiaries[op.to] ?
+                                                    beneficiaries[op.to].selfie ?
+                                                        `url('data:image/${beneficiaries[op.to].selfie_ext};base64,${beneficiaries[op.to].selfie}')`
+                                                        :
+                                                        `url('https://api.multiavatar.com/${beneficiaries[op.to].user_uuid}.png')`
+                                                    : `url('https://api.multiavatar.com/${op.to}.png')`
+                                        }}></div>
+                                        <div className="select_info">
+                                            <span className="select_name">
+                                                {beneficiaries[op.to] && beneficiaries[op.to].firstname ?
+                                                    `${beneficiaries[op.to].firstname} ${beneficiaries[op.to].lastname}`
+                                                    :
+                                                    `${op.to.substring(0, 10)}...${op.to.substring(0, 15)}`}
+                                            </span>
+                                            <span className="select_email">{beneficiaries[op.to] ? beneficiaries[op.to].email_address : t('ops.unreferenced_receiver')}</span>
+                                        </div>
+                                    </div>
+                                    :
+                                    op.claim_uuid ?
+                                        <div className="select_profile">
+                                            <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
+                                            <div className="select_info">
+                                                <span className="select_name">
+                                                    MetaBank
+                                                </span>
+                                                <span className="select_email">{t('ops.offered_by')} <strong>MetaBank</strong></span>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="select_profile">
+                                            <div className="select_avatar" style={{
+                                                backgroundImage:
+                                                    beneficiaries[op.from] ?
+                                                        beneficiaries[op.from].selfie ?
+                                                            `url('data:image/${beneficiaries[op.from].selfie_ext};base64,${beneficiaries[op.from].selfie}')`
+                                                            :
+                                                            `url('https://api.multiavatar.com/${beneficiaries[op.from].user_uuid}.png')`
+                                                        : `url('https://api.multiavatar.com/${op.from}.png')`
+                                            }}></div>
+                                            <div className="select_info">
+                                                <span className="select_name">
+                                                    {beneficiaries[op.from] && beneficiaries[op.from].firstname ?
+                                                        `${beneficiaries[op.from].firstname} ${beneficiaries[op.from].lastname}`
+                                                        :
+                                                        `${op.from.substring(0, 10)}...${op.from.substring(0, 15)}`}
+                                                </span>
+                                                <span className="select_email">{beneficiaries[op.from] ? beneficiaries[op.from].email_address : t('ops.unreferenced_sender')}</span>
+                                            </div>
+                                        </div>
+                                }
                             </div>
+                            {profile.public_address.toLowerCase() === op.to ?
+                                <div className="tx_value">+ {op.value}</div>
+                                :
+                                <div className="tx_value black">- {op.value}</div>}
+                            <img className="tx_symbol" alt="CaâEuro symbol" src={profile.public_address.toLowerCase() === op.to ? LOGO : LOGO_BLACK} />
                         </div>
-                        <div className="tx_value">+ 24.41</div>
-                        <img className="tx_symbol" alt="CaâEuro symbol" src={LOGO}/>
-                    </div>
-                    <div className="operation mobile-ml-40">
-                        <div className="op_type">Sent</div>
-                        <div className="op_link">0xda571e0a5f5e2c6b7a81bafe9489050cf3138fadf613c26fbecdf4c6a4696d7b</div>
-                        <div className="op_date">December 13th 2023, 18:09</div>
-                        <div className="select">
-                            <div className="select_profile">
-                                <div className="select_avatar" style={{ backgroundImage: `url('${USER3}')` }}></div>
-                                <div className="select_info">
-                                    <span className="select_name">Nick Fury</span>
-                                    <span className="select_email">nick.fury@avengers.com</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="tx_value black">- 310.00</div>
-                        <img className="tx_symbol" alt="CaâEuro symbol" src={LOGO_BLACK}/>
-                    </div>
-                    <div className="operation">
-                        <div className="op_type">Redeem</div>
-                        <div className="op_link">0xda571e0a5f5e2c6b7a81bafe9489050cf3138fadf613c26fbecdf4c6a4696d7b</div>
-                        <div className="op_date">December 13th 2023, 19:20</div>
-                        <div className="select">
-                            <div className="select_profile">
-                                <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
-                                <div className="select_info">
-                                    <span className="select_name">MetaBank</span>
-                                    <span className="select_email">Redeem code : <strong>qE26tqug93</strong></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="tx_value">+ 688.00</div>
-                        <img className="tx_symbol" alt="CaâEuro symbol" src={LOGO}/>
-                    </div>
+                    )}
                 </div>
-                <img src={BANKINGWEB3} className="visual" alt="Digital banking" />
+                {!isMobile && <img src={BANKINGWEB3} className="visual" alt="Digital banking" />}
             </div>
         </div>
     )

@@ -8,10 +8,10 @@ header {
 }
 
 header .logo {
-    position: absolute;
+    position: relative;
     left: 0;
-    top: 33px;
-    height: 34px;
+    top: 10px;
+    height: 36px;
 }
 
 header .metabank_typo {
@@ -23,9 +23,9 @@ header .metabank_typo {
 
 header .selecter {
     font-family: 'Raleway-bold';
-    font-size: 16px;
+    font-size: 15px;
     text-align: left;
-    margin-left: 100px;
+    margin-left: 60px;
     cursor: pointer;
     color: #FFF;
     text-decoration: none;
@@ -50,7 +50,7 @@ header .active {
       position: absolute;
       left: 0;
       top: 25px;
-      height: 28px;
+      height: 32px;
   }
   
   header .metabank_typo {

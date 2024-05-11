@@ -6,7 +6,11 @@ import Button from '../button';
 //VISUALS
 import LOGO from "../../assets/images/logo.png";
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 const PopUp = ({ acceptAMFwarning }) => {
+    const { t } = useTranslation();
 
     const onClose = () => {
         window.location.href = "https://www.amf-france.org"
@@ -18,23 +22,17 @@ const PopUp = ({ acceptAMFwarning }) => {
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
                 <span className="metabank_typo">MetaBank</span>
                 <p>
-                    <strong>Les investissements liés aux cryptoactifs sont risqués par nature,</strong> les lecteurs
-                    doivent faire leurs propres recherches avant d'entreprendre toute action et n'investir
-                    que dans les limites de leurs capacités financières. Les articles et page de ce site ne constituent
-                    pas de conseil en investissement. Cette page et ce site ne peuvent pas être tenus responsables,
-                    directement ou indirectement, par tout dommage ou perte causée.
+                    <strong> {t('popup.invest_warning1')} </strong> {t('popup.invest_warning2')}
                 </p>
                 <p>
-                    <strong>Recommandations de l'AMF :</strong>
+                    <strong>{t('popup.amf')} :</strong>
                     <br />
-                    Il n'existe pas de rendement élevé garanti, un produit présentant un potentiel de rendement élevé implique un risque élevé.
-                    Cette prise de risque doit être en adéquation avec votre projet, votre horizon de placement et votre capacité à perdre
-                    une partie de cette épargne. N'investissez pas si vous n'êtes pas prêt à perdre tout ou partie de votre capital.
+                    {t('popup.amf_warning')}
                     <br />
-                    <a href={"https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/crypto-actifs-bitcoin-etc/investir-en-crypto-actifs-les-precautions-pratiques"} target="_blank" rel="noreferrer">En savoir plus</a>
+                    <a href={"https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/crypto-actifs-bitcoin-etc/investir-en-crypto-actifs-les-precautions-pratiques"} target="_blank" rel="noreferrer">{t('popup.learn_more')}</a>
                 </p>
-                <Button title={"J'ai compris et je suis majeur"} click={acceptAMFwarning} />
-                <Button title={"Quitter l'application"} framed={true} click={onClose} />
+                <Button title={t('popup.confirm_age')} click={acceptAMFwarning} />
+                <Button title={t('popup.quit_app')} framed={true} click={onClose} />
             </div>
         </div>
     )
