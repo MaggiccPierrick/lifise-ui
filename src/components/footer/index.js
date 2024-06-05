@@ -10,6 +10,7 @@ import XTWITTER from '../../assets/images/twitter-x-logo.png';
 import YOUTUBE from '../../assets/images/youtube.png';
 import POLYGON from '../../assets/images/polygon-matic-logo.png';
 import INSTAGRAM from '../../assets/images/instagram.png';
+import DISCORD from '../../assets/images/discord.png';
 import FACEBOOK from '../../assets/images/facebook.png';
 
 //TRANSLATION
@@ -36,7 +37,7 @@ const Footer = () => {
                 </span>}
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/cgu")}>{t('footer.cgu')}</span>
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/avis-general-de-confidentialite")}>{t('footer.policy')}</span>
-                <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/whitepaper")}>{t('footer.whitepaper')}</span>
+                <span className="selecter" onClick={() => window.open("https://assets-global.website-files.com/660599d39e3bc42cffcc1db3/663377e0afeaf43701c73f8b_Whitepaper%20-%20MetaBank-France%20V6.pdf")}>{t('footer.whitepaper')}</span>
             </div>
             <div className="split">
                 <h4>
@@ -74,9 +75,9 @@ const Footer = () => {
                 <img src={LINKEDIN} alt="LinkedIn" className="social" onClick={() => window.open("https://www.linkedin.com/company/80497650")} />
                 <img src={XTWITTER} alt="X Twitter" className="social" onClick={() => window.open("https://twitter.com/MetabankFrance")} />
                 <img src={YOUTUBE} alt="Youtube" className="social" onClick={() => window.open("https://www.youtube.com/channel/UCscHwitaskD9i8IT_r3YVCA")} />
-                <img src={FACEBOOK} alt="X Twitter" className="social" onClick={() => window.open("https://www.facebook.com/teamCaamaloth")} />
-                <img src={INSTAGRAM} alt="X Twitter" className="social" onClick={() => window.open("https://www.instagram.com/metapokerseries/")} />
-                <img src={FACEBOOK} alt="Youtube" className="social" onClick={() => window.open("https://www.facebook.com/SireDeLogres")} />
+                <img src={FACEBOOK} alt="X Twitter" className="social" onClick={() => window.open("https://www.facebook.com/metapoker.series/")} />
+                <img src={INSTAGRAM} alt="Instagram" className="social" onClick={() => window.open("https://www.instagram.com/metapokerseries/")} />
+                <img src={DISCORD} alt="Discord" className="social" onClick={() => window.open("https://discord.gg/metabank-france")} />
                 <h4 className="mt-30">
                     Smart contract
                 </h4>
