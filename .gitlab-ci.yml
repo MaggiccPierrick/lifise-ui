@@ -1,4 +1,4 @@
-image: nikolaik/python-nodejs:python3.8-nodejs16
+image: nikolaik/python-nodejs:python3.8-nodejs18
 
 before_script:
   - apt-get update
