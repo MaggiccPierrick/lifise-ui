@@ -38,7 +38,7 @@ const Footer = () => {
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/cgu")}>{t('footer.cgu')}</span>
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/avis-general-de-confidentialite")}>{t('footer.policy')}</span>
                 <span className="selecter" onClick={() => window.open(
-                    i18n.language === "en" ?
+                    i18n.language === "fr" ?
                         "https://cdn.prod.website-files.com/660599d39e3bc42cffcc1db3/663377e0afeaf43701c73f8b_Whitepaper%20-%20MetaBank-France%20V6.pdf"
                         :
                         "https://cdn.prod.website-files.com/660599d39e3bc42cffcc1db3/66337764c8a1c99429c2f6d0_Whitepaper%20-%20MetaBank-France%20V6%20english.pdf")}>{t('footer.whitepaper')}</span>
