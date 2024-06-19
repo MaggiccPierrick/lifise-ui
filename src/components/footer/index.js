@@ -28,16 +28,20 @@ const Footer = () => {
         <footer>
             <div className="split">
                 <img src={LOGO} alt="MetaBank logo" className="logo" />
-                {i18n.language === "en"? <span className="selecter" onClick={() => handleLangChange('fr')}>
+                {i18n.language === "en" ? <span className="selecter" onClick={() => handleLangChange('fr')}>
                     FR
                 </span>
-                :
-                <span className="selecter" onClick={() => handleLangChange('en')}>
-                    EN
-                </span>}
+                    :
+                    <span className="selecter" onClick={() => handleLangChange('en')}>
+                        EN
+                    </span>}
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/cgu")}>{t('footer.cgu')}</span>
                 <span className="selecter" onClick={() => window.open("https://www.metabank-france.eu/avis-general-de-confidentialite")}>{t('footer.policy')}</span>
-                <span className="selecter" onClick={() => window.open("https://assets-global.website-files.com/660599d39e3bc42cffcc1db3/663377e0afeaf43701c73f8b_Whitepaper%20-%20MetaBank-France%20V6.pdf")}>{t('footer.whitepaper')}</span>
+                <span className="selecter" onClick={() => window.open(
+                    i18n.language === "en" ?
+                        "https://cdn.prod.website-files.com/660599d39e3bc42cffcc1db3/663377e0afeaf43701c73f8b_Whitepaper%20-%20MetaBank-France%20V6.pdf"
+                        :
+                        "https://cdn.prod.website-files.com/660599d39e3bc42cffcc1db3/66337764c8a1c99429c2f6d0_Whitepaper%20-%20MetaBank-France%20V6%20english.pdf")}>{t('footer.whitepaper')}</span>
             </div>
             <div className="split">
                 <h4>
@@ -59,11 +63,11 @@ const Footer = () => {
                     {t('footer.legals')}
                 </h4>
                 <p>
-                    En Liens! Rovaltain Web Société {t('footer.joint_company')} 67.530,40 euros
+                    En Liens! Rovaltain Web Société {t('footer.joint_company')} 47 600,00 €
                 </p>
                 <p>
                     {t('footer.head_office')} : 16 Cours Alexandre Borodine
-                    <br/>
+                    <br />
                     26000 VALENCE 914 291 372 RCS ROMANS - {t('footer.tva')} : FR84914291372
                 </p>
             </div>
@@ -81,7 +85,7 @@ const Footer = () => {
                 <h4 className="mt-30">
                     Smart contract
                 </h4>
-                <img src={POLYGON} alt="Polygon" className="social" />
+                <img src={POLYGON} alt="Polygon" className="social" onClick={() => window.open("https://polygonscan.com/address/0xed3004e8b62cf241a2fe4B2347Ca316ef15F539e")} />
             </div>
         </footer>
     )
