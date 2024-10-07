@@ -172,7 +172,7 @@ const Dashboard = () => {
                     <img src={LOGO_BLACK} className="currency" alt="CaaEuro logo" />
                     {isMobile && <br />}
                     {!reference && !displayPurchase && trigger && <Button title={t('dashboard.purchase_funds')} click={togglePurchase} />}
-                    {!reference && !displayPurchase && !processing && (!kycDetails.kyc_status || ["SUBMISSION_REQUIRED", "REJECTED"].includes(kycDetails.kyc_status)) && trigger && <Button title={t('dashboard.process_kyc')} framed={true} click={startKYC} />}
+                    {!reference && !displayPurchase && !processing && (!kycDetails.kyc_status || ["RESUBMISSION_REQUIRED", "SUBMISSION_REQUIRED", "REJECTED", "RESET"].includes(kycDetails.kyc_status)) && trigger && <Button title={t('dashboard.process_kyc')} framed={true} click={startKYC} />}
                     {!reference && displayPurchase &&
                         <React.Fragment>
                             <h2 className="mt-50">{t('dashboard.purchase_by_transfer')}</h2>
