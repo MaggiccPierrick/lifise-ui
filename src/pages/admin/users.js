@@ -105,7 +105,7 @@ const AdminUsers = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={t('admin.metabank_users')} />
+                <BoardHeader title={t('admin.lifise_users')} />
                 <div className="content">
                     {/* <div className="search mb-20">
                         <input type="text" className="semi" placeholder="Search email or address" />
@@ -119,11 +119,11 @@ const AdminUsers = () => {
                             </div>
                             <label>{t('admin.amount_send')} <small>{t('admin.optionnal')}</small></label>
                             <div className="relative display-inline-block">
-                                <input type="number" className="semi" placeholder={t('admin.caaeuro_amount')} onChange={e => onChangeAmount(e.target.value)} />
-                                <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
+                                <input type="number" className="semi" placeholder={t('admin.eurolfs_amount')} onChange={e => onChangeAmount(e.target.value)} />
+                                <img src={LOGO_BLACK} className="eurolfs" alt="Logo EuroLFS" />
                             </div>
                             <Button title={t('admin.send')} loading={loading} click={sendInvits} />
-                            <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                            <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                         </React.Fragment>
                         :
                         <div className="float-right">
@@ -142,7 +142,7 @@ const AdminUsers = () => {
                             </label>
                         </div>
                     </div>
-                    <ThreeDots visible={!accounts || (accounts.length === 0)} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={!accounts || (accounts.length === 0)} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     <div className="beneficiaries">
                         {accounts.map(account =>
                             pending ?
@@ -151,7 +151,7 @@ const AdminUsers = () => {
                                     <div className="profile_info locked">
                                         <span className="profile_name">{account.email_address}</span>
                                         <span className="small_desc left">{t('admin.invit_sent')} {new Date(account.created_date).toLocaleDateString()}</span>
-                                        <span className="profile_name">{account.token_claims.to_claim.length} <small>{t('admin.pending_lw')}</small> → {account.token_claims.total_to_claim} <small>CaaEUR</small></span>
+                                        <span className="profile_name">{account.token_claims.to_claim.length} <small>{t('admin.pending_lw')}</small> → {account.token_claims.total_to_claim} <small>EuroLFS</small></span>
                                     </div>
                                     <div className="rm_beneficiary float-right">
                                         🕒
@@ -179,7 +179,7 @@ const AdminUsers = () => {
                                     <div className="profile_info pointer">
                                         <span className="small_desc">{new Date(account.created_date).toLocaleDateString()} | Birth: {account.birthdate || "-"}</span>
                                         <div className="redeemer">
-                                            {account.token_claims.to_claim.length} {t('admin.pending')} → {account.token_claims.total_to_claim} <small>CaaEUR</small>
+                                            {account.token_claims.to_claim.length} {t('admin.pending')} → {account.token_claims.total_to_claim} <small>EuroLFS</small>
                                         </div>
                                     </div>
                                     <div className="browse float-right" onClick={() => window.open(`/admin/user/${account.user_uuid}`)}>

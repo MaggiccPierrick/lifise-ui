@@ -147,13 +147,13 @@ const AdminProfile = () => {
                         <input type="text" value={lastname} onChange={(e) => onChangeLastname(e.target.value)} />
                     </div>
                     <Button title={t('admin.update_profile')} loading={loading === "profile"} click={updateProfile} />
-                    <ThreeDots visible={loading === "profile"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={loading === "profile"} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     <div className="mt-30 mb-20">
                         <label>{t('admin.email')}</label>
                         <input type="text" value={email} onChange={(e) => onChangeEmail(e.target.value)} />
                     </div>
                     <Button title={t('admin.update_email')} loading={loading === "email"} click={updateEmail} />
-                    <ThreeDots visible={loading === "email"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={loading === "email"} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     <div className="mt-30">
                         <label>{t('admin.current_pswd')}</label>
                         <input type="password" onChange={(e) => onChangeCurrentPassword(e.target.value)} />
@@ -163,7 +163,7 @@ const AdminProfile = () => {
                         <input type="password" onChange={(e) => onChangeNewPassword(e.target.value)} />
                     </div>
                     <Button title={t('admin.update_pswd')} loading={loading === "password"} click={updatePassword} />
-                    <ThreeDots visible={loading === "password"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={loading === "password"} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     {qr ?
                         <div className="mt-30">
                             <label>
@@ -178,13 +178,13 @@ const AdminProfile = () => {
                             />
                             <input type="text" value={otp} onChange={(e) => onChangeOTP(e.target.value)} />
                             <Button title={t('admin.activate')} loading={loading === "activation"} click={activateOTP} />
-                            <ThreeDots visible={loading === "activation"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                            <ThreeDots visible={loading === "activation"} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                         </div>
                         :
                         <div className="mt-30">
                             <label>{t('admin.init_ga')}</label>
                             <Button title={t('admin.gen_qr')} loading={loading === "generation"} click={generateQR} />
-                            <ThreeDots visible={loading === "generation"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                            <ThreeDots visible={loading === "generation"} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                         </div>
                     }
                 </div>

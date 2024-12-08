@@ -80,7 +80,7 @@ const SignUp = ({ magic }) => {
             {isMobile && <Header />}
             <div className="container mt-0">
                 <div className="left_sign" style={{ backgroundImage: `url('${BANNER_VISUAL}')` }}>
-                    <img src={LOGO_BLACK} alt="MetaBank logo" className="logo" onClick={homeRedirect} />
+                    <img src={LOGO_BLACK} alt="LiFiSe logo" className="logo" onClick={homeRedirect} />
                 </div>
                 <div className="right_sign">
                     <p className="instructions">{t('signup.fill_required_info')}</p>
@@ -105,7 +105,7 @@ const SignUp = ({ magic }) => {
                         <>
                             <Button title={t('signup.create_account')} click={magicSignUp} /> <FollowUp intro={t('signup.already_user')} description={t('signup.sign_now')} link={"/signin"} />
                         </>}
-                    <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                 </div>
             </div>
             <ToastContainer />

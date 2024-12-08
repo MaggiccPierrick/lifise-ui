@@ -149,7 +149,7 @@ const AdminDashboard = () => {
                             <label>{t('admin.email')}</label>
                             <input type="text" placeholder='john.doe@mail.com' onChange={e => onChangeEmail(e.target.value)} />
                         </div>
-                        <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                         <Button title={t('admin.create')} click={createAdmin} loading={loading} />
                         <Button title={t('admin.cancel')} click={toggleCreation} loading={loading} framed={true} />
                     </div>}

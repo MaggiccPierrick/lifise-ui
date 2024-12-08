@@ -19,7 +19,7 @@ const Menu = () => {
         <>
             <ToastContainer />
             <div className="left_menu">
-                <img src={LOGO} alt="MetaBank logo" className="logo" />
+                <img src={LOGO} alt="LiFiSe logo" className="logo" />
                 <a href={"/dashboard"} className={currentPath === "/dashboard" ? "entry active mt-50" : "entry mt-50"}>
                     <span className="icon">💳</span> {t('menu.my_account')}
                 </a>
@@ -36,7 +36,7 @@ const Menu = () => {
                     <span className="icon">🛟</span> {t('menu.assistance')}
                 </a>
                 <a href={"#airdrop"} onClick={() => toast.info('Coming soon', TOAST_OPTIONS)} className={currentPath === "/airdrop" ? "entry active" : "entry"} >
-                    <span className="icon">🪙</span> Airdrop Caâm
+                    <span className="icon">🪙</span> Airdrop LFS
                 </a>
                 <a href={"#sponsor"} onClick={() => toast.info('Coming soon', TOAST_OPTIONS)} className={currentPath === "/sponsor" ? "entry active" : "entry"}>
                     <span className="icon">🌟</span> {t('menu.sponsorship')}

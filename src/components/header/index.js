@@ -15,8 +15,8 @@ const Header = () => {
 
     return (
         <header>
-            <img src={LOGO} alt="MetaBank logo" className="logo" />
-            <a href={"/#caaeuro"} className="selecter">CaâEuro</a>
+            <img src={LOGO} alt="LiFiSe logo" className="logo" />
+            <a href={"/#eurolfs"} className="selecter">EuroLFS</a>
             <a href={"/#values"} className="selecter">{t('header.values')}</a>
             <span onClick={() => alert('Coming soon')} target="_blank" rel="noreferrer" className="selecter">{t('header.news')}</span>
             <span onClick={() => alert(`${t('header.website')} coming soon`)} target="_blank" rel="noreferrer" className="selecter">{t('header.website')}</span>

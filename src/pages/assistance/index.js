@@ -62,7 +62,7 @@ const Assistance = () => {
                     <div className="conditions">
                         {t('assistance.find_more')} <a href={"https://www.metabank-france.eu/politique-de-confidentialité"} target="_blank" rel="noreferrer">{t('assistance.policy')}</a>.
                     </div>
-                    <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     <Button title={t('assistance.send_msg')} loading={loading} click={sendMsg}/>
                 </div>
             </div>

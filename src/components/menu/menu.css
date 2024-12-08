@@ -2,7 +2,7 @@
   padding: 40px 20px 20px 20px;
   width: 260px;
   height: calc(80vh - 60px);
-  border-right: 1px solid #ABBCCC;
+  border-right: 1px solid #CCABAB;
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -12,10 +12,10 @@
   position: absolute;
   left: 55px;
   top: 21px;
-  height: 34px;
+  height: 60px;
 }
 
-.dashboard .left_menu .metabank_typo {
+.dashboard .left_menu .lifise_typo {
   font-family: 'Raleway-extrabold';
   font-size: 26px;
   text-align: left;
@@ -45,13 +45,13 @@
 }
 
 .dashboard .left_menu .entry:hover {
-  background: #D4E5F3;
-  background: linear-gradient(145deg, #E7F3FE 0%, #D4E5F3 100%);
+  background: #F3D4D5;
+  background: linear-gradient(145deg, #FEE7E8 0%, #F3D4D5 100%);
 }
 
 .dashboard .left_menu .active {
-  background: #D4E5F3;
-  background: linear-gradient(145deg, #E7F3FE 0%, #D4E5F3 100%);
+  background: #F3D4D5;
+  background: linear-gradient(145deg, #FEE7E8 0%, #F3D4D5 100%);
 }
 
 .dashboard .left_menu table{
@@ -145,8 +145,8 @@
     bottom: 40px;
     height: 48px;
     border-radius: 25px;
-    background: #0E2B46;
-    background: linear-gradient(145deg, #0E2B46 0%, #214E78 100%);
+    background: rgb(14, 43, 70);
+    background: linear-gradient(145deg, rgba(71, 20, 20, 1) 0%, rgba(143, 41, 42, 1) 100%);
     z-index: 5;
   }
 

@@ -14,8 +14,8 @@ const PopUpMFA = ({ confirm, closeDisplay }) => {
     return (
         <div className="cover">
             <div className="pop_up">
-                <img src={LOGO} alt="MetaBank logo" className="logo" />
-                <span className="metabank_typo">MetaBank</span>
+                <img src={LOGO} alt="LiFiSe logo" className="logo" />
+                <span className="lifise_typo">LiFiSe</span>
                 <p>
                     Un code de confirmation vient de vous être envoyé <strong>sur votre adresse email</strong>.
                     Veuillez le saisir pour confirmer votre demande.

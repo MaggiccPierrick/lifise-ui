@@ -27,7 +27,7 @@ const Footer = () => {
     return ((!isMobile || ["/", "/signin", "/signup"].includes(currentPath)) &&
         <footer>
             <div className="split">
-                <img src={LOGO} alt="MetaBank logo" className="logo" />
+                <img src={LOGO} alt="LiFiSe logo" className="logo" />
                 {i18n.language === "en" ? <span className="selecter" onClick={() => handleLangChange('fr')}>
                     FR
                 </span>

@@ -1,6 +1,17 @@
 import Web3 from "web3";
 import { isAddress } from 'web3-validator';
-import { ALCHEMY_NODE, ERC20_ADDRESS } from "../constants";
+import { RPC_URL, CHAIN_ID, ERC20_ADDRESS, REACT_APP_MAGIC_PUBLISHABLE_KEY } from "../constants";
+import { Magic } from 'magic-sdk';
+
+// TODO: I don't know why but the magic passed in args in function
+// Not working to get balance
+const magic = new Magic(REACT_APP_MAGIC_PUBLISHABLE_KEY, {
+    network: {
+        rpcUrl: RPC_URL,
+        chainId: CHAIN_ID, 
+    },
+});
+
 
 const balanceABI = [{
     constant: true,
@@ -15,7 +26,7 @@ const txABI = [{
     name: "transfer",
     outputs: [{ name: "", type: "bool" }],
     type: "function"
-}];
+    }];
 
 export const getBalance = async (magic, addr) => {
     const web3 = new Web3(magic.rpcProvider);
@@ -25,13 +36,14 @@ export const getBalance = async (magic, addr) => {
 }
 
 export const getAdminBalance = async (addr) => {
-    const web3 = new Web3(ALCHEMY_NODE);
+    const web3 = new Web3(RPC_URL);
     let contract = new web3.eth.Contract(balanceABI, ERC20_ADDRESS);
     const result = await contract.methods.balanceOf(addr).call();
     return result ? parseInt(result) / 1000000 : 0;
 }
 
-export const transferERC20 = async (magic, amount, toAddr) => {
+export const transferERC20 = async (_, amount, toAddr) => {
+        
     const web3 = new Web3(magic.rpcProvider);
     await magic.wallet.connectWithUI();
     const fromAddress = (await web3.eth.getAccounts())[0];

@@ -49,6 +49,7 @@ class UserService {
 
 
     async checkEmail(email_address) {
+        console.log(api);
         return await api
             .post('/user/is_registered', { email_address })
             .then(async (response) => {

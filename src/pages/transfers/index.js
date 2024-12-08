@@ -104,9 +104,9 @@ const Transfers = ({ magic }) => {
                     <FollowUp intro={t('transfer.cant_find')} description={t('transfer.add_beneficiary')} link={"/beneficiaries"} />
                     <label>{t('transfer.set_amount')}</label>
                     <div className="relative display-inline-block">
-                        <input type="number" className="semi" placeholder={t('transfer.caaeuro_amount')} onChange={(e) => setAmount(e.target.value)} value={amount} />
-                        <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
-                        <label className="mt-0 mb-40"><small>Max {balance} <img src={LOGO_BLACK} width={"8px"} alt="Logo CâaEuro" /></small></label>
+                        <input type="number" className="semi" placeholder={t('transfer.eurolfs_amount')} onChange={(e) => setAmount(e.target.value)} value={amount} />
+                        <img src={LOGO_BLACK} className="eurolfs" alt="Logo EuroLFS" />
+                        <label className="mt-0 mb-40"><small>Max {balance} <img src={LOGO_BLACK} className='small-logo' alt="Logo EuroLFS" /></small></label>
                     </div>
                     {!loading &&
                         <div className="relative display-inline-block mobile_block">
@@ -114,7 +114,7 @@ const Transfers = ({ magic }) => {
                             <FollowUp intro={t('transfer.no_fees')} />
                         </div>}
                     <div className="relative display-inline-block mobile_block ml-20">
-                        <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     </div>
                 </div>
                 <img src={BANKINGWEB3} className="visual v_mobile" alt="Digital banking" />

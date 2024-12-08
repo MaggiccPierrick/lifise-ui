@@ -19,8 +19,8 @@ const PopUp = ({ acceptAMFwarning }) => {
     return (
         <div className="cover">
             <div className="pop_up">
-                <img src={LOGO} alt="MetaBank logo" className="logo" />
-                <span className="metabank_typo">MetaBank</span>
+                <img src={LOGO} alt="LiFiSe logo" className="logo" />
+                <span className="lifise_typo">LiFiSe</span>
                 <p>
                     <strong> {t('popup.invest_warning1')} </strong> {t('popup.invest_warning2')}
                 </p>

@@ -82,7 +82,7 @@ const AdminOrders = () => {
                     <label className="ml-0">
                         {t('admin.filter')} : <span className={pending ? "filter heavy" : "filter "} onClick={() => setPending(true)}>Pending</span> | <span className={!pending ? "filter heavy" : "filter"} onClick={() => setPending(false)}>Validated</span>
                     </label>
-                    <ThreeDots visible={!orders} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={!orders} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     {orders && orders.map(op =>
                         <div className="operation" key={op.user_purchase_uuid} style={{ minWidth: '80%' }}>
                             <div className="op_type">
@@ -124,14 +124,14 @@ const AdminOrders = () => {
                                 <div className="select_profile">
                                     <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
                                     <div className="select_info">
-                                        <span className="select_email">{t('dashboard.purchase_to')} <strong>MetaBank</strong></span>
+                                        <span className="select_email">{t('dashboard.purchase_to')} <strong>LiFiSe</strong></span>
                                         <span className="select_name">
-                                            {t('dashboard.ordered')} {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
+                                            {t('dashboard.ordered')} {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>EuroLFS</small>
                                         </span>
                                         {op.amount_received && <span className="select_name primary">
                                             {t('dashboard.received_wire_tx')} {op.amount_received} <small>€</small>
                                             <br />
-                                            <small>{t('dashboard.payment_of')}</small> {op.amount_received} <small>CaâEuro</small>
+                                            <small>{t('dashboard.payment_of')}</small> {op.amount_received} <small>EuroLFS</small>
                                         </span>}
                                     </div>
                                 </div>
@@ -143,8 +143,8 @@ const AdminOrders = () => {
                                 <React.Fragment>
                                     <label>{t('admin.amount_received')}</label>
                                     <div className="relative display-inline-block">
-                                        <input type="number" className="semi" placeholder={"CâaEuro amount"} min="0" step="1" onChange={(e) => setAmount(e.target.value)} />
-                                        <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
+                                        <input type="number" className="semi" placeholder={"EuroLFS amount"} min="0" step="1" onChange={(e) => setAmount(e.target.value)} />
+                                        <img src={LOGO_BLACK} className="eurolfs" alt="Logo EuroLFS" />
                                     </div>
                                     {!loading &&
                                         <div className="relative display-inline-block mobile_block">
@@ -152,7 +152,7 @@ const AdminOrders = () => {
                                             <Button title={t('dashboard.cancel')} framed={true} click={() => toggleValidation(op.user_purchase_uuid)} />
                                         </div>}
                                     <div className="relative display-inline-block mobile_block ml-20">
-                                        <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                                        <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                                     </div>
                                 </React.Fragment>
                             }

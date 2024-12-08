@@ -76,7 +76,7 @@ const Home = () => {
                                 <small>{t('home.neo_bank')} <big>🚀</big></small>
                             </h2>
                             <p>
-                                {t('home.banking_level')} {t('home.caaeuro_tech')}
+                                {t('home.banking_level')} {t('home.eurolfs_tech')}
                             </p>
                             <div className="center">
                                 <Button title={t('home.get_started')} click={navigateSignUp} />
@@ -96,7 +96,7 @@ const Home = () => {
                             <p>
                                 {t('home.banking_level')}
                                 <br />
-                                {t('home.caaeuro_tech')}
+                                {t('home.eurolfs_tech')}
                             </p>
                             <Button title={t('home.get_started')} click={navigateSignUp} />
                         </div>
@@ -129,10 +129,10 @@ const Home = () => {
                     <span className="big_number">540</span>
                     <span className="subtitle">{t('home.free_europeans')}</span>
                 </div>
-                <div className="mt-50" id="caaeuro">
+                <div className="mt-50" id="eurolfs">
                     <span className="tagline">{t('home.public_money')}</span>
                     <h2>
-                        {t('home.caaeuro_stablecoin')}
+                        {t('home.eurolfs_stablecoin')}
                     </h2>
                     <p>
                         {t('home.blockchain_access')}

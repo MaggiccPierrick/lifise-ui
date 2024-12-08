@@ -117,7 +117,7 @@ const Profile = ({ magic }) => {
                         <input type="date" value={birthdate} onChange={(e) => onChangeBirthdate(e.target.value)} />
                     </div>
                     <Button title={t('profile.update_profile')} loading={loading === "profile"} click={updateProfile} />
-                    <ThreeDots visible={loading === "profile"} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={loading === "profile"} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                 </div>
                 <div className="disconnect">
                     <Button title={t('profile.disconnect')} click={logout} />

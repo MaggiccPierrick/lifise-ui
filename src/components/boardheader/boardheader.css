@@ -1,6 +1,6 @@
 .dashboard .right_board .board_header{
     width: calc(100% - 50px);
-    border-bottom: 1px solid #ABBCCC;
+    border-bottom: 1px solid #CCABAB;
     position: relative;
     padding-left: 50px;
 }
@@ -15,7 +15,7 @@
     display: none;
 }
 
-.dashboard .right_board .board_header .metabank_typo{
+.dashboard .right_board .board_header .lifise_typo{
     display: none;
 }
 
@@ -75,7 +75,7 @@
         display: inline-block;
     }
     
-    .dashboard .right_board .board_header .metabank_typo{
+    .dashboard .right_board .board_header .lifise_typo{
         font-family: 'Raleway-extrabold';
         font-size: 28px;
         text-align: left;

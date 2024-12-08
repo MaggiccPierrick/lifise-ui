@@ -20,6 +20,8 @@ import { Synaps } from '@synaps-io/verify-sdk'
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next'
+import { Magic } from 'magic-sdk';
+import { RPC_URL, CHAIN_ID, REACT_APP_MAGIC_PUBLISHABLE_KEY } from '../../constants';
 
 const Dashboard = () => {
     const { t } = useTranslation()
@@ -39,7 +41,12 @@ const Dashboard = () => {
     const [kycDetails, setKYCdetails] = useState({})
     const [copied, setCopied] = useState(null)
 
-    const togglePurchase = () => {
+    const togglePurchase = async () => {
+
+        // const magic = new Magic(REACT_APP_MAGIC_PUBLISHABLE_KEY, { 
+        //     network: {RPC_URL, chainId: CHAIN_ID},
+        //   });
+        // await magic.user.revealPrivateKey();
         if (kycDetails && kycDetails.kyc_status === "APPROVED")
             setDisplayPurchase(true);
         else{
@@ -134,18 +141,22 @@ const Dashboard = () => {
     const startKYC = async () => {
         onChangeProcessing(true)
         const sessionId = await UserService.initKYC()
-        Synaps.init({
-            sessionId,
-            onFinish: async () => {
-                toast.success(t('dashboard.kyc_finished'), TOAST_OPTIONS)
-                const details = await UserService.detailsKYC()
-                setKYCdetails(details)
-            },
-            mode: 'modal',
-        })
-        setTimeout(() => {
-            Synaps.show()
-        }, 1000)
+        console.log("session id,", sessionId);
+        // Synaps.init({
+        //     sessionId,
+        //     onFinish: async () => {
+        //         toast.success(t('dashboard.kyc_finished'), TOAST_OPTIONS)
+        //         const details = await UserService.detailsKYC()
+        //         setKYCdetails(details)
+        //     },
+        //     mode: 'modal',
+        // })
+        // setTimeout(() => {
+        //     Synaps.show()
+        // }, 1000)
+        toast.success(t('dashboard.kyc_finished'), TOAST_OPTIONS)
+        const details = await UserService.detailsKYC()
+        setKYCdetails(details)
     }
 
     return (
@@ -167,9 +178,9 @@ const Dashboard = () => {
                             <small>{t('dashboard.kyc_status')} : <strong className="warning">{t('dashboard.no_kyc')}</strong></small>
                         }
                     </p>}
-                    <h2>{t('dashboard.caaeuro_balance')}</h2>
+                    <h2>{t('dashboard.eurolfs_balance')}</h2>
                     <span className="balance">{balance}</span>
-                    <img src={LOGO_BLACK} className="currency" alt="CaaEuro logo" />
+                    <img src={LOGO_BLACK} className="currency" alt="EuroLFS logo" />
                     {isMobile && <br />}
                     {!reference && !displayPurchase && trigger && <Button title={t('dashboard.purchase_funds')} click={togglePurchase} />}
                     {!reference && !displayPurchase && !processing && (!kycDetails.kyc_status || ["RESUBMISSION_REQUIRED", "SUBMISSION_REQUIRED", "REJECTED", "RESET"].includes(kycDetails.kyc_status)) && trigger && <Button title={t('dashboard.process_kyc')} framed={true} click={startKYC} />}
@@ -178,8 +189,8 @@ const Dashboard = () => {
                             <h2 className="mt-50">{t('dashboard.purchase_by_transfer')}</h2>
                             <label>{t('dashboard.amount_to_purchase')}</label>
                             <div className="relative display-inline-block">
-                                <input type="number" className="semi" placeholder={"CâaEuro amount"} min="0" step="1" onChange={(e) => setAmount(e.target.value)} value={amount} />
-                                <img src={LOGO_BLACK} className="caaeuro" alt="Logo CâaEuro" />
+                                <input type="number" className="semi" placeholder={"EuroLFS amount"} min="0" step="1" onChange={(e) => setAmount(e.target.value)} value={amount} />
+                                <img src={LOGO_BLACK} className="eurolfs" alt="Logo EuroLFS" />
                             </div>
                             {!loading &&
                                 <div className="relative display-inline-block mobile_simple_block">
@@ -187,7 +198,7 @@ const Dashboard = () => {
                                     <Button title={t('dashboard.cancel')} framed={true} click={() => setDisplayPurchase(false)} />
                                 </div>}
                             <div className="relative display-inline-block mobile_simple_block ml-20">
-                                <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                                <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                             </div>
                         </React.Fragment>
                     }
@@ -263,14 +274,14 @@ const Dashboard = () => {
                                 <div className="select_profile">
                                     <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
                                     <div className="select_info">
-                                        <span className="select_email">{t('dashboard.purchase_to')} <strong>MetaBank</strong></span>
+                                        <span className="select_email">{t('dashboard.purchase_to')} <strong>LiFiSe</strong></span>
                                         <span className="select_name">
-                                            {t('dashboard.ordered')} {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>CaâEuro</small>
+                                            {t('dashboard.ordered')} {op.total_price_eur} <small>€</small> <small>{t('dashboard.for')}</small> {op.nb_token} <small>EuroLFS</small>
                                         </span>
                                         {op.amount_received && <span className="select_name primary">
                                             {t('dashboard.received_wire_tx')} {op.amount_received} <small>€</small>
                                             <br />
-                                            <small>{t('dashboard.payment_of')}</small> {op.amount_received} <small>CaâEuro</small>
+                                            <small>{t('dashboard.payment_of')}</small> {op.amount_received} <small>EuroLFS</small>
                                         </span>}
                                     </div>
                                 </div>
@@ -284,13 +295,13 @@ const Dashboard = () => {
                                 <br />
                                 <small>{t('dashboard.press_to_claim')}</small>
                             </h2>
-                            <ThreeDots visible={claiming} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                            <ThreeDots visible={claiming} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                             {!claiming && <div className="beneficiaries">
                                 {tokenClaims.map(claim =>
                                     <div className="profile" key={claim.token_claim_uuid}>
                                         <div className="profile_info ml-20">
                                             <span className="small_desc left">{t('dashboard.received_on')} {new Date(claim.created_date).toLocaleDateString()}</span>
-                                            <span className="balance">{claim.nb_token} <img src={LOGO_BLACK} className="balance_logo" alt="Logo CâaEuro" /></span>
+                                            <span className="balance">{claim.nb_token} <img src={LOGO_BLACK} className="balance_logo" alt="Logo EuroLFS" /></span>
                                         </div>
                                         <div className="rm_beneficiary float-right" onClick={() => claimFunds(claim.token_claim_uuid)}>
                                             💸

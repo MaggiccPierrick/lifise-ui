@@ -6,7 +6,7 @@ footer {
     position: relative;
     padding: 30px 50px;
     background: rgb(14, 43, 70);
-    background: linear-gradient(145deg, rgba(14, 43, 70, 1) 0%, rgba(33, 78, 120, 1) 100%);
+    background: linear-gradient(145deg, rgba(71, 20, 20, 1) 0%, rgba(143, 41, 42, 1) 100%);
     border-radius: 24px;
 }
 
@@ -32,10 +32,11 @@ footer p {
 footer .split .logo {
     position: relative;
     margin-bottom: 0;
-    height: 40px;
+    margin-left: 40px;
+    height: 60px;
 }
 
-footer .split .metabank_typo {
+footer .split .lifise_typo {
     font-family: 'Raleway-extrabold';
     font-size: 30px;
     text-align: left;

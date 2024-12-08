@@ -20,8 +20,8 @@ const BoardHeader = ({ title }) => {
             <h1>
                 {title}
             </h1>
-            <img src={LOGO} alt="MetaBank logo" className="logo" />
-            <span className="metabank_typo">MetaBank</span>
+            <img src={LOGO} alt="LiFiSe logo" className="logo" />
+            <span className="lifise_typo">LiFiSe</span>
             <div className="profile" onClick={() => window.location.href = "/profile"}>
                 <div className="avatar" style={{ backgroundImage: profile.selfie ? `url('data:image/${profile.selfie_ext};base64,${profile.selfie}')` : `url('https://api.multiavatar.com/${profile.user_uuid}.png')` }}></div>
                 <div className="profile_info">

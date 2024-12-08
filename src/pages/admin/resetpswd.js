@@ -80,7 +80,7 @@ const AdminResetPswd = () => {
             {isMobile && <Header />}
             <div className="container mt-0">
                 <div className="left_sign" style={{ backgroundImage: `url('${BANNER_VISUAL}')` }}>
-                    <img src={LOGO_WHITE} alt="MetaBank logo" className="logo" onClick={homeRedirect} />
+                    <img src={LOGO_WHITE} alt="LiFiSe logo" className="logo" onClick={homeRedirect} />
                 </div>
                 {!validation ?
                     <div className="right_sign">
@@ -89,7 +89,7 @@ const AdminResetPswd = () => {
                         <label>{t('admin.email')}</label>
                         <input type="email" placeholder="john.doe@mail.com" onChange={e => onChangeEmail(e.target.value)} />
                         <Button title={t('admin.send_reset')} click={sendReset} loading={loading} />
-                        <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     </div>
                     :
                     <div className="right_sign">
@@ -102,7 +102,7 @@ const AdminResetPswd = () => {
                         {!loading && !success && <>
                             <Button title={t('admin.set_new_pswd')} click={newPswd} /> <FollowUp intro={t('admin.did_not_receive')} description={t('admin.resend_code')} action={sendReset} />
                         </>}
-                        <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                         <Button title={t('admin.go_sign_in')} click={signRedirect} loading={loading || !success} />
                     </div>
                 }

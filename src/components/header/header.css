@@ -14,7 +14,7 @@ header .logo {
     height: 36px;
 }
 
-header .metabank_typo {
+header .lifise_typo {
     font-family: 'Raleway-extrabold';
     font-size: 30px;
     text-align: left;
@@ -53,7 +53,7 @@ header .active {
       height: 32px;
   }
   
-  header .metabank_typo {
+  header .lifise_typo {
       font-family: 'Raleway-extrabold';
       font-size: 24px;
       text-align: left;

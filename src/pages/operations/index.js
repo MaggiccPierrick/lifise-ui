@@ -52,7 +52,7 @@ const Operations = () => {
                 <BoardHeader title={t('ops.operations')} />
                 <div className="content">
                     <p><strong>{t('ops.browse_ops')}</strong></p>
-                    <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                    <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     {!loading && operations.map(op =>
                         <div className={profile.public_address.toLowerCase() === op.from ? "operation mobile-ml-40" : "operation"} key={op.hash}>
                             <div className="op_type">{profile.public_address.toLowerCase() === op.from ? t('ops.sent') : t('ops.received')} </div>
@@ -86,9 +86,9 @@ const Operations = () => {
                                             <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
                                             <div className="select_info">
                                                 <span className="select_name">
-                                                    MetaBank
+                                                    LiFiSe
                                                 </span>
-                                                <span className="select_email">{t('ops.offered_by')} <strong>MetaBank</strong></span>
+                                                <span className="select_email">{t('ops.offered_by')} <strong>LiFiSe</strong></span>
                                             </div>
                                         </div>
                                         :
@@ -118,7 +118,7 @@ const Operations = () => {
                                 <div className="tx_value">+ {op.value}</div>
                                 :
                                 <div className="tx_value black">- {op.value}</div>}
-                            <img className="tx_symbol" alt="CaâEuro symbol" src={profile.public_address.toLowerCase() === op.to ? LOGO : LOGO_BLACK} />
+                            <img className="tx_symbol" alt="EuroLFS symbol" src={profile.public_address.toLowerCase() === op.to ? LOGO : LOGO_BLACK} />
                         </div>
                     )}
                 </div>

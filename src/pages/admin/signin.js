@@ -81,7 +81,7 @@ const AdminSignIn = () => {
             {isMobile && <Header />}
             <div className="container mt-0">
                 <div className="left_sign" style={{ backgroundImage: `url('${BANNER_VISUAL}')` }}>
-                    <img src={LOGO_WHITE} alt="MetaBank logo" className="logo" onClick={homeRedirect} />
+                    <img src={LOGO_WHITE} alt="LiFiSe logo" className="logo" onClick={homeRedirect} />
                 </div>
                 {!validation ?
                     <div className="right_sign">
@@ -101,7 +101,7 @@ const AdminSignIn = () => {
                             <>
                                 <Button title={t('admin.sign_in')} click={isGA? verify : login} /> <FollowUp intro={t('admin.no_pswd')} description={t('admin.set_pswd')} link={"/admin/reset"} />
                             </>}
-                        <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     </div>
                     :
                     <div className="right_sign">
@@ -113,7 +113,7 @@ const AdminSignIn = () => {
                             <>
                                 <Button title={t('admin.verify')} click={verify} />
                             </>}
-                        <ThreeDots visible={loading} height="50" width="50" color="#1F90FA" radius="9" ariaLabel="three-dots-loading" />
+                        <ThreeDots visible={loading} height="50" width="50" color="var(--primary)" radius="9" ariaLabel="three-dots-loading" />
                     </div>
                 }
             </div>

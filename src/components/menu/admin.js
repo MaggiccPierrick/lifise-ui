@@ -25,6 +25,7 @@ const Menu = () => {
 
     const loadBalances = async() => {
         const data = await AdminService.getAdminBalance()
+        console.log(data)
         setBalances(data.balances)
         setAddress(data.address)
     } 
@@ -37,7 +38,7 @@ const Menu = () => {
     return (
         <>
             <div className="left_menu">
-                <img src={LOGO} alt="MetaBank logo" className="logo" />
+                <img src={LOGO} alt="LiFiSe logo" className="logo" />
                 <a href={"/admin/dashboard"} className={currentPath === "/admin/dashboard" ? "entry active mt-50" : "entry mt-50"}>
                     <span className="icon">🥋</span> {t('admin.admins')}
                 </a>
@@ -69,7 +70,7 @@ const Menu = () => {
                             </tr>
                             <tr>
                                 <td>
-                                    <h3>{parseFloat(balances.matic).toFixed(2)}</h3>
+                                    <h3>{parseFloat(balances.native_token).toFixed(2)}</h3>
                                 </td>
                                 <td>
                                     <img src={POLYGON} width={"15px"} alt="Logo Matic Polygon"/>

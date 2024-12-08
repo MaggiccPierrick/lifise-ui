@@ -1,6 +1,6 @@
-# MetaBank ReactJS
+# LiFiSe ReactJS
 
-A responsive and PWA extended application to support MetaBank system
+A responsive and PWA extended application to support LiFiSe system
 
 ## Available Scripts
 

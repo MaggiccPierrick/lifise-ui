@@ -18,13 +18,15 @@ import AdminUsers from './pages/admin/users';
 import AdminUser from './pages/admin/user';
 import AdminOrders from './pages/admin/orders';
 import { Magic } from 'magic-sdk';
-import { ALCHEMY_NODE, CHAIN_ID, REACT_APP_MAGIC_PUBLISHABLE_KEY } from './constants';
+import { RPC_URL, CHAIN_ID, REACT_APP_MAGIC_PUBLISHABLE_KEY } from './constants';
 import Decline from './pages/decline';
 
 function App() {
 
   const magic = new Magic(REACT_APP_MAGIC_PUBLISHABLE_KEY, { 
-    network: {rpcUrl: ALCHEMY_NODE, chainId: CHAIN_ID},
+    network: {
+      rpcUrl: RPC_URL, 
+      chainId: CHAIN_ID},
   });
 
   return (

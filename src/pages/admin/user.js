@@ -36,7 +36,7 @@ const AdminUser = () => {
         <div className="dashboard">
             <Menu />
             <div className="right_board">
-                <BoardHeader title={profile.firstname? `${profile.firstname} ${profile.lastname}` : t('admin.metabank_users')} />
+                <BoardHeader title={profile.firstname? `${profile.firstname} ${profile.lastname}` : t('admin.lifise_users')} />
                 {profile && profile.public_address && <div className="content">
                     <div className="big_avatar"
                         style={{
@@ -54,7 +54,7 @@ const AdminUser = () => {
                         <small>{t('admin.profile.matic')}:</small> <strong>{profile.wallet && parseFloat(profile.wallet.matic).toFixed(2)}</strong> <img src={POLYGON} className="matic_logo" alt="Logo Matic Polygon" />
                     </h3>
                     <h2>
-                        <small>{t('admin.profile.caaeuro')}:</small> <strong>{profile.wallet && parseFloat(profile.wallet.token_balance).toFixed(2)}</strong> <img src={LOGO_BLACK} className="balance_logo" alt="Logo CaaEuro" />
+                        <small>{t('admin.profile.eurolfs')}:</small> <strong>{profile.wallet && parseFloat(profile.wallet.token_balance).toFixed(2)}</strong> <img src={LOGO_BLACK} className="balance_logo" alt="Logo EuroLFS" />
                     </h2>
                     {profile.token_claims && profile.token_claims.to_claim.length > 0 && <p className="mt-30"><strong>{t('admin.profile.pending')}</strong></p>}
                     {profile.token_claims && profile.token_claims.to_claim.map(op =>
@@ -69,7 +69,7 @@ const AdminUser = () => {
                                     <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
                                     <div className="select_info">
                                         <span className="select_name">
-                                            MetaBank
+                                            LiFiSe
                                         </span>
                                         <span className="select_email">
                                             {t('admin.profile.awaiting')}
@@ -78,7 +78,7 @@ const AdminUser = () => {
                                 </div>
                             </div>
                             <div className="tx_value">+ {op.nb_token}</div>
-                            <img className="tx_symbol" alt="CaâEuro symbol" src={LOGO} />
+                            <img className="tx_symbol" alt="EuroLFS symbol" src={LOGO} />
                         </div>
                     )}
                     {profile.token_claims && profile.token_claims.already_claimed.length > 0 && <p className="mt-30"><strong>{t('admin.profile.already_claimed')}</strong></p>}
@@ -94,7 +94,7 @@ const AdminUser = () => {
                                     <div className="select_avatar" style={{ backgroundImage: `url('${LOGO_BLACK}')` }}></div>
                                     <div className="select_info">
                                         <span className="select_name">
-                                            MetaBank
+                                            LiFiSe
                                         </span>
                                         <span className="select_email">
                                             {t('admin.profile.claimed_date')} {new Date(op.claimed_date).toLocaleDateString()} {new Date(op.claimed_date).toLocaleTimeString()}
@@ -103,7 +103,7 @@ const AdminUser = () => {
                                 </div>
                             </div>
                             <div className="tx_value black">+ {op.nb_token}</div>
-                            <img className="tx_symbol" alt="CaâEuro symbol" src={LOGO_BLACK} />
+                            <img className="tx_symbol" alt="EuroLFS symbol" src={LOGO_BLACK} />
                         </div>
                     )}
                 </div>}

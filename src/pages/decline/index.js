@@ -37,8 +37,8 @@ const Decline = () => {
             {isMobile && <Header />}
             <div className="container mt-0">
                 <div className="left_sign" style={{ backgroundImage: `url('${BANNER_VISUAL}')` }}>
-                    <img src={LOGO_BLACK} alt="MetaBank logo" className="logo" onClick={homeRedirect} />
-                    <span className="metabank_typo" onClick={homeRedirect}>MetaBank</span>
+                    <img src={LOGO_BLACK} alt="LiFiSe logo" className="logo" onClick={homeRedirect} />
+                    <span className="lifise_typo" onClick={homeRedirect}>LiFiSe</span>
                 </div>
                 <div className="right_sign">
                     <p className="instructions">{t('decline.validated_request')}</p>

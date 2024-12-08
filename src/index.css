@@ -1,7 +1,7 @@
 :root {
-  --primary: #1F90FA;
-  --primary-hover: #117fe6;
-  --end-gradient: rgba(164, 207, 245, 1);
+  --primary: #E84142;
+  --primary-hover: #c73334;
+  --end-gradient: rgba(247, 150, 151, 1);
 }
 
 @font-face {
@@ -394,11 +394,11 @@ body {
   position: absolute;
   left: 30px;
   top: 31px;
-  height: 34px;
+  height: 80px;
   cursor: pointer;
 }
 
-.container .left_sign .metabank_typo {
+.container .left_sign .lifise_typo {
   font-family: 'Raleway-extrabold';
   font-size: 30px;
   text-align: left;
@@ -506,11 +506,11 @@ textarea:focus {
   width: 180px !important;
 }
 
-.caaeuro {
+.eurolfs {
   position: absolute;
-  right: 7px;
-  top: 7px;
-  height: 24px;
+  right: 3px;
+  top: -1px;
+  height: 40px;
 }
 
 .dashboard {
@@ -541,6 +541,12 @@ textarea:focus {
 
 .dashboard .content p small {
   font-size: 12px;
+}
+
+.small-logo {
+  position: absolute;
+  width: 30px;
+  top: 41px;
 }
 
 .dashboard .content h2 {
@@ -1028,7 +1034,7 @@ textarea:focus {
     display: none;
   }
 
-  .container .left_sign .metabank_typo {
+  .container .left_sign .lifise_typo {
     display: none;
   }
 
